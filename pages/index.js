@@ -52,7 +52,7 @@ export default function HomePage() {
       <StyledHeading3>Upcoming Trips</StyledHeading3>
       <ul>
         {upcomingTrips.length === 0 ? (
-          <p>You don't have any upcoming trips yet.</p>
+          <p>You do not have any upcoming trips yet.</p>
         ) : (
           upcomingTrips.map((trip) => (
             <DestinationPreview key={trip.id} trip={trip} />
@@ -62,7 +62,7 @@ export default function HomePage() {
       <StyledHeading3>Current Trips</StyledHeading3>
       <ul>
         {currentTrips.length === 0 ? (
-          <p>You don't have any current trips yet.</p>
+          <p>You do not have any current trips yet.</p>
         ) : (
           currentTrips.map((trip) => (
             <DestinationPreview key={trip.id} trip={trip} />
@@ -72,7 +72,7 @@ export default function HomePage() {
       <StyledHeading3>Passed Trips</StyledHeading3>
       <ul>
         {passedTrips.length === 0 ? (
-          <p>You don't have any passed trips yet.</p>
+          <p>You do not have any passed trips yet.</p>
         ) : (
           passedTrips.map((trip) => (
             <DestinationPreview key={trip.id} trip={trip} />
