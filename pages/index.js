@@ -1,4 +1,4 @@
-import initialTrips from "../public/trips";
+import initialTrips from "../db/trips";
 import styled from "styled-components";
 import Image from "next/image";
 import TripInputForm from "@/components/TripInputForm";
@@ -12,17 +12,8 @@ export default function HomePage() {
     event.preventDefault();
     const formData = new FormData(event.target);
     const trip = Object.fromEntries(formData);
-
-    const startYear = startDate.value.substring(2, 4);
-    const startMonth = startDate.value.substring(5, 7);
-    const startDay = startDate.value.substring(8);
-    const formattedStartDate = `${startDay}/${startMonth}/${startYear}`;
-    const endYear = endDate.value.substring(2, 4);
-    const endMonth = endDate.value.substring(5, 7);
-    const endDay = endDate.value.substring(8);
-    const formattedEndDate = `${endDay}/${endMonth}/${endYear}`;
-    console.log(formattedStartDate, formattedEndDate);
-
+    const formattedStartDate = formatDate(event.target.startDate);
+    const formattedEndDate = formatDate(event.target.endDate);
     const updatedTrips = [
       {
         id: uid(),
@@ -34,7 +25,16 @@ export default function HomePage() {
       ...initialTrips,
     ];
     setTrips(updatedTrips);
+    console.log(updatedTrips);
     event.target.reset();
+  }
+
+  function formatDate(date) {
+    const year = date.value.substring(2, 4);
+    const month = date.value.substring(5, 7);
+    const day = date.value.substring(8);
+    const formattedDate = `${day}/${month}/${year}`;
+    return formattedDate;
   }
 
   return (
