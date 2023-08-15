@@ -14,6 +14,7 @@ export default function HomePage() {
     const trip = Object.fromEntries(formData);
     const formattedStartDate = formatDate(event.target.startDate.value);
     const formattedEndDate = formatDate(event.target.endDate.value);
+    const list = compareDate(formattedStartDate, formattedEndDate);
     const updatedTrips = [
       {
         id: uid(),
@@ -32,9 +33,27 @@ export default function HomePage() {
     const year = date.substring(2, 4);
     const month = date.substring(5, 7);
     const day = date.substring(8);
-    const formattedDate = `${day}/${month}/${year}`;
+    const formattedDate = `${month}/${day}/${year}`;
     return formattedDate;
   }
+
+  function compareDate(start, end) {
+    const year = new Date().getFullYear().toString().substring(2, 4);
+    const month = (new Date().getMonth() + 1).toString().padStart(2, "0");
+    const day = new Date().getDate().toString().padStart(2, "0");
+    const today = `${month}/${day}/${year}`;
+    if (today > start) {
+      if (today > end) {
+        console.log("passed");
+      } else {
+        console.log("current");
+      }
+    } else {
+      console.log("upcoming");
+    }
+  }
+
+  compareDate();
 
   return (
     <div>
