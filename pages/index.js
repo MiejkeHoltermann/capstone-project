@@ -12,12 +12,28 @@ export default function HomePage() {
     event.preventDefault();
     const formData = new FormData(event.target);
     const trip = Object.fromEntries(formData);
+
+    const startYear = startDate.value.substring(2, 4);
+    const startMonth = startDate.value.substring(5, 7);
+    const startDay = startDate.value.substring(8);
+    const formattedStartDate = `${startDay}/${startMonth}/${startYear}`;
+    const endYear = endDate.value.substring(2, 4);
+    const endMonth = endDate.value.substring(5, 7);
+    const endDay = endDate.value.substring(8);
+    const formattedEndDate = `${endDay}/${endMonth}/${endYear}`;
+    console.log(formattedStartDate, formattedEndDate);
+
     const updatedTrips = [
-      { id: uid(), image: "/placeholder.jpg", ...trip },
+      {
+        id: uid(),
+        image: "/placeholder.jpg",
+        ...trip,
+        startDate: formattedStartDate,
+        endDate: formattedEndDate,
+      },
       ...initialTrips,
     ];
     setTrips(updatedTrips);
-    console.log(trips);
     event.target.reset();
   }
 

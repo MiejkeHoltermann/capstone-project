@@ -11,17 +11,17 @@ export default function TripInputForm({ onSubmit }) {
         placeholder="location"
         required
       />
-      <StyledLabel htmlFor="startDate">Start Date: </StyledLabel>
+      <label htmlFor="startDate">Start Date: </label>
       <StyledInput
-        type="text"
+        type="date"
         id="startDate"
         name="startDate"
         placeholder="dd/mm/yy"
         required
       />
-      <StyledLabel htmlFor="endDate">End Date: </StyledLabel>
+      <label htmlFor="endDate">End Date: </label>
       <StyledInput
-        type="text"
+        type="date"
         id="endDate"
         name="endDate"
         placeholder="dd/mm/yy"
