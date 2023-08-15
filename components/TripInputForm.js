@@ -19,7 +19,6 @@ export default function TripInputForm({ onSubmit }) {
         id="startDate"
         name="startDate"
         onChange={(event) => setStart(event.target.value)}
-        value={start}
         placeholder="dd/mm/yy"
         required
       />

@@ -1,9 +1,9 @@
 import initialTrips from "../db/trips";
 import styled from "styled-components";
-import Image from "next/image";
 import TripInputForm from "@/components/TripInputForm";
 import { useState } from "react";
 import { uid } from "uid";
+import DestinationPreview from "@/components/DestinationPreview";
 
 export default function HomePage() {
   const [trips, setTrips] = useState(initialTrips);
@@ -12,16 +12,11 @@ export default function HomePage() {
     event.preventDefault();
     const formData = new FormData(event.target);
     const trip = Object.fromEntries(formData);
-    const formattedStartDate = formatDate(event.target.startDate.value);
-    const formattedEndDate = formatDate(event.target.endDate.value);
-    const list = compareDate(formattedStartDate, formattedEndDate);
     const updatedTrips = [
       {
-        id: uid(),
-        image: "/placeholder.jpg",
         ...trip,
-        startDate: formattedStartDate,
-        endDate: formattedEndDate,
+        image: "/placeholder.jpg",
+        id: uid(),
       },
       ...initialTrips,
     ];
@@ -29,53 +24,60 @@ export default function HomePage() {
     event.target.reset();
   }
 
-  function formatDate(date) {
-    const year = date.substring(2, 4);
-    const month = date.substring(5, 7);
-    const day = date.substring(8);
-    const formattedDate = `${month}/${day}/${year}`;
-    return formattedDate;
-  }
-
-  function compareDate(start, end) {
-    const year = new Date().getFullYear().toString().substring(2, 4);
+  function todaysDate() {
+    const year = new Date().getFullYear();
     const month = (new Date().getMonth() + 1).toString().padStart(2, "0");
     const day = new Date().getDate().toString().padStart(2, "0");
-    const today = `${month}/${day}/${year}`;
-    if (today > start) {
-      if (today > end) {
-        console.log("passed");
-      } else {
-        console.log("current");
-      }
-    } else {
-      console.log("upcoming");
-    }
+    const today = `${year}-${month}-${day}`;
+    return today;
   }
 
-  compareDate();
+  const upcomingTrips = trips.filter(
+    (trip) => trip.startDate > todaysDate() && trip.endDate > todaysDate()
+  );
+
+  const currentTrips = trips.filter(
+    (trip) => trip.startDate < todaysDate() && trip.endDate > todaysDate()
+  );
+
+  const passedTrips = trips.filter(
+    (trip) => trip.startDate < todaysDate() && trip.endDate < todaysDate()
+  );
 
   return (
     <div>
       <StyledHeading1>My Travel Log</StyledHeading1>
       <StyledHeading2>Create a new Trip</StyledHeading2>
       <TripInputForm onSubmit={handleSubmit} />
+      <StyledHeading3>Upcoming Trips</StyledHeading3>
       <ul>
-        {trips.map((trip) => (
-          <StyledListItem key={trip.id}>
-            <StyledImageWrapper>
-              <StyledImage
-                src={trip.image}
-                height={800}
-                width={800}
-                alt={trip.location}
-              />
-            </StyledImageWrapper>
-            {trip.location}
-            <br />
-            {trip.startDate} - {trip.endDate}
-          </StyledListItem>
-        ))}
+        {upcomingTrips.length === 0 ? (
+          <p>You don't have any upcoming trips yet.</p>
+        ) : (
+          upcomingTrips.map((trip) => (
+            <DestinationPreview key={trip.id} trip={trip} />
+          ))
+        )}
+      </ul>
+      <StyledHeading3>Current Trips</StyledHeading3>
+      <ul>
+        {currentTrips.length === 0 ? (
+          <p>You don't have any current trips yet.</p>
+        ) : (
+          currentTrips.map((trip) => (
+            <DestinationPreview key={trip.id} trip={trip} />
+          ))
+        )}
+      </ul>
+      <StyledHeading3>Passed Trips</StyledHeading3>
+      <ul>
+        {passedTrips.length === 0 ? (
+          <p>You don't have any passed trips yet.</p>
+        ) : (
+          passedTrips.map((trip) => (
+            <DestinationPreview key={trip.id} trip={trip} />
+          ))
+        )}
       </ul>
     </div>
   );
@@ -94,23 +96,15 @@ const StyledHeading2 = styled.h2`
   margin-bottom: 1rem;
 `;
 
-const StyledListItem = styled.li`
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+const StyledHeading3 = styled.h3`
+  color: teal;
+  margin-left: 2.3rem;
+  font-size: 1.2em;
   margin-bottom: 1rem;
 `;
 
-const StyledImageWrapper = styled.div`
-  float: left;
-  width: 6rem;
-  height: 4rem;
-  margin-right: 1rem;
-`;
-
-const StyledImage = styled(Image)`
-  border-radius: 0.4rem;
-  object-fit: cover;
-  width: 100%;
-  height: 100%;
+const StyledHeadingContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
 `;
