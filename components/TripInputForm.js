@@ -1,6 +1,8 @@
+import { useState } from "react";
 import styled from "styled-components";
 
 export default function TripInputForm({ onSubmit }) {
+  const [start, setStart] = useState("");
   return (
     <StyledForm onSubmit={onSubmit}>
       <StyledLabel htmlFor="location">Location: </StyledLabel>
@@ -16,6 +18,8 @@ export default function TripInputForm({ onSubmit }) {
         type="date"
         id="startDate"
         name="startDate"
+        onChange={(event) => setStart(event.target.value)}
+        value={start}
         placeholder="dd/mm/yy"
         required
       />
@@ -24,6 +28,7 @@ export default function TripInputForm({ onSubmit }) {
         type="date"
         id="endDate"
         name="endDate"
+        min={start}
         placeholder="dd/mm/yy"
         required
       />

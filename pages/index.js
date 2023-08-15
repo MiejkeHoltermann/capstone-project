@@ -12,8 +12,8 @@ export default function HomePage() {
     event.preventDefault();
     const formData = new FormData(event.target);
     const trip = Object.fromEntries(formData);
-    const formattedStartDate = formatDate(event.target.startDate);
-    const formattedEndDate = formatDate(event.target.endDate);
+    const formattedStartDate = formatDate(event.target.startDate.value);
+    const formattedEndDate = formatDate(event.target.endDate.value);
     const updatedTrips = [
       {
         id: uid(),
@@ -25,14 +25,13 @@ export default function HomePage() {
       ...initialTrips,
     ];
     setTrips(updatedTrips);
-    console.log(updatedTrips);
     event.target.reset();
   }
 
   function formatDate(date) {
-    const year = date.value.substring(2, 4);
-    const month = date.value.substring(5, 7);
-    const day = date.value.substring(8);
+    const year = date.substring(2, 4);
+    const month = date.substring(5, 7);
+    const day = date.substring(8);
     const formattedDate = `${day}/${month}/${year}`;
     return formattedDate;
   }
