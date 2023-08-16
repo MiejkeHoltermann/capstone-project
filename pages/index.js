@@ -3,7 +3,9 @@ import styled from "styled-components";
 import TripInputForm from "@/components/TripInputForm";
 import { useState } from "react";
 import { uid } from "uid";
-import DestinationPreview from "@/components/DestinationPreview";
+import TripPreview from "@/components/TripPreview";
+import Link from "next/link";
+import Image from "next/image";
 
 export default function HomePage() {
   const [trips, setTrips] = useState(initialTrips);
@@ -45,66 +47,93 @@ export default function HomePage() {
   );
 
   return (
-    <div>
+    <>
+      <StyledImageWrapper>
+        <StyledImage
+          src="/travel-log.jpg"
+          height={600}
+          width={800}
+          layout="responsive"
+          alt="Travel Notebook"
+        />
+      </StyledImageWrapper>
       <StyledHeading1>My Travel Log</StyledHeading1>
       <StyledHeading2>Create a new Trip</StyledHeading2>
       <TripInputForm onSubmit={handleSubmit} />
       <StyledHeading3>Upcoming Trips</StyledHeading3>
-      <ul>
+      <StyledSection>
         {upcomingTrips.length === 0 ? (
           <p>You do not have any upcoming trips yet.</p>
         ) : (
           upcomingTrips.map((trip) => (
-            <DestinationPreview key={trip.id} trip={trip} />
+            <>
+              <StyledLink href="/explore">
+                <TripPreview key={trip.id} trip={trip} />
+              </StyledLink>
+            </>
           ))
         )}
-      </ul>
+      </StyledSection>
       <StyledHeading3>Current Trips</StyledHeading3>
-      <ul>
+      <StyledSection>
         {currentTrips.length === 0 ? (
           <p>You do not have any current trips yet.</p>
         ) : (
-          currentTrips.map((trip) => (
-            <DestinationPreview key={trip.id} trip={trip} />
-          ))
+          currentTrips.map((trip) => <TripPreview key={trip.id} trip={trip} />)
         )}
-      </ul>
+      </StyledSection>
       <StyledHeading3>Passed Trips</StyledHeading3>
-      <ul>
+      <StyledSection>
         {passedTrips.length === 0 ? (
           <p>You do not have any passed trips yet.</p>
         ) : (
-          passedTrips.map((trip) => (
-            <DestinationPreview key={trip.id} trip={trip} />
-          ))
+          passedTrips.map((trip) => <TripPreview key={trip.id} trip={trip} />)
         )}
-      </ul>
-    </div>
+      </StyledSection>
+    </>
   );
 }
 
+const StyledSection = styled.section`
+  width: 80%;
+`;
+
+const StyledImageWrapper = styled.div`
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%);
+  height: 10rem;
+  width: 360px;
+  overflow: clip;
+`;
+
+const StyledImage = styled(Image)`
+  position: absolute;
+  top: 0;
+  left: 0;
+  object-fit: cover;
+`;
+
 const StyledHeading1 = styled.h1`
-  text-align: center;
+  margin-top: 8rem;
   font-size: 1.6rem;
   margin-bottom: 1rem;
 `;
 
 const StyledHeading2 = styled.h2`
   color: teal;
-  text-align: center;
   font-size: 1.2em;
   margin-bottom: 1rem;
 `;
 
 const StyledHeading3 = styled.h3`
   color: teal;
-  margin-left: 2.3rem;
   font-size: 1.2em;
   margin-bottom: 1rem;
 `;
 
-const StyledHeadingContainer = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
+const StyledLink = styled(Link)`
+  color: black;
+  text-decoration: none;
 `;

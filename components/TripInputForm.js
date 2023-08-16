@@ -41,6 +41,7 @@ const StyledForm = styled.form`
   flex-direction: column;
   align-items: center;
   gap: 0.6rem;
+  width: 100%;
 `;
 
 const StyledLabel = styled.label`

@@ -3,15 +3,15 @@ import { uid } from "uid";
 const trips = [
   {
     location: "Greece",
-    startDate: "2023-09-12",
-    endDate: "2023-10-02",
+    startDate: "2023-06-12",
+    endDate: "2023-07-02",
     image: "/greece.jpg",
     id: uid(),
   },
   {
     location: "Jordan",
-    startDate: "2023-08-09",
-    endDate: "2023-08-16",
+    startDate: "2023-08-29",
+    endDate: "2023-09-16",
     image: "/jordan.jpg",
     id: uid(),
   },
