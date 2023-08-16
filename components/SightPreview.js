@@ -1,10 +1,24 @@
 import styled from "styled-components";
 import Image from "next/image";
+import DetailsPopUp from "./DetailsPopUp";
+import { useState } from "react";
 
 export default function TripPreview({ sight }) {
+  const [popUp, setPopUp] = useState(false);
+
+  function handlePopUp() {
+    setPopUp(!popUp);
+  }
+  console.log(popUp);
   return (
-    <StyledArticle>
-      <StyledImageWrapper>
+    <StyledArticle onClick={handlePopUp}>
+      <DetailsPopUp
+        $popUp={popUp}
+        details={sight.details}
+        image={sight.image}
+        name={sight.name}
+      />
+      <StyledImageWrapper $popUp={popUp}>
         <StyledImage
           src={sight.image}
           height={800}
@@ -12,16 +26,12 @@ export default function TripPreview({ sight }) {
           alt={sight.name}
         />
       </StyledImageWrapper>
-      {sight.name}
+      <StyledHeading4 $popUp={popUp}>{sight.name}</StyledHeading4>
     </StyledArticle>
   );
 }
 
 const StyledArticle = styled.article`
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  margin-bottom: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -29,11 +39,9 @@ const StyledArticle = styled.article`
 `;
 
 const StyledImageWrapper = styled.div`
-  float: left;
+  height: ${({ $popUp }) => (!$popUp ? "180px " : "0px")};
   width: 260px;
-  height: 180px;
   margin-bottom: 0.6rem;
-  margin-top: 1rem;
 `;
 
 const StyledImage = styled(Image)`
@@ -41,4 +49,9 @@ const StyledImage = styled(Image)`
   object-fit: cover;
   width: 100%;
   height: 100%;
+`;
+
+const StyledHeading4 = styled.h4`
+  font-size: ${({ $popUp }) => (!$popUp ? "1rem " : "0")};
+  margin: 0;
 `;
