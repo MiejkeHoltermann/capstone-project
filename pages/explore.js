@@ -57,7 +57,7 @@ const StyledLocation = styled.p`
   top: 2.8rem;
   left: 0;
   z-index: 1;
-  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
 `;
 
 const StyledDate = styled.p`
@@ -69,7 +69,7 @@ const StyledDate = styled.p`
   top: 5.4rem;
   left: 0;
   z-index: 1;
-  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
 `;
 
 const StyledHeading1 = styled.h1`
