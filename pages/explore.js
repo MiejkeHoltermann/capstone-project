@@ -9,7 +9,7 @@ export default function Explore() {
     <>
       <StyledImageWrapper>
         <StyledImage
-          src="/jordan.jpg"
+          src="/countries/jordan.jpg"
           height={600}
           width={800}
           layout="responsive"
