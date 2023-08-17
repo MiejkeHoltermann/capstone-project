@@ -3,8 +3,26 @@ import Image from "next/image";
 import SightPreview from "@/components/SightPreview";
 import sights from "../db/sights.js";
 import Link from "next/link";
+import { useState } from "react";
+import initialSights from "../db/sights";
 
 export default function Explore() {
+  const [sights, setSights] = useState(initialSights);
+
+  function handleSights(id) {
+    const updatedSights = sights.map((sight) => {
+      if (sight.id === id) {
+        return {
+          ...sight,
+          inItinerary: true,
+          hidden: true,
+        };
+      } else {
+        return sight;
+      }
+    });
+    setSights(updatedSights);
+  }
   return (
     <>
       <StyledImageWrapper>
@@ -23,7 +41,15 @@ export default function Explore() {
         {sights.length === 0 ? (
           <p>There are no sights for this destination yet.</p>
         ) : (
-          sights.map((sight) => <SightPreview key={sight.id} sight={sight} />)
+          sights
+            .filter((sight) => sight.hidden !== true)
+            .map((sight) => (
+              <SightPreview
+                key={sight.id}
+                sight={sight}
+                handleSights={handleSights}
+              />
+            ))
         )}
       </section>
       <StyledLink href="/">Exit</StyledLink>

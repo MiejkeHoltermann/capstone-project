@@ -3,13 +3,13 @@ import Image from "next/image";
 import DetailsPopUp from "./DetailsPopUp";
 import { useState } from "react";
 
-export default function TripPreview({ sight }) {
+export default function TripPreview({ sight, handleSights }) {
   const [popUp, setPopUp] = useState(false);
 
   function handlePopUp() {
     setPopUp(!popUp);
   }
-  console.log(popUp);
+
   return (
     <StyledArticle onClick={handlePopUp}>
       <DetailsPopUp
@@ -17,6 +17,8 @@ export default function TripPreview({ sight }) {
         details={sight.details}
         image={sight.image}
         name={sight.name}
+        id={sight.id}
+        handleSights={handleSights}
       />
       <StyledImageWrapper $popUp={popUp}>
         <StyledImage

@@ -1,7 +1,14 @@
 import styled from "styled-components";
 import Image from "next/image";
 
-export default function DetailsPopUp({ $popUp, image, name, details }) {
+export default function DetailsPopUp({
+  $popUp,
+  image,
+  name,
+  details,
+  id,
+  handleSights,
+}) {
   return (
     <StyledPopUp $popUp={$popUp}>
       <StyledImageWrapper>
@@ -9,6 +16,9 @@ export default function DetailsPopUp({ $popUp, image, name, details }) {
       </StyledImageWrapper>
       <StyledHeading4>{name}</StyledHeading4>
       <StyledDetails>{details}</StyledDetails>
+      <StyledButton $popUp={$popUp} onClick={() => handleSights(id)}>
+        Add to Itinerary
+      </StyledButton>
     </StyledPopUp>
   );
 }
@@ -50,4 +60,15 @@ const StyledImage = styled(Image)`
 const StyledHeading4 = styled.h4`
   margin: 0 0 0.6rem 0;
   overflow: hidden;
+`;
+
+const StyledButton = styled.button`
+  visibility: ${({ $popUp }) => (!$popUp ? "hidden" : "visible")};
+  border-radius: 2rem;
+  color: white;
+  border: none;
+  background-color: darkblue;
+  padding: 0.4rem 1rem;
+  margin: 1rem 0;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
 `;
