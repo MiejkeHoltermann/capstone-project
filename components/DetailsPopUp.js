@@ -58,7 +58,7 @@ const StyledImage = styled(Image)`
 `;
 
 const StyledHeading4 = styled.h4`
-  margin: 0 0 0.8rem 0;
+  margin: 0 0 0.6rem 0;
   overflow: hidden;
 `;
 
