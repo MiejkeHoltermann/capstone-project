@@ -84,5 +84,6 @@ const StyledLink = styled(Link)`
   text-decoration: none;
   background-color: darkblue;
   padding: 0.4rem 1rem;
+  margin-top: 2rem;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
 `;
