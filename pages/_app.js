@@ -1,10 +1,13 @@
 import GlobalStyle from "../styles";
 import Layout from "../components/Layout";
 import initialSights from "../db/sights";
-import { useState } from "react";
+import useLocalStorageState from "use-local-storage-state";
+import trips from "../db/trips";
 
 export default function App({ Component, pageProps }) {
-  const [sights, setSights] = useState(initialSights);
+  const [sights, setSights] = useLocalStorageState("sights", {
+    defaultValue: initialSights,
+  });
 
   function handleSights(id) {
     const updatedSights = sights.map((sight) => {
@@ -25,7 +28,13 @@ export default function App({ Component, pageProps }) {
     <>
       <Layout>
         <GlobalStyle />
-        <Component {...pageProps} sights={sights} handleSights={handleSights} />
+        <Component
+          {...pageProps}
+          trips={trips}
+          sights={sights}
+          setSights={setSights}
+          handleSights={handleSights}
+        />
       </Layout>
     </>
   );

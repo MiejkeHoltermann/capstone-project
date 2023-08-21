@@ -23,7 +23,9 @@ export default function Explore({ sights, handleSights }) {
           <p>There are no sights for this destination yet.</p>
         ) : (
           sights
-            .filter((sight) => sight.hidden !== true)
+            .filter(
+              (sight) => sight.hidden !== true && sight.plannedDate === ""
+            )
             .map((sight) => (
               <SightPreview
                 key={sight.id}

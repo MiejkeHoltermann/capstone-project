@@ -1,14 +1,17 @@
 import initialTrips from "../db/trips";
 import styled from "styled-components";
 import TripInputForm from "@/components/TripInputForm";
-import { useState } from "react";
+import useLocalStorageState from "use-local-storage-state";
 import { uid } from "uid";
 import TripPreview from "@/components/TripPreview";
 import Link from "next/link";
 import Image from "next/image";
+import { format } from "date-fns";
 
 export default function HomePage() {
-  const [trips, setTrips] = useState(initialTrips);
+  const [trips, setTrips] = useLocalStorageState("trips", {
+    defaultValue: initialTrips,
+  });
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -26,24 +29,22 @@ export default function HomePage() {
     event.target.reset();
   }
 
-  function todaysDate() {
-    const year = new Date().getFullYear();
-    const month = (new Date().getMonth() + 1).toString().padStart(2, "0");
-    const day = new Date().getDate().toString().padStart(2, "0");
-    const today = `${year}-${month}-${day}`;
-    return today;
-  }
-
   const upcomingTrips = trips.filter(
-    (trip) => trip.startDate > todaysDate() && trip.endDate > todaysDate()
+    (trip) =>
+      trip.startDate > format(new Date(), "yyyy-MM-dd") &&
+      trip.endDate > format(new Date(), "yyyy-MM-dd")
   );
 
   const currentTrips = trips.filter(
-    (trip) => trip.startDate < todaysDate() && trip.endDate > todaysDate()
+    (trip) =>
+      trip.startDate < format(new Date(), "yyyy-MM-dd") &&
+      trip.endDate > format(new Date(), "yyyy-MM-dd")
   );
 
   const passedTrips = trips.filter(
-    (trip) => trip.startDate < todaysDate() && trip.endDate < todaysDate()
+    (trip) =>
+      trip.startDate < format(new Date(), "yyyy-MM-dd") &&
+      trip.endDate < format(new Date(), "yyyy-MM-dd")
   );
 
   return (
