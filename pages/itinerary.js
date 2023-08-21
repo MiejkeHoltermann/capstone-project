@@ -4,8 +4,33 @@ import Link from "next/link";
 import { uid } from "uid";
 import { format } from "date-fns";
 import Carousel from "@/components/Carousel";
+import { useState, useEffect } from "react";
 
 export default function Itinerary({ trips, sights, setSights }) {
+  const [sortedSights, setSortedSights] = useState([]);
+
+  useEffect(() => {
+    const updatedSortedSights = sights.slice().sort((a, b) => {
+      if (a.plannedDate === "") {
+        if (b.plannedDate === "") {
+          return 0;
+        } else {
+          return 1;
+        }
+      } else if (b.plannedDate === "") {
+        return -1;
+      } else if (a.plannedTime < b.plannedTime) {
+        return -1;
+      } else if (a.plannedTime > b.plannedTime) {
+        return 1;
+      }
+      return 0;
+    });
+    setSortedSights(updatedSortedSights);
+  }, [sights]);
+
+  console.log(sortedSights);
+
   function handleSubmitItem(event) {
     event.preventDefault();
     const name = event.target.itineraryItem.value;
@@ -60,7 +85,7 @@ export default function Itinerary({ trips, sights, setSights }) {
         {datesArray.map((date) => (
           <StyledListItem key={uid()}>
             <StyledHeading2>{format(date, "dd/MM/yy")}</StyledHeading2>
-            {sights.map(
+            {sortedSights.map(
               (sight) =>
                 sight.plannedDate === format(date, "yyyy-MM-dd") && (
                   <StyledItineraryItem key={sight.id}>
