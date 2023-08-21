@@ -11,25 +11,26 @@ export default function Itinerary({ trips, sights, setSights }) {
 
   useEffect(() => {
     const updatedSortedSights = sights.slice().sort((a, b) => {
-      if (a.plannedDate === "") {
-        if (b.plannedDate === "") {
+      if (a.plannedTime === "") {
+        if (b.plannedTime === "") {
           return 0;
         } else {
           return 1;
         }
-      } else if (b.plannedDate === "") {
-        return -1;
-      } else if (a.plannedTime < b.plannedTime) {
-        return -1;
-      } else if (a.plannedTime > b.plannedTime) {
-        return 1;
+      } else {
+        if (b.plannedTime === "") {
+          return -1;
+        }
+        if (a.plannedTime < b.plannedTime) {
+          return -1;
+        }
+        if (a.plannedTime > b.plannedTime) {
+          return 1;
+        }
       }
-      return 0;
     });
     setSortedSights(updatedSortedSights);
   }, [sights]);
-
-  console.log(sortedSights);
 
   function handleSubmitItem(event) {
     event.preventDefault();
@@ -66,6 +67,13 @@ export default function Itinerary({ trips, sights, setSights }) {
 
   const datesArray = createItinerary();
 
+  function formatTime(sight) {
+    const [hours, minutes] = sight.plannedTime.split(":");
+    const mode = parseInt(hours) >= 12 ? "pm" : "am";
+    const formattedTime = `${hours % 12}.${minutes} ${mode}`;
+    return formattedTime;
+  }
+
   return (
     <>
       <StyledImageWrapper>
@@ -88,9 +96,12 @@ export default function Itinerary({ trips, sights, setSights }) {
             {sortedSights.map(
               (sight) =>
                 sight.plannedDate === format(date, "yyyy-MM-dd") && (
-                  <StyledItineraryItem key={sight.id}>
-                    {sight.name} {sight.plannedTime}
-                  </StyledItineraryItem>
+                  <StyledItineraryItemContainer key={sight.id}>
+                    <StyledItineraryItem>{sight.name}</StyledItineraryItem>
+                    <StyledItineraryTime>
+                      {sight.plannedTime ? formatTime(sight) : null}
+                    </StyledItineraryTime>
+                  </StyledItineraryItemContainer>
                 )
             )}
             <form onSubmit={handleSubmitItem}>
@@ -189,8 +200,22 @@ const StyledHeading2 = styled.h2`
   margin: 0;
 `;
 
+const StyledItineraryItemContainer = styled.div`
+  margin: 0.2rem 0.6rem;
+  display: grid;
+  grid-template-columns: 4fr 2fr;
+  gap: 1rem;
+`;
+
 const StyledItineraryItem = styled.p`
-  margin: 0.4rem;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
+
+const StyledItineraryTime = styled.p`
+  margin: 0;
+  text-align: right;
 `;
 
 const StyledLabel = styled.label`
