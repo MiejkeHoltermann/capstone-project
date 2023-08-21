@@ -1,19 +1,34 @@
 import styled from "styled-components";
 import Image from "next/image";
 import Link from "next/link";
-import trips from "../db/trips";
 import { uid } from "uid";
 import { format } from "date-fns";
-import {
-  CarouselProvider,
-  Slider,
-  Slide,
-  ButtonBack,
-  ButtonNext,
-} from "pure-react-carousel";
-import "pure-react-carousel/dist/react-carousel.es.css";
+import Carousel from "@/components/Carousel";
 
-export default function Itinerary({ sights }) {
+export default function Itinerary({ trips, sights, setSights }) {
+  function handleSubmitItem(event) {
+    event.preventDefault();
+    const name = event.target.itineraryItem.value;
+    const plannedDate = event.target.itineraryItem.id;
+    const plannedTime = event.target.time.value;
+    const updatedSights = [...sights, { name, plannedDate, plannedTime }];
+    setSights(updatedSights);
+    event.target.reset();
+  }
+
+  function handleSubmitDate(event) {
+    event.preventDefault();
+    const plannedDate = event.target.plannedDate.value;
+    const plannedTime = event.target.plannedTime.value;
+    const name = event.target.plannedDate.id;
+    const updatedSights = sights.map((sight) =>
+      sight.name === name
+        ? { ...sight, plannedDate: plannedDate, plannedTime: plannedTime }
+        : sight
+    );
+    setSights(updatedSights);
+  }
+
   function createItinerary() {
     let firstDay = new Date(trips[1].startDate);
     let lastDay = new Date(trips[1].endDate);
@@ -40,71 +55,42 @@ export default function Itinerary({ sights }) {
         <StyledDate>29/08/23 - 16/09/23</StyledDate>
       </StyledImageWrapper>
       <StyledHeading1>Itinerary</StyledHeading1>
-      <StyledCarousel
-        naturalSlideWidth={100}
-        naturalSlideHeight={125}
-        totalSlides={10}
-        visibleSlides={5}
-      >
-        <StyledPrevButton>
-          <Image src="arrowBack.svg" width={20} height={20} alt="alt" />
-        </StyledPrevButton>
-        <StyledSlider>
-          {sights
-            .filter((sight) => sight.inItinerary === true)
-            .map((sight) => (
-              <Slide key={sight.id} index={sight.index}>
-                <StyledImage2
-                  src={sight.image}
-                  height={40}
-                  width={40}
-                  alt={sight.name}
-                />
-              </Slide>
-            ))}
-        </StyledSlider>
-        <StyledNextButton>
-          <Image src="arrowNext.svg" width={20} height={20} alt="alt" />
-        </StyledNextButton>
-      </StyledCarousel>
+      <Carousel trips={trips} sights={sights} onSubmit={handleSubmitDate} />
       <StyledList>
         {datesArray.map((date) => (
-          <li key={uid()}>{format(date, "dd/MM/yy")}</li>
+          <StyledListItem key={uid()}>
+            <StyledHeading2>{format(date, "dd/MM/yy")}</StyledHeading2>
+            {sights.map(
+              (sight) =>
+                sight.plannedDate === format(date, "yyyy-MM-dd") && (
+                  <StyledItineraryItem key={sight.id}>
+                    {sight.name} {sight.plannedTime}
+                  </StyledItineraryItem>
+                )
+            )}
+            <form onSubmit={handleSubmitItem}>
+              <StyledLabel htmlFor={format(date, "yyyy-MM-dd")}>
+                Add Item:
+              </StyledLabel>
+              <StyledInput
+                type="text"
+                id={format(date, "yyyy-MM-dd")}
+                name="itineraryItem"
+                placeholder="Add Item"
+                className="inputItem"
+                required
+              ></StyledInput>
+              <StyledLabel htmlFor="time">Set time:</StyledLabel>
+              <StyledInput type="time" id="time" name="time"></StyledInput>
+              <StyledButton type="submit">+</StyledButton>
+            </form>
+          </StyledListItem>
         ))}
       </StyledList>
       <StyledLink href="/">Save</StyledLink>
     </>
   );
 }
-
-const StyledCarousel = styled(CarouselProvider)`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-`;
-
-const StyledSlider = styled(Slider)`
-  width: 240px;
-  height: 40px;
-`;
-
-const StyledPrevButton = styled(ButtonBack)`
-  background-color: white;
-  border: none;
-  width: 2rem;
-  height: 2rem;
-`;
-
-const StyledNextButton = styled(ButtonNext)`
-  background-color: white;
-  border: none;
-  width: 2rem;
-  height: 2rem;
-`;
-
-const StyledImage2 = styled(Image)`
-  border-radius: 0.3rem;
-`;
 
 const StyledImageWrapper = styled.div`
   position: absolute;
@@ -155,7 +141,54 @@ const StyledHeading1 = styled.h1`
 
 const StyledList = styled.ul`
   list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
   align-self: flex-start;
+`;
+
+const StyledListItem = styled.li`
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 0.4rem;
+  padding: 0.4rem;
+  width: 280px;
+  min-height: 40px;
+  gap: 0.3rem;
+`;
+
+const StyledHeading2 = styled.h2`
+  color: teal;
+  font-size: 1rem;
+  margin: 0;
+`;
+
+const StyledItineraryItem = styled.p`
+  margin: 0.4rem;
+`;
+
+const StyledLabel = styled.label`
+  font-size: 0;
+`;
+
+const StyledInput = styled.input`
+  border-radius: 2rem;
+  padding: 0.4rem 1rem;
+  color: darkgrey;
+  width: 7rem;
+  &.inputItem {
+    margin-right: 0.4rem;
+  }
+`;
+
+const StyledButton = styled.button`
+  margin-left: 0.4rem;
+  background-color: transparent;
+  border: none;
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: teal;
 `;
 
 const StyledLink = styled(Link)`
