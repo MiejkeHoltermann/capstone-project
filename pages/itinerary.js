@@ -4,34 +4,9 @@ import Link from "next/link";
 import { uid } from "uid";
 import { format } from "date-fns";
 import Carousel from "@/components/Carousel";
-import { useState, useEffect } from "react";
+import { CreateItinerary, FormatTime, SortSights } from "@/components/utils";
 
 export default function Itinerary({ trips, sights, setSights }) {
-  const [sortedSights, setSortedSights] = useState([]);
-
-  useEffect(() => {
-    const updatedSortedSights = sights.slice().sort((a, b) => {
-      if (a.plannedTime === "") {
-        if (b.plannedTime === "") {
-          return 0;
-        } else {
-          return 1;
-        }
-      } else {
-        if (b.plannedTime === "") {
-          return -1;
-        }
-        if (a.plannedTime < b.plannedTime) {
-          return -1;
-        }
-        if (a.plannedTime > b.plannedTime) {
-          return 1;
-        }
-      }
-    });
-    setSortedSights(updatedSortedSights);
-  }, [sights]);
-
   function handleSubmitItem(event) {
     event.preventDefault();
     const name = event.target.itineraryItem.value;
@@ -55,24 +30,9 @@ export default function Itinerary({ trips, sights, setSights }) {
     setSights(updatedSights);
   }
 
-  function createItinerary() {
-    let firstDay = new Date(trips[1].startDate);
-    let lastDay = new Date(trips[1].endDate);
-    const datesArray = [];
-    for (let i = firstDay; i <= lastDay; i.setDate(i.getDate() + 1)) {
-      datesArray.push(new Date(i));
-    }
-    return datesArray;
-  }
+  const datesArray = CreateItinerary(trips[1]);
 
-  const datesArray = createItinerary();
-
-  function formatTime(sight) {
-    const [hours, minutes] = sight.plannedTime.split(":");
-    const mode = parseInt(hours) >= 12 ? "pm" : "am";
-    const formattedTime = `${hours % 12}.${minutes} ${mode}`;
-    return formattedTime;
-  }
+  const sortedSights = SortSights(sights);
 
   return (
     <>
@@ -99,7 +59,7 @@ export default function Itinerary({ trips, sights, setSights }) {
                   <StyledItineraryItemContainer key={sight.id}>
                     <StyledItineraryItem>{sight.name}</StyledItineraryItem>
                     <StyledItineraryTime>
-                      {sight.plannedTime ? formatTime(sight) : null}
+                      {sight.plannedTime ? FormatTime(sight) : null}
                     </StyledItineraryTime>
                   </StyledItineraryItemContainer>
                 )
