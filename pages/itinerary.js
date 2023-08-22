@@ -4,6 +4,7 @@ import Link from "next/link";
 import { uid } from "uid";
 import { format } from "date-fns";
 import Carousel from "@/components/Carousel";
+import { CreateItinerary, FormatTime, SortSights } from "@/components/utils";
 
 export default function Itinerary({ trips, sights, setSights }) {
   function handleSubmitItem(event) {
@@ -29,17 +30,9 @@ export default function Itinerary({ trips, sights, setSights }) {
     setSights(updatedSights);
   }
 
-  function createItinerary() {
-    let firstDay = new Date(trips[1].startDate);
-    let lastDay = new Date(trips[1].endDate);
-    const datesArray = [];
-    for (let i = firstDay; i <= lastDay; i.setDate(i.getDate() + 1)) {
-      datesArray.push(new Date(i));
-    }
-    return datesArray;
-  }
+  const datesArray = CreateItinerary(trips[1]);
 
-  const datesArray = createItinerary();
+  const sortedSights = SortSights(sights);
 
   return (
     <>
@@ -60,12 +53,15 @@ export default function Itinerary({ trips, sights, setSights }) {
         {datesArray.map((date) => (
           <StyledListItem key={uid()}>
             <StyledHeading2>{format(date, "dd/MM/yy")}</StyledHeading2>
-            {sights.map(
+            {sortedSights.map(
               (sight) =>
                 sight.plannedDate === format(date, "yyyy-MM-dd") && (
-                  <StyledItineraryItem key={sight.id}>
-                    {sight.name} {sight.plannedTime}
-                  </StyledItineraryItem>
+                  <StyledItineraryItemContainer key={sight.id}>
+                    <StyledItineraryItem>{sight.name}</StyledItineraryItem>
+                    <StyledItineraryTime>
+                      {sight.plannedTime ? FormatTime(sight) : null}
+                    </StyledItineraryTime>
+                  </StyledItineraryItemContainer>
                 )
             )}
             <form onSubmit={handleSubmitItem}>
@@ -79,6 +75,7 @@ export default function Itinerary({ trips, sights, setSights }) {
                 placeholder="Add Item"
                 className="inputItem"
                 required
+                pattern="\S+"
               ></StyledInput>
               <StyledLabel htmlFor="time">Set time:</StyledLabel>
               <StyledInput type="time" id="time" name="time"></StyledInput>
@@ -164,8 +161,22 @@ const StyledHeading2 = styled.h2`
   margin: 0;
 `;
 
+const StyledItineraryItemContainer = styled.div`
+  margin: 0.2rem 0.6rem;
+  display: grid;
+  grid-template-columns: 4fr 2fr;
+  gap: 1rem;
+`;
+
 const StyledItineraryItem = styled.p`
-  margin: 0.4rem;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
+
+const StyledItineraryTime = styled.p`
+  margin: 0;
+  text-align: right;
 `;
 
 const StyledLabel = styled.label`
