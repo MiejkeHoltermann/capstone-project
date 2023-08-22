@@ -75,6 +75,7 @@ export default function Itinerary({ trips, sights, setSights }) {
                 placeholder="Add Item"
                 className="inputItem"
                 required
+                pattern="\S+"
               ></StyledInput>
               <StyledLabel htmlFor="time">Set time:</StyledLabel>
               <StyledInput type="time" id="time" name="time"></StyledInput>
