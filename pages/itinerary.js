@@ -5,8 +5,12 @@ import { uid } from "uid";
 import { format } from "date-fns";
 import Carousel from "@/components/Carousel";
 import { CreateItinerary, FormatTime, SortSights } from "@/components/utils";
+import { useRef } from "react";
+import Popup from "reactjs-popup";
 
 export default function Itinerary({ trips, sights, setSights }) {
+  const popupRef = useRef();
+
   function handleSubmitItem(event) {
     event.preventDefault();
     const name = event.target.itineraryItem.value;
@@ -28,6 +32,15 @@ export default function Itinerary({ trips, sights, setSights }) {
         : sight
     );
     setSights(updatedSights);
+  }
+
+  function handleDeleteItem(name) {
+    const updatedSights = sights.filter((sight) => sight.name !== name);
+    setSights(updatedSights);
+  }
+
+  function closePopup() {
+    popupRef.current.close();
   }
 
   const datesArray = CreateItinerary(trips[1]);
@@ -61,6 +74,31 @@ export default function Itinerary({ trips, sights, setSights }) {
                     <StyledItineraryTime>
                       {sight.plannedTime ? FormatTime(sight) : null}
                     </StyledItineraryTime>
+                    <StyledPopup
+                      trigger={<StyledDeleteButton>X</StyledDeleteButton>}
+                      position="bottom center"
+                      ref={popupRef}
+                    >
+                      <StyledText>
+                        Are you sure you want to delete this item?
+                      </StyledText>
+                      <ButtonContainer>
+                        <StyledButton2
+                          type="button"
+                          className="cancel"
+                          onClick={() => closePopup()}
+                        >
+                          Cancel
+                        </StyledButton2>
+                        <StyledButton2
+                          type="button"
+                          className="yes"
+                          onClick={() => handleDeleteItem(sight.name)}
+                        >
+                          Yes
+                        </StyledButton2>
+                      </ButtonContainer>
+                    </StyledPopup>
                   </StyledItineraryItemContainer>
                 )
             )}
@@ -88,6 +126,36 @@ export default function Itinerary({ trips, sights, setSights }) {
     </>
   );
 }
+
+const StyledPopup = styled(Popup)`
+  &-content {
+    padding: 10px;
+  }
+`;
+
+const StyledText = styled.p`
+  margin: 0;
+`;
+
+const ButtonContainer = styled.div`
+  margin-top: 1rem;
+  display: flex;
+  gap: 1rem;
+`;
+
+const StyledButton2 = styled.button`
+  width: 5rem;
+  height: 1.4rem;
+  color: white;
+  border: none;
+  border-radius: 0.3rem;
+  &.cancel {
+    background-color: #934d29;
+  }
+  &.yes {
+    background-color: teal;
+  }
+`;
 
 const StyledImageWrapper = styled.div`
   position: absolute;
@@ -164,7 +232,7 @@ const StyledHeading2 = styled.h2`
 const StyledItineraryItemContainer = styled.div`
   margin: 0.2rem 0.6rem;
   display: grid;
-  grid-template-columns: 4fr 2fr;
+  grid-template-columns: 4fr 3fr 1fr;
   gap: 1rem;
 `;
 
@@ -177,6 +245,15 @@ const StyledItineraryItem = styled.p`
 const StyledItineraryTime = styled.p`
   margin: 0;
   text-align: right;
+`;
+
+const StyledDeleteButton = styled.button`
+  color: white;
+  background-color: #934d29;
+  border: none;
+  border-radius: 0.3rem;
+  width: 1.2rem;
+  height: 1.2rem;
 `;
 
 const StyledLabel = styled.label`

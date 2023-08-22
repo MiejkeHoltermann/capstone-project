@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export default function DetailsPopUp({ $popUp, onSubmit }) {
+export default function AddPopUp({ $popUp, onSubmit }) {
   return (
     <StyledPopUp $popUp={$popUp} onSubmit={onSubmit}>
       <StyledLabel htmlFor="itineraryItem">Add new item</StyledLabel>

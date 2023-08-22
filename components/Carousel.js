@@ -3,7 +3,7 @@ import Image from "next/image";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 
-export default function DetailsPopUp({ onSubmit, trips, sights }) {
+export default function Carousel({ onSubmit, trips, sights }) {
   return (
     <>
       <StyledSection>
