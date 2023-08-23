@@ -10,20 +10,20 @@ export default function ItineraryItem({
   handleDeleteItem,
   handleUpdateItem,
 }) {
-  function toggleEditModal(name) {
+  function toggleEditModal(id) {
     const updatedSights = sights.map((sight) =>
-      sight.name === name
+      sight.id === id
         ? { ...sight, editModal: !sight.editModal }
-        : { ...sight }
+        : { ...sight, editModal: false, deleteModal: false }
     );
     setSights(updatedSights);
   }
 
-  function toggleDeleteModal(name) {
+  function toggleDeleteModal(id) {
     const updatedSights = sights.map((sight) =>
-      sight.name === name
+      sight.id === id
         ? { ...sight, deleteModal: !sight.deleteModal }
-        : { ...sight }
+        : { ...sight, editModal: false, deleteModal: false }
     );
     setSights(updatedSights);
   }
@@ -32,13 +32,13 @@ export default function ItineraryItem({
     <>
       {!sight.editModal ? (
         <StyledItineraryItem>
-          <StyledItineraryName onClick={() => toggleEditModal(sight.name)}>
+          <StyledItineraryName onClick={() => toggleEditModal(sight.id)}>
             {sight.name}
           </StyledItineraryName>
-          <StyledItineraryTime onClick={() => toggleEditModal(sight.name)}>
+          <StyledItineraryTime onClick={() => toggleEditModal(sight.id)}>
             {sight.plannedTime ? FormatTime(sight) : null}
           </StyledItineraryTime>
-          <StyledDeleteButton onClick={() => toggleDeleteModal(sight.name)}>
+          <StyledDeleteButton onClick={() => toggleDeleteModal(sight.id)}>
             X
           </StyledDeleteButton>
           {sight.deleteModal === true ? (
@@ -73,13 +73,17 @@ const StyledItineraryName = styled.p`
   text-overflow: ellipsis;
   &:hover {
     cursor: pointer;
-    transform: scale(1.1);
+    color: #934d29;
   }
 `;
 
 const StyledItineraryTime = styled.p`
   margin: 0;
   justify-self: end;
+  &:hover {
+    cursor: pointer;
+    color: #934d29;
+  }
 `;
 
 const StyledDeleteButton = styled.button`

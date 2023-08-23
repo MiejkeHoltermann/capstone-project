@@ -4,9 +4,9 @@ import AddModal from "@/components/AddModal";
 import { Fragment } from "react";
 
 export default function Carousel({ handleSortItem, trips, sights, setSights }) {
-  function toggleAddModal(name) {
+  function toggleAddModal(id) {
     const updatedSights = sights.map((sight) =>
-      sight.name === name
+      sight.id === id
         ? { ...sight, addModal: !sight.addModal }
         : { ...sight, addModal: false }
     );
@@ -27,7 +27,7 @@ export default function Carousel({ handleSortItem, trips, sights, setSights }) {
                 width={40}
                 alt={sight.name}
                 id={sight.name}
-                onClick={() => toggleAddModal(sight.name)}
+                onClick={() => toggleAddModal(sight.id)}
               />
             </Fragment>
           ))}

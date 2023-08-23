@@ -12,14 +12,14 @@ export default function AddModal({
         <StyledButton
           type="button"
           className="red"
-          onClick={() => toggleDeleteModal(sight.name)}
+          onClick={() => toggleDeleteModal(sight.id)}
         >
           Cancel
         </StyledButton>
         <StyledButton
           type="button"
           className="green"
-          onClick={() => handleDeleteItem(sight.name)}
+          onClick={() => handleDeleteItem(sight.id)}
         >
           Yes
         </StyledButton>

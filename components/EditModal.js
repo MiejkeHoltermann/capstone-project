@@ -6,13 +6,12 @@ export default function EditModal({
   toggleEditModal,
 }) {
   return (
-    <StyledForm onSubmit={(event) => handleUpdateItem(event, sight.name)}>
+    <StyledForm onSubmit={(event) => handleUpdateItem(event, sight.id)}>
       <StyledInputName
         type="text"
         name="editedItem"
         defaultValue={sight.name}
         required
-        pattern="\S+"
       />
       <StyledInputTime
         type="time"
@@ -23,7 +22,7 @@ export default function EditModal({
         <StyledButtonRed
           type="button"
           className="cancel"
-          onClick={() => toggleEditModal(sight.name)}
+          onClick={() => toggleEditModal(sight.id)}
         >
           Cancel
         </StyledButtonRed>

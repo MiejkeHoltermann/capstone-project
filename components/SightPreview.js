@@ -8,9 +8,9 @@ export default function TripPreview({
   sight,
   addSightsToItinerary,
 }) {
-  function toggleDetailsModal(name) {
+  function toggleDetailsModal(id) {
     const updatedSights = sights.map((sight) =>
-      sight.name === name
+      sight.id === id
         ? { ...sight, detailsModal: !sight.detailsModal }
         : { ...sight }
     );
@@ -20,7 +20,7 @@ export default function TripPreview({
   return (
     <>
       {!sight.detailsModal ? (
-        <StyledArticle onClick={() => toggleDetailsModal(sight.name)}>
+        <StyledArticle onClick={() => toggleDetailsModal(sight.id)}>
           <StyledImageWrapper>
             <StyledImage
               src={sight.image}

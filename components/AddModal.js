@@ -9,7 +9,7 @@ export default function AddModal({
   return (
     <Modal>
       <StyledText>{sight.name}</StyledText>
-      <StyledForm onSubmit={(event) => handleSortItem(event, sight.name)}>
+      <StyledForm onSubmit={(event) => handleSortItem(event, sight.id)}>
         <StyledInputDate
           type="date"
           name="plannedDate"
@@ -22,7 +22,7 @@ export default function AddModal({
           <StyledButtonRed
             type="button"
             className="cancel"
-            onClick={() => toggleAddModal(sight.name)}
+            onClick={() => toggleAddModal(sight.id)}
           >
             Cancel
           </StyledButtonRed>

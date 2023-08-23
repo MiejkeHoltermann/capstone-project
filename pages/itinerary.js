@@ -14,18 +14,18 @@ export default function Itinerary({ trips, sights, setSights }) {
     const time = event.target.time.value;
     const updatedSights = [
       ...sights,
-      { name: name, plannedDate: date, plannedTime: time },
+      { name: name, plannedDate: date, plannedTime: time, id: uid() },
     ];
     setSights(updatedSights);
     event.target.reset();
   }
 
-  function handleSortItem(event, name) {
+  function handleSortItem(event, id) {
     event.preventDefault();
     const date = event.target.plannedDate.value;
     const time = event.target.plannedTime.value;
     const updatedSights = sights.map((sight) =>
-      sight.name === name
+      sight.id === id
         ? {
             ...sight,
             plannedDate: date,
@@ -37,12 +37,12 @@ export default function Itinerary({ trips, sights, setSights }) {
     setSights(updatedSights);
   }
 
-  function handleUpdateItem(event, name) {
+  function handleUpdateItem(event, id) {
     event.preventDefault();
     const updatedName = event.target.editedItem.value;
     const time = event.target.editedTime.value;
     const updatedSights = sights.map((sight) =>
-      sight.name === name
+      sight.id === id
         ? {
             ...sight,
             name: updatedName,
@@ -54,8 +54,8 @@ export default function Itinerary({ trips, sights, setSights }) {
     setSights(updatedSights);
   }
 
-  function handleDeleteItem(name) {
-    const updatedSights = sights.filter((sight) => sight.name !== name);
+  function handleDeleteItem(id) {
+    const updatedSights = sights.filter((sight) => sight.id !== id);
     setSights(updatedSights);
   }
 
@@ -158,9 +158,19 @@ const StyledLabel = styled.label`
 
 const StyledInput = styled.input`
   border-radius: 2rem;
-  padding: 0.4rem 1rem;
-  color: darkgrey;
+  padding: 0.3rem 0.6rem;
+  color: rgba(0, 0, 0, 0.5);
   width: 7rem;
+  border: none;
+  &:hover {
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    border-radius: 0.2rem;
+  }
+  &:focus {
+    border: 1px solid black;
+    border-radius: 0.2rem;
+    outline: none;
+  }
 `;
 
 const StyledButton = styled.button`
@@ -171,7 +181,7 @@ const StyledButton = styled.button`
   color: teal;
   &:hover {
     cursor: pointer;
-    transform: scale(1.1);
+    transform: scale(1.2);
   }
 `;
 
