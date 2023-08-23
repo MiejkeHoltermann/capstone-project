@@ -1,15 +1,18 @@
 import GlobalStyle from "../styles";
-import Layout from "../components/Layout";
 import initialSights from "../db/sights";
+import initialTrips from "../db/trips";
 import useLocalStorageState from "use-local-storage-state";
-import trips from "../db/trips";
+import Layout from "@/components/Layout";
 
 export default function App({ Component, pageProps }) {
   const [sights, setSights] = useLocalStorageState("sights", {
     defaultValue: initialSights,
   });
+  const [trips, setTrips] = useLocalStorageState("trips", {
+    defaultValue: initialTrips,
+  });
 
-  function handleSights(id) {
+  function addSightsToItinerary(id) {
     const updatedSights = sights.map((sight) => {
       if (sight.id === id) {
         return {
@@ -23,17 +26,17 @@ export default function App({ Component, pageProps }) {
     });
     setSights(updatedSights);
   }
-
   return (
     <>
       <Layout>
         <GlobalStyle />
         <Component
           {...pageProps}
-          trips={trips}
           sights={sights}
           setSights={setSights}
-          handleSights={handleSights}
+          trips={trips}
+          setTrips={setTrips}
+          addSightsToItinerary={addSightsToItinerary}
         />
       </Layout>
     </>

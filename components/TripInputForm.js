@@ -1,10 +1,10 @@
 import { useState } from "react";
 import styled from "styled-components";
 
-export default function TripInputForm({ onSubmit }) {
+export default function TripInputForm({ handleAddTrip }) {
   const [start, setStart] = useState("");
   return (
-    <StyledForm onSubmit={onSubmit}>
+    <StyledForm onSubmit={handleAddTrip}>
       <StyledLabel htmlFor="location">Location: </StyledLabel>
       <StyledInput
         type="text"
