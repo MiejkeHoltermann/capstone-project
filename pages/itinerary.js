@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Link from "next/link";
+import Image from "next/image";
 import { uid } from "uid";
 import { format } from "date-fns";
 import Header from "@/components/Header";
@@ -67,6 +68,14 @@ export default function Itinerary({ trips, sights, setSights }) {
     <>
       <Header />
       <StyledHeading1>Itinerary</StyledHeading1>
+      <ToggleButton href="/map">
+        <ToggleButtonImage
+          src="/map.svg"
+          height={40}
+          width={40}
+          alt="map view"
+        />
+      </ToggleButton>
       <Scrollbox>
         <Carousel
           trips={trips}
@@ -118,7 +127,7 @@ export default function Itinerary({ trips, sights, setSights }) {
         </StyledItinerary>
       </Scrollbox>
       <StyledFooter>
-        <StyledLink href="/">Save</StyledLink>
+        <StyledLink href="/">Home</StyledLink>
       </StyledFooter>
     </>
   );
@@ -136,6 +145,26 @@ const StyledHeading1 = styled.h1`
   @media (min-width: 500px) {
     width: 500px;
   }
+`;
+
+const ToggleButton = styled(Link)`
+  background-color: yellow;
+  position: fixed;
+  top: 11rem;
+  right: 4rem;
+  z-index: 1;
+  background-color: teal;
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const ToggleButtonImage = styled(Image)`
+  width: 1.6rem;
+  height: 1.6rem;
 `;
 
 const Scrollbox = styled.div`
