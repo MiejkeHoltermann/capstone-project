@@ -49,7 +49,7 @@ const StyledArticle = styled.article`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 360px;
+  width: 100%;
 `;
 
 const StyledImageWrapper = styled.div`

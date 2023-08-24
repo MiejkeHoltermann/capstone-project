@@ -2,7 +2,6 @@ import GlobalStyle from "../styles";
 import initialSights from "../db/sights";
 import initialTrips from "../db/trips";
 import useLocalStorageState from "use-local-storage-state";
-import Layout from "@/components/Layout";
 
 export default function App({ Component, pageProps }) {
   const [sights, setSights] = useLocalStorageState("sights", {
@@ -28,17 +27,15 @@ export default function App({ Component, pageProps }) {
   }
   return (
     <>
-      <Layout>
-        <GlobalStyle />
-        <Component
-          {...pageProps}
-          sights={sights}
-          setSights={setSights}
-          trips={trips}
-          setTrips={setTrips}
-          addSightsToItinerary={addSightsToItinerary}
-        />
-      </Layout>
+      <GlobalStyle />
+      <Component
+        {...pageProps}
+        sights={sights}
+        setSights={setSights}
+        trips={trips}
+        setTrips={setTrips}
+        addSightsToItinerary={addSightsToItinerary}
+      />
     </>
   );
 }
