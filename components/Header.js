@@ -3,37 +3,50 @@ import Image from "next/image";
 
 export default function Header() {
   return (
-    <>
+    <StyledHeader>
       <StyledImageWrapper>
         <StyledImage
           src="/countries/jordan.jpg"
-          height={600}
-          width={800}
+          height={450}
+          width={600}
           layout="responsive"
           alt="jordan"
         />
+        <StyledLogo>Travel</StyledLogo>
         <StyledLocation>Jordan</StyledLocation>
         <StyledDate>29/08/23 - 16/09/23</StyledDate>
       </StyledImageWrapper>
-    </>
+    </StyledHeader>
   );
 }
 
-const StyledImageWrapper = styled.div`
-  position: absolute;
+const StyledHeader = styled.header`
+  position: fixed;
   top: 0;
-  left: 50%;
-  transform: translate(-50%);
+  left: 0;
   height: 10rem;
-  width: 360px;
+  width: 100%;
+  @media (min-width: 500px) {
+    width: 500px;
+  }
+`;
+
+const StyledImageWrapper = styled.div`
+  height: 100%;
+  width: 100%;
   overflow: clip;
 `;
 
 const StyledImage = styled(Image)`
-  position: absolute;
-  top: 0;
-  left: 0;
   object-fit: cover;
+`;
+
+const StyledLogo = styled.p`
+  position: fixed;
+  top: 0;
+  left: 1rem;
+  color: white;
+  font-size: 24px;
 `;
 
 const StyledLocation = styled.p`
@@ -41,11 +54,12 @@ const StyledLocation = styled.p`
   font-size: 1.6rem;
   width: 100%;
   text-align: center;
-  position: absolute;
+  position: fixed;
   top: 2.8rem;
-  left: 0;
-  z-index: 1;
   text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+  @media (min-width: 500px) {
+    width: 500px;
+  }
 `;
 
 const StyledDate = styled.p`
@@ -53,9 +67,11 @@ const StyledDate = styled.p`
   font-size: 1.2rem;
   width: 100%;
   text-align: center;
-  position: absolute;
+  position: fixed;
   top: 5.4rem;
   left: 0;
-  z-index: 1;
   text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+  @media (min-width: 500px) {
+    width: 500px;
+  }
 `;

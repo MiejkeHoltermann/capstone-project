@@ -43,60 +43,65 @@ export default function HomePage({ trips, setTrips }) {
 
   return (
     <>
-      <StyledImageWrapper>
-        <StyledImage
-          src="/travel-log.jpg"
-          height={600}
-          width={800}
-          layout="responsive"
-          alt="Travel Notebook"
-        />
-      </StyledImageWrapper>
-      <StyledHeading1>My Travel Log</StyledHeading1>
-      <StyledHeading2>Create a new Trip</StyledHeading2>
-      <TripInputForm handleAddTrip={handleAddTrip} />
-      <StyledHeading3>Upcoming Trips</StyledHeading3>
-      <StyledSection>
-        {upcomingTrips.length === 0 ? (
-          <p>You do not have any upcoming trips yet.</p>
-        ) : (
-          upcomingTrips.map((trip) => (
-            <>
-              <StyledLink href="/explore">
+      <Scrollbox>
+        <StyledImageWrapper>
+          <StyledImage
+            src="/travel-log.jpg"
+            height={600}
+            width={800}
+            layout="responsive"
+            alt="Travel Notebook"
+          />
+        </StyledImageWrapper>
+        <StyledLogo>Travel</StyledLogo>
+        <StyledHeading1>My Travel Log</StyledHeading1>
+        <StyledHeading2>Create a new Trip</StyledHeading2>
+        <TripInputForm handleAddTrip={handleAddTrip} />
+        <StyledHeading3>Upcoming Trips</StyledHeading3>
+        <section>
+          {upcomingTrips.length === 0 ? (
+            <p>You do not have any upcoming trips yet.</p>
+          ) : (
+            upcomingTrips.map((trip) => (
+              <>
                 <TripPreview key={trip.id} trip={trip} />
-              </StyledLink>
-            </>
-          ))
-        )}
-      </StyledSection>
-      <StyledHeading3>Current Trips</StyledHeading3>
-      <StyledSection>
-        {currentTrips.length === 0 ? (
-          <p>You do not have any current trips yet.</p>
-        ) : (
-          currentTrips.map((trip) => <TripPreview key={trip.id} trip={trip} />)
-        )}
-      </StyledSection>
-      <StyledHeading3>Passed Trips</StyledHeading3>
-      <StyledSection>
-        {passedTrips.length === 0 ? (
-          <p>You do not have any passed trips yet.</p>
-        ) : (
-          passedTrips.map((trip) => <TripPreview key={trip.id} trip={trip} />)
-        )}
-      </StyledSection>
+              </>
+            ))
+          )}
+        </section>
+        <StyledHeading3>Current Trips</StyledHeading3>
+        <section>
+          {currentTrips.length === 0 ? (
+            <p>You do not have any current trips yet.</p>
+          ) : (
+            currentTrips.map((trip) => (
+              <TripPreview key={trip.id} trip={trip} />
+            ))
+          )}
+        </section>
+        <StyledHeading3>Passed Trips</StyledHeading3>
+        <section>
+          {passedTrips.length === 0 ? (
+            <p>You do not have any passed trips yet.</p>
+          ) : (
+            passedTrips.map((trip) => <TripPreview key={trip.id} trip={trip} />)
+          )}
+        </section>
+      </Scrollbox>
     </>
   );
 }
 
 const StyledImageWrapper = styled.div`
-  position: absolute;
+  position: fixed;
   top: 0;
-  left: 50%;
-  transform: translate(-50%);
-  height: 10rem;
-  width: 360px;
+  left: 0;
+  height: 12rem;
+  width: 100%;
   overflow: clip;
+  @media (min-width: 500px) {
+    width: 500px;
+  }
 `;
 
 const StyledImage = styled(Image)`
@@ -106,10 +111,34 @@ const StyledImage = styled(Image)`
   object-fit: cover;
 `;
 
+const StyledLogo = styled.p`
+  position: fixed;
+  top: 0;
+  left: 1rem;
+  color: white;
+  font-size: 24px;
+`;
+
 const StyledHeading1 = styled.h1`
-  margin-top: 8rem;
+  margin: 0;
+  position: fixed;
+  text-align: center;
+  top: 12rem;
   font-size: 1.6rem;
-  margin-bottom: 1rem;
+  width: 100%;
+  padding: 1rem 0;
+  background-color: white;
+`;
+
+const Scrollbox = styled.div`
+  width: 100%;
+  margin-top: 16rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  @media (min-width: 500px) {
+    width: 500px;
+  }
 `;
 
 const StyledHeading2 = styled.h2`
@@ -118,17 +147,8 @@ const StyledHeading2 = styled.h2`
   margin-bottom: 1rem;
 `;
 
-const StyledSection = styled.section`
-  width: 80%;
-`;
-
 const StyledHeading3 = styled.h3`
   color: teal;
   font-size: 1.2em;
   margin-bottom: 1rem;
-`;
-
-const StyledLink = styled(Link)`
-  color: black;
-  text-decoration: none;
 `;
