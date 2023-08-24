@@ -1,35 +1,47 @@
 import styled from "styled-components";
 import Image from "next/image";
-import DetailsPopUp from "./DetailsPopUp";
-import { useState } from "react";
+import DetailsModal from "@/components/DetailsModal";
 
-export default function TripPreview({ sight, handleSights }) {
-  const [popUp, setPopUp] = useState(false);
-
-  function handlePopUp() {
-    setPopUp(!popUp);
+export default function TripPreview({
+  sights,
+  setSights,
+  sight,
+  addSightsToItinerary,
+}) {
+  function toggleDetailsModal(id) {
+    const updatedSights = sights.map((sight) =>
+      sight.id === id
+        ? { ...sight, detailsModal: !sight.detailsModal }
+        : { ...sight }
+    );
+    setSights(updatedSights);
   }
 
   return (
-    <StyledArticle onClick={handlePopUp}>
-      <DetailsPopUp
-        $popUp={popUp}
-        details={sight.details}
-        image={sight.image}
-        name={sight.name}
-        id={sight.id}
-        handleSights={handleSights}
-      />
-      <StyledImageWrapper $popUp={popUp}>
-        <StyledImage
-          src={sight.image}
-          height={800}
-          width={800}
-          alt={sight.name}
+    <>
+      {!sight.detailsModal ? (
+        <StyledArticle onClick={() => toggleDetailsModal(sight.id)}>
+          <StyledImageWrapper>
+            <StyledImage
+              src={sight.image}
+              height={800}
+              width={800}
+              alt={sight.name}
+            />
+          </StyledImageWrapper>
+          <StyledHeading2>{sight.name}</StyledHeading2>
+        </StyledArticle>
+      ) : (
+        <DetailsModal
+          details={sight.details}
+          image={sight.image}
+          name={sight.name}
+          id={sight.id}
+          toggleDetailsModal={toggleDetailsModal}
+          addSightsToItinerary={addSightsToItinerary}
         />
-      </StyledImageWrapper>
-      <StyledHeading4 $popUp={popUp}>{sight.name}</StyledHeading4>
-    </StyledArticle>
+      )}
+    </>
   );
 }
 
@@ -41,9 +53,9 @@ const StyledArticle = styled.article`
 `;
 
 const StyledImageWrapper = styled.div`
-  height: ${({ $popUp }) => (!$popUp ? "180px " : "0px")};
+  height: 180px;
   width: 260px;
-  margin-bottom: 0.6rem;
+  margin: 2rem 0 0.6rem 0;
 `;
 
 const StyledImage = styled(Image)`
@@ -53,7 +65,7 @@ const StyledImage = styled(Image)`
   height: 100%;
 `;
 
-const StyledHeading4 = styled.h4`
-  font-size: ${({ $popUp }) => (!$popUp ? "1rem " : "0")};
+const StyledHeading2 = styled.h4`
+  font-size: 1rem;
   margin: 0;
 `;

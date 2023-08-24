@@ -1,19 +1,13 @@
-import initialTrips from "../db/trips";
 import styled from "styled-components";
-import TripInputForm from "@/components/TripInputForm";
-import useLocalStorageState from "use-local-storage-state";
 import { uid } from "uid";
-import TripPreview from "@/components/TripPreview";
 import Link from "next/link";
 import Image from "next/image";
 import { format } from "date-fns";
+import TripInputForm from "@/components/TripInputForm";
+import TripPreview from "@/components/TripPreview";
 
-export default function HomePage() {
-  const [trips, setTrips] = useLocalStorageState("trips", {
-    defaultValue: initialTrips,
-  });
-
-  function handleSubmit(event) {
+export default function HomePage({ trips, setTrips }) {
+  function handleAddTrip(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const trip = Object.fromEntries(formData);
@@ -23,7 +17,7 @@ export default function HomePage() {
         image: "/placeholder.jpg",
         id: uid(),
       },
-      ...initialTrips,
+      ...trips,
     ];
     setTrips(updatedTrips);
     event.target.reset();
@@ -60,7 +54,7 @@ export default function HomePage() {
       </StyledImageWrapper>
       <StyledHeading1>My Travel Log</StyledHeading1>
       <StyledHeading2>Create a new Trip</StyledHeading2>
-      <TripInputForm onSubmit={handleSubmit} />
+      <TripInputForm handleAddTrip={handleAddTrip} />
       <StyledHeading3>Upcoming Trips</StyledHeading3>
       <StyledSection>
         {upcomingTrips.length === 0 ? (
@@ -95,10 +89,6 @@ export default function HomePage() {
   );
 }
 
-const StyledSection = styled.section`
-  width: 80%;
-`;
-
 const StyledImageWrapper = styled.div`
   position: absolute;
   top: 0;
@@ -126,6 +116,10 @@ const StyledHeading2 = styled.h2`
   color: teal;
   font-size: 1.2em;
   margin-bottom: 1rem;
+`;
+
+const StyledSection = styled.section`
+  width: 80%;
 `;
 
 const StyledHeading3 = styled.h3`
