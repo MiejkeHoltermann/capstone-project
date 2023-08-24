@@ -63,9 +63,7 @@ export default function HomePage({ trips, setTrips }) {
             <p>You do not have any upcoming trips yet.</p>
           ) : (
             upcomingTrips.map((trip) => (
-              <>
-                <TripPreview key={trip.id} trip={trip} />
-              </>
+              <TripPreview key={trip.id} trip={trip} />
             ))
           )}
         </section>

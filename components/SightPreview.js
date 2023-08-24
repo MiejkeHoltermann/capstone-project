@@ -17,8 +17,6 @@ export default function TripPreview({
     setSights(updatedSights);
   }
 
-  console.log(sights);
-
   return (
     <>
       {!sight.detailsModal ? (
