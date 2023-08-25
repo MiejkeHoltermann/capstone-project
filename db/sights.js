@@ -9,6 +9,7 @@ const sights = [
     id: uid(),
     plannedDate: "",
     plannedTime: "",
+    geocode: [30.328, 35.444],
   },
   {
     name: "Dead Sea",
@@ -18,6 +19,7 @@ const sights = [
     id: uid(),
     plannedDate: "",
     plannedTime: "",
+    geocode: [31.757, 35.578],
   },
   {
     name: "Wadi Rum",
@@ -27,6 +29,7 @@ const sights = [
     id: uid(),
     plannedDate: "",
     plannedTime: "",
+    geocode: [29.592, 35.416],
   },
   {
     name: "Bedouin Camp",
@@ -36,6 +39,7 @@ const sights = [
     id: uid(),
     plannedDate: "",
     plannedTime: "",
+    geocode: [29.504, 35.426],
   },
   {
     name: "Amman",
@@ -45,6 +49,7 @@ const sights = [
     id: uid(),
     plannedDate: "",
     plannedTime: "",
+    geocode: [31.968, 35.91],
   },
   {
     name: "Aqaba",
@@ -54,6 +59,7 @@ const sights = [
     id: uid(),
     plannedDate: "",
     plannedTime: "",
+    geocode: [29.535, 35.0],
   },
   {
     name: "Little Petra",
@@ -63,6 +69,7 @@ const sights = [
     id: uid(),
     plannedDate: "",
     plannedTime: "",
+    geocode: [30.375, 35.45],
   },
   {
     name: "Dana Biosphere Reserve",
@@ -72,15 +79,17 @@ const sights = [
     id: uid(),
     plannedDate: "",
     plannedTime: "",
+    geocode: [30.671, 35.583],
   },
   {
-    name: "Wadi Mujib",
+    name: "Wadi al Mujib",
     image: "/jordan/wadi-mujib.jpg",
     details:
       "Wadi Mujib, also known as Arnon Stream, is a river in Jordan. The river empties into the Dead Sea circa 420 metres below sea level. Today, Wadi Mujib is fed by seven tributaries. The western part of the river is the site of the Mujib Biosphere Reserve, popular for hikes and canyoning amid dramatic rock formations. The Mujib Dam was completed in 2004 at the bottom of the wadi, where the modern road crosses the river. As a result, a large lake has formed.",
     id: uid(),
     plannedDate: "",
     plannedTime: "",
+    geocode: [31.453, 35.813],
   },
   {
     name: "Jerash",
@@ -90,6 +99,7 @@ const sights = [
     id: uid(),
     plannedDate: "",
     plannedTime: "",
+    geocode: [32.274, 35.896],
   },
 ];
 
