@@ -25,18 +25,20 @@ export default function Map({ sights }) {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        {sights.map((sight) => (
-          <Marker
-            key={sight.id}
-            position={sight.geocode}
-            draggable={true}
-            icon={customIcon}
-          >
-            <Popup>
-              <h3>{sight.name}</h3>
-            </Popup>
-          </Marker>
-        ))}
+        {sights.map((sight) =>
+          sight.inItinerary ? (
+            <Marker
+              key={sight.id}
+              position={sight.geocode}
+              draggable={true}
+              icon={customIcon}
+            >
+              <Popup>
+                <h3>{sight.name}</h3>
+              </Popup>
+            </Marker>
+          ) : null
+        )}
       </StyledMapContainer>
     </>
   );
