@@ -2,8 +2,51 @@ import styled from "styled-components";
 import Header from "@/components/Header";
 import Link from "next/link";
 import Image from "next/image";
+import dynamic from "next/dynamic";
+import "leaflet/dist/leaflet.css";
+
+const DynamicMapContainer = dynamic(
+  () => import("react-leaflet").then((module) => module.MapContainer),
+  {
+    ssr: false,
+    loading: () => <p>Loading...</p>,
+  }
+);
+
+const DynamicTileLayer = dynamic(
+  () => import("react-leaflet").then((module) => module.TileLayer),
+  {
+    ssr: false,
+    loading: () => <p>Loading...</p>,
+  }
+);
+
+const DynamicMarker = dynamic(
+  () => import("react-leaflet").then((module) => module.Marker),
+  {
+    ssr: false,
+    loading: () => <p>Loading...</p>,
+  }
+);
+
+const DynamicAttributionControl = dynamic(
+  () => import("react-leaflet").then((module) => module.AttributionControl),
+  {
+    ssr: false,
+    loading: () => <p>Loading...</p>,
+  }
+);
+
+const DynamicL = dynamic(() => import("leaflet").then((module) => module.L), {
+  ssr: false,
+  loading: () => <p>Loading...</p>,
+});
 
 export default function MapView() {
+  const customIcon = new DynamicL.Icon({
+    iconUrl: "map-marker.svg",
+    iconSize: [50, 50],
+  });
   return (
     <>
       <Header />
@@ -16,7 +59,14 @@ export default function MapView() {
           alt="list view"
         />
       </ToggleButton>
-      <Scrollbox></Scrollbox>
+      <StyledMapContainer center={[31.95, 35.933]} zoom={6}>
+        <DynamicAttributionControl position="topright" />
+        <DynamicTileLayer
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
+        <DynamicMarker position={[31.95, 35.933]}></DynamicMarker>
+      </StyledMapContainer>
       <StyledFooter>
         <StyledLink href="/">Home</StyledLink>
       </StyledFooter>
@@ -58,13 +108,11 @@ const ToggleButtonImage = styled(Image)`
   height: 1.6rem;
 `;
 
-const Scrollbox = styled.div`
-  width: 100%;
+const StyledMapContainer = styled(DynamicMapContainer)`
   margin-top: 15rem;
   margin-bottom: 6rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  height: 70vh;
+  width: 100%;
   @media (min-width: 500px) {
     width: 500px;
   }
@@ -73,7 +121,7 @@ const Scrollbox = styled.div`
 const StyledFooter = styled.div`
   position: fixed;
   bottom: 0;
-  z-index: 1;
+  z-index: 1000;
   background-color: white;
   height: 5rem;
   width: 100%;
