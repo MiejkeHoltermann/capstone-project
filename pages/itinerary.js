@@ -160,6 +160,9 @@ const ToggleButton = styled(Link)`
   display: flex;
   justify-content: center;
   align-items: center;
+  @media (min-width: 500px) {
+    left: 400px;
+  }
 `;
 
 const ToggleButtonImage = styled(Image)`
