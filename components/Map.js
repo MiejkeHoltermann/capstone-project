@@ -11,7 +11,6 @@ import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 
 export default function Map({ sights }) {
-  console.log(sights);
   const customIcon = new L.Icon({
     iconUrl: "map-marker3.svg",
     iconSize: [50, 50],
@@ -25,19 +24,20 @@ export default function Map({ sights }) {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        {sights.map((sight) =>
-          sight.inItinerary ? (
-            <Marker
-              key={sight.id}
-              position={sight.geocode}
-              draggable={true}
-              icon={customIcon}
-            >
-              <Popup>
-                <h3>{sight.name}</h3>
-              </Popup>
-            </Marker>
-          ) : null
+        {sights.map(
+          (sight) =>
+            sight.inItinerary && (
+              <Marker
+                key={sight.id}
+                position={sight.geocode}
+                draggable={true}
+                icon={customIcon}
+              >
+                <Popup>
+                  <h3>{sight.name}</h3>
+                </Popup>
+              </Marker>
+            )
         )}
       </StyledMapContainer>
     </>

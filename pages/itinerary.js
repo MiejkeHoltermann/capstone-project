@@ -68,14 +68,9 @@ export default function Itinerary({ trips, sights, setSights }) {
     <>
       <Header />
       <StyledHeading1>Itinerary</StyledHeading1>
-      <ToggleButton href="/map">
-        <ToggleButtonImage
-          src="/map.svg"
-          height={40}
-          width={40}
-          alt="map view"
-        />
-      </ToggleButton>
+      <ToggleLink href="/map">
+        <ToggleLinkImage src="/map.svg" height={40} width={40} alt="map view" />
+      </ToggleLink>
       <Scrollbox>
         <Carousel
           trips={trips}
@@ -147,7 +142,7 @@ const StyledHeading1 = styled.h1`
   }
 `;
 
-const ToggleButton = styled(Link)`
+const ToggleLink = styled(Link)`
   background-color: yellow;
   position: fixed;
   top: 11rem;
@@ -165,7 +160,7 @@ const ToggleButton = styled(Link)`
   }
 `;
 
-const ToggleButtonImage = styled(Image)`
+const ToggleLinkImage = styled(Image)`
   width: 1.6rem;
   height: 1.6rem;
 `;

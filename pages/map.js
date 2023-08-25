@@ -13,14 +13,14 @@ export default function MapView({ sights }) {
     <>
       <Header />
       <StyledHeading1>Itinerary</StyledHeading1>
-      <ToggleButton href="/itinerary">
-        <ToggleButtonImage
+      <ToggleLink href="/itinerary">
+        <ToggleLinkImage
           src="/list.svg"
           height={40}
           width={40}
           alt="list view"
         />
-      </ToggleButton>
+      </ToggleLink>
       <DynamicMap sights={sights} />
       <StyledFooter>
         <StyledLink href="/">Home</StyledLink>
@@ -43,7 +43,7 @@ const StyledHeading1 = styled.h1`
   }
 `;
 
-const ToggleButton = styled(Link)`
+const ToggleLink = styled(Link)`
   background-color: yellow;
   position: fixed;
   top: 11rem;
@@ -61,7 +61,7 @@ const ToggleButton = styled(Link)`
   }
 `;
 
-const ToggleButtonImage = styled(Image)`
+const ToggleLinkImage = styled(Image)`
   width: 1.6rem;
   height: 1.6rem;
 `;
