@@ -1,63 +1,117 @@
-import styled from "styled-components";
 import Image from "next/image";
-import AddModal from "@/components/AddModal";
-import { Fragment } from "react";
+import destinations from "@/db/destinations";
+import styled from "styled-components";
+import { fillCarousel } from "@/components/utils";
+import {
+  CarouselProvider,
+  Slider,
+  Slide,
+  ButtonBack,
+  ButtonNext,
+} from "pure-react-carousel";
+import "pure-react-carousel/dist/react-carousel.es.css";
 
-export default function Carousel({ handleSortItem, trips, sights, setSights }) {
-  function toggleAddModal(id) {
-    const updatedSights = sights.map((sight) =>
-      sight.id === id
-        ? { ...sight, addModal: !sight.addModal }
-        : { ...sight, addModal: false }
-    );
-    setSights(updatedSights);
-  }
+export default function Carousel() {
+  const randomDestinations = fillCarousel(destinations);
+
   return (
     <>
-      <StyledSection>
-        {sights
-          .filter(
-            (sight) => sight.inItinerary === true && sight.plannedDate === ""
-          )
-          .map((sight) => (
-            <Fragment key={sight.id}>
-              <StyledImage
-                src={sight.image}
-                height={40}
-                width={40}
-                alt={sight.name}
-                id={sight.name}
-                onClick={() => toggleAddModal(sight.id)}
-              />
-            </Fragment>
+      <StyledHeading2>Random Destinations</StyledHeading2>
+      <StyledCarousel
+        naturalSlideWidth={500}
+        naturalSlideHeight={180}
+        totalSlides={5}
+        visibleSlides={1}
+      >
+        <StyledButtonBack>
+          <Image src="/arrowBack.svg" height={30} width={30} alt="last slide" />
+        </StyledButtonBack>
+        <StyledSlider>
+          {randomDestinations.map((randomDestination) => (
+            <StyledSlide
+              key={randomDestination.id}
+              index={randomDestination.index}
+            >
+              <StyledImageWrapper>
+                <StyledImage
+                  src={randomDestination.image}
+                  height={500}
+                  width={500}
+                  alt={randomDestination.name}
+                  id={randomDestination.name}
+                />
+              </StyledImageWrapper>
+              <StyledHeading3>{randomDestination.name} </StyledHeading3>
+            </StyledSlide>
           ))}
-      </StyledSection>
-      {sights.map((sight) =>
-        sight.addModal ? (
-          <AddModal
-            key={sight.id}
-            sight={sight}
-            trips={trips}
-            toggleAddModal={toggleAddModal}
-            handleSortItem={handleSortItem}
-          />
-        ) : null
-      )}
+        </StyledSlider>
+        <StyledButtonNext>
+          <Image src="/arrowNext.svg" height={30} width={30} alt="next slide" />
+        </StyledButtonNext>
+      </StyledCarousel>
     </>
   );
 }
-const StyledSection = styled.section`
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  overflow: hidden;
-  width: 270px;
-  height: 40px;
-  gap: 6px;
+
+const StyledCarousel = styled(CarouselProvider)`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 3rem;
+`;
+
+const StyledSlider = styled(Slider)`
+  width: 260px;
+`;
+
+const StyledSlide = styled(Slide)`
+  height: 220px;
+  width: 260px;
+  margin: 1rem 0 0.6rem 0;
+`;
+
+const StyledImageWrapper = styled.div`
+  height: 180px;
+  width: 260px;
+  margin: 1rem 0 0.6rem 0;
 `;
 
 const StyledImage = styled(Image)`
-  border-radius: 0.3rem;
-  height: 40px;
-  width: 40px;
+  border-radius: 0.6rem;
   object-fit: cover;
+  width: 100%;
+  height: 100%;
+`;
+
+const StyledHeading2 = styled.h2`
+  color: teal;
+  font-size: 1.2em;
+  margin: 3rem 0 1rem 0;
+`;
+
+const StyledHeading3 = styled.h4`
+  font-size: 1rem;
+  margin: 0;
+  text-align: center;
+`;
+
+const StyledButtonBack = styled(ButtonBack)`
+  width: 30px;
+  height: 30px;
+  border: none;
+  background-color: transparent;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+`;
+
+const StyledButtonNext = styled(ButtonNext)`
+  width: 30px;
+  height: 30px;
+  border: none;
+  background-color: transparent;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 `;
