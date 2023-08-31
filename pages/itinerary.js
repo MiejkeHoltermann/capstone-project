@@ -5,7 +5,7 @@ import { uid } from "uid";
 import { format } from "date-fns";
 import Header from "@/components/Header";
 import { CreateItinerary, SortSights } from "@/components/utils";
-import Carousel from "@/components/Carousel";
+import Overview from "@/components/Overview";
 import ItineraryItem from "@/components/ItineraryItem";
 
 export default function Itinerary({ trips, sights, setSights }) {
@@ -72,7 +72,7 @@ export default function Itinerary({ trips, sights, setSights }) {
         <ToggleLinkImage src="/map.svg" height={40} width={40} alt="map view" />
       </ToggleLink>
       <Scrollbox>
-        <Carousel
+        <Overview
           trips={trips}
           sights={sights}
           setSights={setSights}

@@ -2,11 +2,17 @@ import styled from "styled-components";
 import { uid } from "uid";
 import Link from "next/link";
 import Image from "next/image";
-import { format } from "date-fns";
 import TripInputForm from "@/components/TripInputForm";
-import TripPreview from "@/components/TripPreview";
+import dynamic from "next/dynamic";
+import { sortTrips, countdown } from "@/components/utils";
 
-export default function HomePage({ trips, setTrips }) {
+const DynamicCarousel = dynamic(() => import("../components/Carousel"), {
+  ssr: false,
+});
+
+export default function Homepage({ trips, setTrips }) {
+  const { currentTrips, upcomingTrips } = sortTrips(trips);
+
   function handleAddTrip(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -23,74 +29,76 @@ export default function HomePage({ trips, setTrips }) {
     event.target.reset();
   }
 
-  const upcomingTrips = trips.filter(
-    (trip) =>
-      trip.startDate > format(new Date(), "yyyy-MM-dd") &&
-      trip.endDate > format(new Date(), "yyyy-MM-dd")
-  );
-
-  const currentTrips = trips.filter(
-    (trip) =>
-      trip.startDate < format(new Date(), "yyyy-MM-dd") &&
-      trip.endDate > format(new Date(), "yyyy-MM-dd")
-  );
-
-  const passedTrips = trips.filter(
-    (trip) =>
-      trip.startDate < format(new Date(), "yyyy-MM-dd") &&
-      trip.endDate < format(new Date(), "yyyy-MM-dd")
-  );
-
   return (
     <>
+      <StyledImageWrapperHeader>
+        <StyledImageHeader
+          src="/homepage.jpg"
+          height={600}
+          width={800}
+          layout="responsive"
+          alt="Homepage Header"
+        />
+      </StyledImageWrapperHeader>
+      <StyledLogo>Travel</StyledLogo>
+      <TravelLogLink href="/travellog">
+        <TravelLogLinkImage
+          src="/book.svg"
+          height={40}
+          width={40}
+          alt="travel log"
+        />
+      </TravelLogLink>
       <Scrollbox>
-        <StyledImageWrapper>
-          <StyledImage
-            src="/travel-log.jpg"
-            height={600}
-            width={800}
-            layout="responsive"
-            alt="Travel Notebook"
-          />
-        </StyledImageWrapper>
-        <StyledLogo>Travel</StyledLogo>
-        <StyledHeading1>My Travel Log</StyledHeading1>
         <StyledHeading2>Create a new Trip</StyledHeading2>
         <TripInputForm handleAddTrip={handleAddTrip} />
-        <StyledHeading3>Upcoming Trips</StyledHeading3>
-        <section>
-          {upcomingTrips.length === 0 ? (
-            <p>You do not have any upcoming trips yet.</p>
-          ) : (
-            upcomingTrips.map((trip) => (
-              <TripPreview key={trip.id} trip={trip} />
-            ))
-          )}
-        </section>
-        <StyledHeading3>Current Trips</StyledHeading3>
-        <section>
-          {currentTrips.length === 0 ? (
-            <p>You do not have any current trips yet.</p>
-          ) : (
-            currentTrips.map((trip) => (
-              <TripPreview key={trip.id} trip={trip} />
-            ))
-          )}
-        </section>
-        <StyledHeading3>Passed Trips</StyledHeading3>
-        <section>
-          {passedTrips.length === 0 ? (
-            <p>You do not have any passed trips yet.</p>
-          ) : (
-            passedTrips.map((trip) => <TripPreview key={trip.id} trip={trip} />)
-          )}
-        </section>
+        <StyledHeading2>Current Trips</StyledHeading2>
+        {currentTrips.length === 0 ? (
+          <p>You do not have any current trips yet.</p>
+        ) : (
+          currentTrips.map((trip) => (
+            <StyledArticle key={trip.id}>
+              <StyledLink href="/explore">
+                <StyledImageWrapper>
+                  <StyledImage
+                    src={trip.image}
+                    height={800}
+                    width={800}
+                    alt={trip.location}
+                  />
+                </StyledImageWrapper>
+                <StyledHeading3>{trip.location}</StyledHeading3>
+              </StyledLink>
+            </StyledArticle>
+          ))
+        )}
+        <StyledHeading2>Upcoming Trips</StyledHeading2>
+        {upcomingTrips.length === 0 ? (
+          <p>You do not have any upcoming trips yet.</p>
+        ) : (
+          upcomingTrips.map((trip) => (
+            <StyledArticle key={trip.id}>
+              <StyledImageWrapper>
+                <StyledImage
+                  src={trip.image}
+                  height={800}
+                  width={800}
+                  alt={trip.location}
+                />
+              </StyledImageWrapper>
+              <StyledHeading3>
+                {trip.location} - {countdown(trip.startDate)}
+              </StyledHeading3>
+            </StyledArticle>
+          ))
+        )}
+        <DynamicCarousel />
       </Scrollbox>
     </>
   );
 }
 
-const StyledImageWrapper = styled.div`
+const StyledImageWrapperHeader = styled.div`
   position: fixed;
   top: 0;
   left: 0;
@@ -102,7 +110,7 @@ const StyledImageWrapper = styled.div`
   }
 `;
 
-const StyledImage = styled(Image)`
+const StyledImageHeader = styled(Image)`
   position: absolute;
   top: 0;
   left: 0;
@@ -117,20 +125,32 @@ const StyledLogo = styled.p`
   font-size: 24px;
 `;
 
-const StyledHeading1 = styled.h1`
-  margin: 0;
+const TravelLogLink = styled(Link)`
+  background-color: yellow;
   position: fixed;
-  text-align: center;
-  top: 12rem;
-  font-size: 1.6rem;
-  width: 100%;
-  padding: 1rem 0;
-  background-color: white;
+  top: 1rem;
+  right: 2rem;
+  z-index: 1;
+  background-color: #ef8344;
+  width: 3.4rem;
+  height: 3.4rem;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @media (min-width: 500px) {
+    left: 425px;
+  }
+`;
+
+const TravelLogLinkImage = styled(Image)`
+  width: 2rem;
+  height: 2rem;
 `;
 
 const Scrollbox = styled.div`
   width: 100%;
-  margin-top: 16rem;
+  margin-top: 12rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -142,11 +162,39 @@ const Scrollbox = styled.div`
 const StyledHeading2 = styled.h2`
   color: teal;
   font-size: 1.2em;
-  margin-bottom: 1rem;
+  margin: 3rem 0 1rem 0;
 `;
 
-const StyledHeading3 = styled.h3`
-  color: teal;
-  font-size: 1.2em;
-  margin-bottom: 1rem;
+const StyledArticle = styled.article`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  &:hover {
+    transform: scale(1.05);
+  }
+`;
+
+const StyledImageWrapper = styled.div`
+  height: 120px;
+  width: 260px;
+  margin: 1rem 0 0.6rem 0;
+`;
+
+const StyledImage = styled(Image)`
+  border-radius: 0.6rem;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+`;
+
+const StyledHeading3 = styled.h4`
+  font-size: 1rem;
+  margin: 0;
+  text-align: center;
+`;
+
+const StyledLink = styled(Link)`
+  color: black;
+  text-decoration: none;
 `;

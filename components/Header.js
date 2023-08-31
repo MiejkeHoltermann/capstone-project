@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Header() {
   return (
@@ -13,6 +14,14 @@ export default function Header() {
           alt="jordan"
         />
         <StyledLogo>Travel</StyledLogo>
+        <TravelLogLink href="/travellog">
+          <TravelLogLinkImage
+            src="/book.svg"
+            height={40}
+            width={40}
+            alt="travel log"
+          />
+        </TravelLogLink>
         <StyledLocation>Jordan</StyledLocation>
         <StyledDate>29/08/23 - 16/09/23</StyledDate>
       </StyledImageWrapper>
@@ -47,6 +56,29 @@ const StyledLogo = styled.p`
   left: 1rem;
   color: white;
   font-size: 24px;
+`;
+
+const TravelLogLink = styled(Link)`
+  background-color: yellow;
+  position: fixed;
+  top: 1rem;
+  right: 2rem;
+  z-index: 1;
+  background-color: #ef8344;
+  width: 3.4rem;
+  height: 3.4rem;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @media (min-width: 500px) {
+    left: 425px;
+  }
+`;
+
+const TravelLogLinkImage = styled(Image)`
+  width: 2rem;
+  height: 2rem;
 `;
 
 const StyledLocation = styled.p`
