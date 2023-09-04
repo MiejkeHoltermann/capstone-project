@@ -7,19 +7,32 @@ import Header from "@/components/Header";
 import { CreateItinerary, SortSights } from "@/components/utils";
 import Overview from "@/components/Overview";
 import ItineraryItem from "@/components/ItineraryItem";
+import { useRouter } from "next/router";
+import Footer from "@/components/Footer";
 
 export default function Itinerary({ trips, sights, setSights }) {
+  const router = useRouter();
+  const currentTrip = trips.find((trip) => trip.slug === router.query.slug);
+
   function handleAddItem(event, date) {
     event.preventDefault();
     const name = event.target.itineraryItem.value;
     const time = event.target.time.value;
+    console.log(time);
     const updatedSights = [
       ...sights,
-      { name: name, plannedDate: date, plannedTime: time, id: uid() },
+      {
+        country: router.query.slug,
+        name: name,
+        plannedDate: date,
+        plannedTime: time,
+        id: uid(),
+      },
     ];
     setSights(updatedSights);
     event.target.reset();
   }
+  sights;
 
   function handleSortItem(event, id) {
     event.preventDefault();
@@ -60,21 +73,25 @@ export default function Itinerary({ trips, sights, setSights }) {
     setSights(updatedSights);
   }
 
-  const datesArray = CreateItinerary(trips[2]);
+  const datesArray = CreateItinerary(currentTrip);
 
-  const sortedSights = SortSights(sights);
+  const filteredSights = sights.filter(
+    (sight) => sight.country === router.query.slug
+  );
+  const sortedSights = SortSights(filteredSights);
 
   return (
     <>
-      <Header />
+      <Header trip={currentTrip} />
       <StyledHeading1>Itinerary</StyledHeading1>
-      <ToggleLink href="/map">
+      <ToggleLink href={`/${currentTrip.slug}/map`}>
         <ToggleLinkImage src="/map.svg" height={40} width={40} alt="map view" />
       </ToggleLink>
       <Scrollbox>
         <Overview
           trips={trips}
           sights={sights}
+          trip={currentTrip}
           setSights={setSights}
           handleSortItem={handleSortItem}
         />
@@ -121,9 +138,7 @@ export default function Itinerary({ trips, sights, setSights }) {
           ))}
         </StyledItinerary>
       </Scrollbox>
-      <StyledFooter>
-        <StyledLink href="/">Home</StyledLink>
-      </StyledFooter>
+      <Footer buttonlink={`/${currentTrip.slug}`} buttontext="Overview" />
     </>
   );
 }
@@ -232,7 +247,7 @@ const StyledInput = styled.input`
     border-radius: 0.2rem;
   }
   &:focus {
-    border: 1px solid black;
+    border: 1px solid rgba(0, 0, 0, 0.3);
     border-radius: 0.2rem;
     outline: none;
   }

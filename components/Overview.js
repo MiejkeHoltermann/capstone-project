@@ -3,7 +3,13 @@ import Image from "next/image";
 import AddModal from "@/components/AddModal";
 import { Fragment } from "react";
 
-export default function Overview({ handleSortItem, trips, sights, setSights }) {
+export default function Overview({
+  handleSortItem,
+  trips,
+  trip,
+  sights,
+  setSights,
+}) {
   function toggleAddModal(id) {
     const updatedSights = sights.map((sight) =>
       sight.id === id
@@ -12,14 +18,14 @@ export default function Overview({ handleSortItem, trips, sights, setSights }) {
     );
     setSights(updatedSights);
   }
+  const filteredSights = sights.filter(
+    (sight) => sight.inItinerary === true && sight.plannedDate === ""
+  );
   return (
     <>
-      <StyledSection>
-        {sights
-          .filter(
-            (sight) => sight.inItinerary === true && sight.plannedDate === ""
-          )
-          .map((sight) => (
+      {filteredSights.length !== 0 && (
+        <StyledSection>
+          {filteredSights.map((sight) => (
             <Fragment key={sight.id}>
               <StyledImage
                 src={sight.image}
@@ -31,13 +37,15 @@ export default function Overview({ handleSortItem, trips, sights, setSights }) {
               />
             </Fragment>
           ))}
-      </StyledSection>
+        </StyledSection>
+      )}
       {sights.map((sight) =>
         sight.addModal ? (
           <AddModal
             key={sight.id}
             sight={sight}
             trips={trips}
+            trip={trip}
             toggleAddModal={toggleAddModal}
             handleSortItem={handleSortItem}
           />

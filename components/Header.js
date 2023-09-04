@@ -1,17 +1,18 @@
 import styled from "styled-components";
 import Image from "next/image";
 import Link from "next/link";
+import { format } from "date-fns";
 
-export default function Header() {
+export default function Header({ trip }) {
   return (
     <StyledHeader>
       <StyledImageWrapper>
         <StyledImage
-          src="/countries/jordan.jpg"
+          src={trip.image}
           height={450}
           width={600}
           layout="responsive"
-          alt="jordan"
+          alt={trip.name}
         />
         <StyledLogo>Travel</StyledLogo>
         <TravelLogLink href="/travellog">
@@ -22,8 +23,11 @@ export default function Header() {
             alt="travel log"
           />
         </TravelLogLink>
-        <StyledLocation>Jordan</StyledLocation>
-        <StyledDate>29/08/23 - 16/09/23</StyledDate>
+        <StyledName>{trip.name}</StyledName>
+        <StyledDate>
+          {format(new Date(trip.startDate), "dd/MM/yy")} -{" "}
+          {format(new Date(trip.endDate), "dd/MM/yy")}
+        </StyledDate>
       </StyledImageWrapper>
     </StyledHeader>
   );
@@ -33,7 +37,7 @@ const StyledHeader = styled.header`
   position: fixed;
   top: 0;
   left: 0;
-  height: 10rem;
+  height: 12rem;
   width: 100%;
   @media (min-width: 500px) {
     width: 500px;
@@ -48,6 +52,7 @@ const StyledImageWrapper = styled.div`
 
 const StyledImage = styled(Image)`
   object-fit: cover;
+  object-position: center -80px;
 `;
 
 const StyledLogo = styled.p`
@@ -63,25 +68,24 @@ const TravelLogLink = styled(Link)`
   position: fixed;
   top: 1rem;
   right: 2rem;
-  z-index: 1;
   background-color: #ef8344;
-  width: 3.4rem;
-  height: 3.4rem;
+  width: 3rem;
+  height: 3rem;
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
   @media (min-width: 500px) {
-    left: 425px;
+    left: 435px;
   }
 `;
 
 const TravelLogLinkImage = styled(Image)`
-  width: 2rem;
-  height: 2rem;
+  width: 1.6rem;
+  height: 1.6rem;
 `;
 
-const StyledLocation = styled.p`
+const StyledName = styled.p`
   color: white;
   font-size: 1.6rem;
   width: 100%;

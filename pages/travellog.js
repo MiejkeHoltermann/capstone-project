@@ -2,6 +2,8 @@ import styled from "styled-components";
 import Image from "next/image";
 import TripPreview from "@/components/TripPreview";
 import { sortTrips } from "@/components/utils";
+import Link from "next/link";
+import Footer from "@/components/Footer";
 
 export default function Travellog({ trips }) {
   const { currentTrips, upcomingTrips, passedTrips } = sortTrips(trips);
@@ -10,8 +12,8 @@ export default function Travellog({ trips }) {
     <>
       <StyledImageWrapper>
         <StyledImage
-          src="/travel-log.jpg"
-          height={600}
+          src="https://source.unsplash.com/dvK_CT1Wg78/640x480"
+          height={800}
           width={800}
           layout="responsive"
           alt="Travel Notebook"
@@ -22,23 +24,24 @@ export default function Travellog({ trips }) {
         <StyledHeading1>My Travel Log</StyledHeading1>
         <StyledHeading2>Current Trips</StyledHeading2>
         {currentTrips.length === 0 ? (
-          <p>You do not have any current trips yet.</p>
+          <p>There are no current trips in your travel log.</p>
         ) : (
           currentTrips.map((trip) => <TripPreview key={trip.id} trip={trip} />)
         )}
         <StyledHeading2>Upcoming Trips</StyledHeading2>
         {upcomingTrips.length === 0 ? (
-          <p>You do not have any upcoming trips yet.</p>
+          <p>There are no upcoming trips in your travel log.</p>
         ) : (
           upcomingTrips.map((trip) => <TripPreview key={trip.id} trip={trip} />)
         )}
         <StyledHeading2>Passed Trips</StyledHeading2>
         {passedTrips.length === 0 ? (
-          <p>You do not have any passed trips yet.</p>
+          <p>There are no passed trips in your travel log.</p>
         ) : (
           passedTrips.map((trip) => <TripPreview key={trip.id} trip={trip} />)
         )}
       </Scrollbox>
+      <Footer buttonlink="/" buttontext="Home" />
     </>
   );
 }
@@ -96,4 +99,28 @@ const StyledHeading2 = styled.h2`
   color: teal;
   font-size: 1.2em;
   margin-bottom: 1rem;
+`;
+
+const StyledFooter = styled.div`
+  position: fixed;
+  bottom: 0;
+  z-index: 1;
+  background-color: white;
+  height: 5rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @media (min-width: 500px) {
+    width: 500px;
+  }
+`;
+
+const StyledLink = styled(Link)`
+  border-radius: 2rem;
+  color: white;
+  text-decoration: none;
+  background-color: darkblue;
+  padding: 0.4rem 1rem;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
 `;

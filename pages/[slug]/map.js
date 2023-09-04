@@ -3,17 +3,21 @@ import Header from "@/components/Header";
 import Link from "next/link";
 import Image from "next/image";
 import dynamic from "next/dynamic";
+import { useRouter } from "next/router";
+import Footer from "@/components/Footer";
 
-const DynamicMap = dynamic(() => import("../components/Map"), {
+const DynamicMap = dynamic(() => import("@/components/Map"), {
   ssr: false,
 });
 
-export default function MapView({ sights }) {
+export default function MapView({ sights, trips }) {
+  const router = useRouter();
+  const currentTrip = trips.find((trip) => trip.slug === router.query.slug);
   return (
     <>
-      <Header />
+      <Header trip={currentTrip} />
       <StyledHeading1>Itinerary</StyledHeading1>
-      <ToggleLink href="/itinerary">
+      <ToggleLink href={`/${currentTrip.slug}/itinerary`}>
         <ToggleLinkImage
           src="/list.svg"
           height={40}
@@ -21,10 +25,8 @@ export default function MapView({ sights }) {
           alt="list view"
         />
       </ToggleLink>
-      <DynamicMap sights={sights} />
-      <StyledFooter>
-        <StyledLink href="/">Home</StyledLink>
-      </StyledFooter>
+      <DynamicMap sights={sights} trip={currentTrip} />
+      <Footer buttonlink={`/${currentTrip.slug}`} buttontext="Overview" />
     </>
   );
 }

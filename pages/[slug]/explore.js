@@ -1,19 +1,32 @@
 import styled from "styled-components";
 import Header from "@/components/Header";
 import Link from "next/link";
+import Footer from "@/components/Footer";
 
 import SightPreview from "@/components/SightPreview";
+import { useRouter } from "next/router";
 
-export default function Explore({ sights, setSights, addSightsToItinerary }) {
+export default function Explore({
+  sights,
+  setSights,
+  addSightsToItinerary,
+  trips,
+}) {
+  const router = useRouter();
+  const currentTrip = trips.find((trip) => trip.slug === router.query.slug);
+  const filteredSights = sights.filter(
+    (sight) => sight.country === router.query.slug
+  );
+  console.log(router.query.slug);
   return (
     <>
-      <Header />
+      <Header trip={currentTrip} />
       <StyledHeading1>Explore</StyledHeading1>
       <Scrollbox>
-        {sights.length === 0 ? (
+        {filteredSights.length === 0 ? (
           <p>There are no sights for this destination yet.</p>
         ) : (
-          sights
+          filteredSights
             .filter(
               (sight) => sight.inItinerary !== true && sight.plannedDate === ""
             )
@@ -28,9 +41,10 @@ export default function Explore({ sights, setSights, addSightsToItinerary }) {
             ))
         )}
       </Scrollbox>
-      <StyledFooter>
-        <StyledLink href="/itinerary">Save</StyledLink>
-      </StyledFooter>
+      <Footer
+        buttonlink={`/${currentTrip.slug}/itinerary`}
+        buttontext="Itinerary"
+      />
     </>
   );
 }
@@ -39,7 +53,7 @@ const StyledHeading1 = styled.h1`
   margin: 0;
   position: fixed;
   text-align: center;
-  top: 10rem;
+  top: 13rem;
   font-size: 1.6rem;
   width: 100%;
   padding: 1rem 0;
@@ -51,7 +65,7 @@ const StyledHeading1 = styled.h1`
 
 const Scrollbox = styled.div`
   width: 100%;
-  margin-top: 14rem;
+  margin-top: 16rem;
   margin-bottom: 6rem;
   display: flex;
   flex-direction: column;

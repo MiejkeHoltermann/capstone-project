@@ -10,7 +10,7 @@ import {
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 
-export default function Map({ sights }) {
+export default function Map({ sights, trip }) {
   const customIcon = new L.Icon({
     iconUrl: "map-marker3.svg",
     iconSize: [50, 50],
@@ -19,7 +19,7 @@ export default function Map({ sights }) {
   return (
     <>
       <p>Test</p>
-      <StyledMapContainer center={[31.95, 35.933]} zoom={6}>
+      <StyledMapContainer center={trip.geocode} zoom={6}>
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
