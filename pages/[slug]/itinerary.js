@@ -9,11 +9,15 @@ import Overview from "@/components/Overview";
 import ItineraryItem from "@/components/ItineraryItem";
 import { useRouter } from "next/router";
 import Footer from "@/components/Footer";
+import Lottie from "react-lottie-player";
+import lottieJson from "../../public/loadingAnimation.json";
 
 export default function Itinerary({ trips, sights, setSights }) {
   const router = useRouter();
   const currentTrip = trips.find((trip) => trip.slug === router.query.slug);
-
+  if (!currentTrip) {
+    return <StyledLottie loop animationData={lottieJson} play />;
+  }
   function handleAddItem(event, date) {
     event.preventDefault();
     const name = event.target.itineraryItem.value;
@@ -142,6 +146,15 @@ export default function Itinerary({ trips, sights, setSights }) {
     </>
   );
 }
+
+const StyledLottie = styled(Lottie)`
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 50vw;
+  height: 50vw;
+`;
 
 const StyledHeading1 = styled.h1`
   margin: 0;

@@ -5,6 +5,8 @@ import Image from "next/image";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import Footer from "@/components/Footer";
+import Lottie from "react-lottie-player";
+import lottieJson from "../../public/loadingAnimation.json";
 
 const DynamicMap = dynamic(() => import("@/components/Map"), {
   ssr: false,
@@ -13,6 +15,9 @@ const DynamicMap = dynamic(() => import("@/components/Map"), {
 export default function MapView({ sights, trips }) {
   const router = useRouter();
   const currentTrip = trips.find((trip) => trip.slug === router.query.slug);
+  if (!currentTrip) {
+    return <StyledLottie loop animationData={lottieJson} play />;
+  }
   return (
     <>
       <Header trip={currentTrip} />
@@ -30,6 +35,15 @@ export default function MapView({ sights, trips }) {
     </>
   );
 }
+
+const StyledLottie = styled(Lottie)`
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 50vw;
+  height: 50vw;
+`;
 
 const StyledHeading1 = styled.h1`
   margin: 0;

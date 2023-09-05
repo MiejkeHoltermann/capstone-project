@@ -2,7 +2,8 @@ import styled from "styled-components";
 import Header from "@/components/Header";
 import Link from "next/link";
 import Footer from "@/components/Footer";
-
+import Lottie from "react-lottie-player";
+import lottieJson from "../../public/loadingAnimation.json";
 import SightPreview from "@/components/SightPreview";
 import { useRouter } from "next/router";
 
@@ -14,6 +15,9 @@ export default function Explore({
 }) {
   const router = useRouter();
   const currentTrip = trips.find((trip) => trip.slug === router.query.slug);
+  if (!currentTrip) {
+    return <StyledLottie loop animationData={lottieJson} play />;
+  }
   const filteredSights = sights.filter(
     (sight) => sight.country === router.query.slug
   );
@@ -48,6 +52,15 @@ export default function Explore({
     </>
   );
 }
+
+const StyledLottie = styled(Lottie)`
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 50vw;
+  height: 50vw;
+`;
 
 const StyledHeading1 = styled.h1`
   margin: 0;
