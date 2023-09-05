@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import Link from "next/link";
 
-export default function Footer({ buttonLink, buttonText }) {
+export default function Footer({ url, linkText }) {
   return (
     <StyledFooter>
       <StyledLinkBorder>
-        <StyledLink href={buttonLink}>{buttonText}</StyledLink>
+        <StyledLink href={url}>{linkText}</StyledLink>
       </StyledLinkBorder>
     </StyledFooter>
   );

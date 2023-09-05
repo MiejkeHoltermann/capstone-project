@@ -29,7 +29,7 @@ export default function Overview({ trips }) {
           </StyledOptionsLink>
         </StyledLinkContainer>
       </Scrollbox>
-      <Footer buttonLink="/" buttonText="Home" />
+      <Footer url="/" linkText="Home" />
     </>
   );
 }

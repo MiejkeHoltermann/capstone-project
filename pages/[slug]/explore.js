@@ -24,7 +24,7 @@ export default function Explore({
   return (
     <>
       <Header trip={currentTrip} />
-      <StyledHeading1>Explore</StyledHeading1>
+      <StyledTitle>Explore</StyledTitle>
       <Scrollbox>
         {filteredSights.length === 0 ? (
           <p>There are no sights for this destination yet.</p>
@@ -44,10 +44,7 @@ export default function Explore({
             ))
         )}
       </Scrollbox>
-      <Footer
-        buttonLink={`/${currentTrip.slug}/itinerary`}
-        buttonText="Itinerary"
-      />
+      <Footer url={`/${currentTrip.slug}/itinerary`} linkText="Itinerary" />
     </>
   );
 }
@@ -61,7 +58,7 @@ const StyledLottie = styled(Lottie)`
   height: 50vw;
 `;
 
-const StyledHeading1 = styled.h1`
+const StyledTitle = styled.h1`
   margin: 0;
   position: fixed;
   text-align: center;

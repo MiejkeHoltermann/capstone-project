@@ -21,7 +21,7 @@ export default function MapView({ sights, trips }) {
   return (
     <>
       <Header trip={currentTrip} />
-      <StyledHeading1>Itinerary</StyledHeading1>
+      <StyledTitle>Itinerary</StyledTitle>
       <ToggleLink href={`/${currentTrip.slug}/itinerary`}>
         <ToggleLinkImage
           src="/list.svg"
@@ -31,7 +31,7 @@ export default function MapView({ sights, trips }) {
         />
       </ToggleLink>
       <DynamicMap sights={sights} trip={currentTrip} />
-      <Footer buttonLink={`/${currentTrip.slug}`} buttonText="Overview" />
+      <Footer url={`/${currentTrip.slug}`} linkText="Overview" />
     </>
   );
 }
@@ -45,7 +45,7 @@ const StyledLottie = styled(Lottie)`
   height: 50vw;
 `;
 
-const StyledHeading1 = styled.h1`
+const StyledTitle = styled.h1`
   margin: 0;
   position: fixed;
   text-align: center;

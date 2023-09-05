@@ -15,7 +15,7 @@ export default function DetailsModal({
         <StyledImageWrapper>
           <StyledImage src={image} height={800} width={800} alt={name} />
         </StyledImageWrapper>
-        <StyledHeading2>{name}</StyledHeading2>
+        <StyledSubheading>{name}</StyledSubheading>
         <StyledDetails>{details}</StyledDetails>
       </Clickzone>
       <StyledButton onClick={() => addSightsToItinerary(id)}>
@@ -58,7 +58,7 @@ const StyledImage = styled(Image)`
   height: 100%;
 `;
 
-const StyledHeading2 = styled.h4`
+const StyledSubheading = styled.h4`
   margin: 0 0 0.6rem 0;
   overflow: hidden;
 `;

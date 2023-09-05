@@ -29,7 +29,7 @@ export default function TripPreview({
               alt={sight.name}
             />
           </StyledImageWrapper>
-          <StyledHeading2>{sight.name}</StyledHeading2>
+          <StyledSubheading>{sight.name}</StyledSubheading>
         </StyledArticle>
       ) : (
         <DetailsModal
@@ -65,7 +65,7 @@ const StyledImage = styled(Image)`
   height: 100%;
 `;
 
-const StyledHeading2 = styled.h4`
+const StyledSubheading = styled.h4`
   font-size: 1rem;
   margin: 0;
 `;

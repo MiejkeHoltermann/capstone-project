@@ -21,27 +21,27 @@ export default function Travellog({ trips }) {
       </StyledImageWrapper>
       <StyledLogo>Travel</StyledLogo>
       <Scrollbox>
-        <StyledHeading1>My Travel Log</StyledHeading1>
-        <StyledHeading2>Current Trips</StyledHeading2>
+        <StyledTitle>My Travel Log</StyledTitle>
+        <StyledSubheading>Current Trips</StyledSubheading>
         {currentTrips.length === 0 ? (
           <p>There are no current trips in your travel log.</p>
         ) : (
           currentTrips.map((trip) => <TripPreview key={trip.id} trip={trip} />)
         )}
-        <StyledHeading2>Upcoming Trips</StyledHeading2>
+        <StyledSubheading>Upcoming Trips</StyledSubheading>
         {upcomingTrips.length === 0 ? (
           <p>There are no upcoming trips in your travel log.</p>
         ) : (
           upcomingTrips.map((trip) => <TripPreview key={trip.id} trip={trip} />)
         )}
-        <StyledHeading2>Passed Trips</StyledHeading2>
+        <StyledSubheading>Passed Trips</StyledSubheading>
         {passedTrips.length === 0 ? (
           <p>There are no passed trips in your travel log.</p>
         ) : (
           passedTrips.map((trip) => <TripPreview key={trip.id} trip={trip} />)
         )}
       </Scrollbox>
-      <Footer buttonLink="/" buttonText="Home" />
+      <Footer url="/" linkText="Home" />
     </>
   );
 }
@@ -84,7 +84,7 @@ const Scrollbox = styled.div`
   }
 `;
 
-const StyledHeading1 = styled.h1`
+const StyledTitle = styled.h1`
   margin: 0;
   position: fixed;
   text-align: center;
@@ -95,7 +95,7 @@ const StyledHeading1 = styled.h1`
   background-color: white;
 `;
 
-const StyledHeading2 = styled.h2`
+const StyledSubheading = styled.h2`
   color: teal;
   font-size: 1.2em;
   margin-bottom: 1rem;

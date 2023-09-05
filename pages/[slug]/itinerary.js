@@ -22,7 +22,6 @@ export default function Itinerary({ trips, sights, setSights }) {
     event.preventDefault();
     const name = event.target.itineraryItem.value;
     const time = event.target.time.value;
-    console.log(time);
     const updatedSights = [
       ...sights,
       {
@@ -87,7 +86,7 @@ export default function Itinerary({ trips, sights, setSights }) {
   return (
     <>
       <Header trip={currentTrip} />
-      <StyledHeading1>Itinerary</StyledHeading1>
+      <StyledTitle>Itinerary</StyledTitle>
       <ToggleLink href={`/${currentTrip.slug}/map`}>
         <ToggleLinkImage src="/map.svg" height={40} width={40} alt="map view" />
       </ToggleLink>
@@ -142,7 +141,7 @@ export default function Itinerary({ trips, sights, setSights }) {
           ))}
         </StyledItinerary>
       </Scrollbox>
-      <Footer buttonLink={`/${currentTrip.slug}`} buttonText="Overview" />
+      <Footer url={`/${currentTrip.slug}`} linkText="Overview" />
     </>
   );
 }
@@ -156,7 +155,7 @@ const StyledLottie = styled(Lottie)`
   height: 50vw;
 `;
 
-const StyledHeading1 = styled.h1`
+const StyledTitle = styled.h1`
   margin: 0;
   position: fixed;
   text-align: center;

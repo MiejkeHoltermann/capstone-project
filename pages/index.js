@@ -220,7 +220,7 @@ const StyledImage = styled(Image)`
   height: 100%;
 `;
 
-const StyledName = styled.h4`
+const StyledName = styled.h3`
   font-size: 1rem;
   margin: 0;
   text-align: center;
