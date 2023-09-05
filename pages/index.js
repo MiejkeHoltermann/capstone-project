@@ -14,7 +14,6 @@ const DynamicCarousel = dynamic(() => import("../components/Carousel"), {
 });
 
 export default function Homepage({ trips, setTrips }) {
-  console.log(new Date());
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
   const [successMessage, setSuccessMessage] = useState("");
@@ -26,9 +25,6 @@ export default function Homepage({ trips, setTrips }) {
   const { currentTrips, upcomingTrips } = sortTrips(trips);
 
   function handleAddTrip(event) {
-    if (!startDate || !endDate) {
-      console.log("error");
-    }
     event.preventDefault();
     const name = event.target.destination.value;
     const currentDestination = destinations.find(
@@ -74,16 +70,18 @@ export default function Homepage({ trips, setTrips }) {
         />
       </TravelLogLink>
       <Scrollbox>
-        <StyledHeading2>Create a new Trip</StyledHeading2>
+        <StyledSubheading>Create a new Trip</StyledSubheading>
         <TripInputForm
           handleAddTrip={handleAddTrip}
           startDate={startDate}
           endDate={endDate}
           handleChange={handleChange}
         />
-        {successMessage && <StyledHeading2>{successMessage}</StyledHeading2>}
+        {successMessage && (
+          <StyledSubheading>{successMessage}</StyledSubheading>
+        )}
 
-        <StyledHeading2>Upcoming Trips</StyledHeading2>
+        <StyledSubheading>Upcoming Trips</StyledSubheading>
         {upcomingTrips.length === 0 ? (
           <p>There are no upcoming trips yet.</p>
         ) : (
@@ -98,14 +96,14 @@ export default function Homepage({ trips, setTrips }) {
                     alt={trip.name}
                   />
                 </StyledImageWrapper>
-                <StyledHeading3>
+                <StyledName>
                   {trip.name} - {countdown(trip.startDate)}
-                </StyledHeading3>
+                </StyledName>
               </StyledLink>
             </StyledArticle>
           ))
         )}
-        <StyledHeading2>Current Trips</StyledHeading2>
+        <StyledSubheading>Current Trips</StyledSubheading>
         {currentTrips.length === 0 ? (
           <p>There are no current trips yet.</p>
         ) : (
@@ -120,7 +118,7 @@ export default function Homepage({ trips, setTrips }) {
                     alt={trip.name}
                   />
                 </StyledImageWrapper>
-                <StyledHeading3>{trip.name}</StyledHeading3>
+                <StyledName>{trip.name}</StyledName>
               </StyledLink>
             </StyledArticle>
           ))
@@ -191,7 +189,7 @@ const Scrollbox = styled.div`
   }
 `;
 
-const StyledHeading2 = styled.h2`
+const StyledSubheading = styled.h2`
   color: teal;
   width: 60%;
   text-align: center;
@@ -222,7 +220,7 @@ const StyledImage = styled(Image)`
   height: 100%;
 `;
 
-const StyledHeading3 = styled.h4`
+const StyledName = styled.h4`
   font-size: 1rem;
   margin: 0;
   text-align: center;

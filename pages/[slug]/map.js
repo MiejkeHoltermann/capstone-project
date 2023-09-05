@@ -31,7 +31,7 @@ export default function MapView({ sights, trips }) {
         />
       </ToggleLink>
       <DynamicMap sights={sights} trip={currentTrip} />
-      <Footer buttonlink={`/${currentTrip.slug}`} buttontext="Overview" />
+      <Footer buttonLink={`/${currentTrip.slug}`} buttonText="Overview" />
     </>
   );
 }

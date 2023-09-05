@@ -41,7 +41,7 @@ export default function Travellog({ trips }) {
           passedTrips.map((trip) => <TripPreview key={trip.id} trip={trip} />)
         )}
       </Scrollbox>
-      <Footer buttonlink="/" buttontext="Home" />
+      <Footer buttonLink="/" buttonText="Home" />
     </>
   );
 }

@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import Image from "next/image";
 import AddModal from "@/components/AddModal";
-import { Fragment } from "react";
 
 export default function Overview({
   handleSortItem,
@@ -19,23 +18,22 @@ export default function Overview({
     setSights(updatedSights);
   }
   const filteredSights = sights.filter(
-    (sight) => sight.inItinerary === true && sight.plannedDate === ""
+    (sight) => sight.inItinerary && sight.plannedDate === ""
   );
   return (
     <>
       {filteredSights.length !== 0 && (
         <StyledSection>
           {filteredSights.map((sight) => (
-            <Fragment key={sight.id}>
-              <StyledImage
-                src={sight.image}
-                height={40}
-                width={40}
-                alt={sight.name}
-                id={sight.name}
-                onClick={() => toggleAddModal(sight.id)}
-              />
-            </Fragment>
+            <StyledImage
+              key={sight.id}
+              src={sight.image}
+              height={40}
+              width={40}
+              alt={sight.name}
+              id={sight.name}
+              onClick={() => toggleAddModal(sight.id)}
+            />
           ))}
         </StyledSection>
       )}

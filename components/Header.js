@@ -15,14 +15,14 @@ export default function Header({ trip }) {
           alt={trip.name}
         />
         <StyledLogo>Travel</StyledLogo>
-        <TravelLogLink href="/travellog">
-          <TravelLogLinkImage
+        <StyledTravelLogLink href="/travellog">
+          <StyledTravelLogLinkImage
             src="/book.svg"
             height={40}
             width={40}
             alt="travel log"
           />
-        </TravelLogLink>
+        </StyledTravelLogLink>
         <StyledName>{trip.name}</StyledName>
         <StyledDate>
           {format(new Date(trip.startDate), "dd/MM/yy")} -{" "}
@@ -63,7 +63,7 @@ const StyledLogo = styled.p`
   font-size: 24px;
 `;
 
-const TravelLogLink = styled(Link)`
+const StyledTravelLogLink = styled(Link)`
   background-color: yellow;
   position: fixed;
   top: 1rem;
@@ -80,7 +80,7 @@ const TravelLogLink = styled(Link)`
   }
 `;
 
-const TravelLogLinkImage = styled(Image)`
+const StyledTravelLogLinkImage = styled(Image)`
   width: 1.6rem;
   height: 1.6rem;
 `;

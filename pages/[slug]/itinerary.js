@@ -142,7 +142,7 @@ export default function Itinerary({ trips, sights, setSights }) {
           ))}
         </StyledItinerary>
       </Scrollbox>
-      <Footer buttonlink={`/${currentTrip.slug}`} buttontext="Overview" />
+      <Footer buttonLink={`/${currentTrip.slug}`} buttonText="Overview" />
     </>
   );
 }

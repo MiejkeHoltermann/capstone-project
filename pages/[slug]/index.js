@@ -29,7 +29,7 @@ export default function Overview({ trips }) {
           </StyledOptionsLink>
         </StyledLinkContainer>
       </Scrollbox>
-      <Footer buttonlink="/" buttontext="Home" />
+      <Footer buttonLink="/" buttonText="Home" />
     </>
   );
 }
@@ -52,12 +52,6 @@ const Scrollbox = styled.div`
   @media (min-width: 500px) {
     width: 500px;
   }
-`;
-
-const StyledHeading2 = styled.h2`
-  color: teal;
-  font-size: 1.6rem;
-  margin: 0.4rem 0;
 `;
 
 const StyledExploreLink = styled(Link)`

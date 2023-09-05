@@ -21,7 +21,6 @@ export default function Explore({
   const filteredSights = sights.filter(
     (sight) => sight.country === router.query.slug
   );
-  console.log(router.query.slug);
   return (
     <>
       <Header trip={currentTrip} />
@@ -46,8 +45,8 @@ export default function Explore({
         )}
       </Scrollbox>
       <Footer
-        buttonlink={`/${currentTrip.slug}/itinerary`}
-        buttontext="Itinerary"
+        buttonLink={`/${currentTrip.slug}/itinerary`}
+        buttonText="Itinerary"
       />
     </>
   );
