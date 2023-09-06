@@ -3,7 +3,7 @@ import destinations from "@/db/destinations";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-export default function TripInputForm({
+export default function TripForm({
   handleAddTrip,
   startDate,
   endDate,
@@ -22,7 +22,7 @@ export default function TripInputForm({
           </StyledOption>
         ))}
       </StyledSelect>
-      <StyledInput>
+      <StyledDatePickerWrapper>
         <StyledDatePicker
           selected={startDate}
           selectsRange
@@ -33,7 +33,7 @@ export default function TripInputForm({
           onChange={handleChange}
           required
         />
-      </StyledInput>
+      </StyledDatePickerWrapper>
       <StyledButton type="submit">Save</StyledButton>
     </StyledForm>
   );
@@ -67,7 +67,7 @@ const StyledOption = styled.option`
   background-color: white;
 `;
 
-const StyledInput = styled.div`
+const StyledDatePickerWrapper = styled.div`
   width: 60%;
   padding: 0;
   margin: 0;

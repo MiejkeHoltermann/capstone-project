@@ -18,7 +18,7 @@ const destinations = [
   {
     slug: "croatia",
     name: "Croatia",
-    image: "/countries/croatia.jpg",
+    image: "/destinations/croatia.jpg",
     geocode: [45.388, 15.539],
     id: uid(),
   },
@@ -39,14 +39,14 @@ const destinations = [
   {
     slug: "morocco",
     name: "Morocco",
-    image: "/countries/morocco.jpg",
+    image: "/destinations/morocco.jpg",
     geocode: [32.531, -6.891],
     id: uid(),
   },
   {
     slug: "thailand",
     name: "Thailand",
-    image: "/countries/thailand.jpg",
+    image: "/destinations/thailand.jpg",
     geocode: [12.663, 100.388],
     id: uid(),
   },

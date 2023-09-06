@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { uid } from "uid";
 import Link from "next/link";
 import Image from "next/image";
-import TripInputForm from "@/components/TripInputForm";
+import TripForm from "@/components/TripForm";
 import dynamic from "next/dynamic";
 import { sortTrips, countdown } from "@/components/utils";
 import destinations from "@/db/destinations";
@@ -30,6 +30,7 @@ export default function Homepage({ trips, setTrips }) {
     const currentDestination = destinations.find(
       (destination) => destination.name === name
     );
+    console.log(currentDestination.image);
     const updatedTrips = [
       {
         slug: name.toLowerCase().replace(/\s+/g, "-"),
@@ -48,7 +49,6 @@ export default function Homepage({ trips, setTrips }) {
     setEndDate();
     setSuccessMessage("You successfully created a new trip.");
   }
-
   return (
     <>
       <StyledImageWrapperHeader>
@@ -71,7 +71,7 @@ export default function Homepage({ trips, setTrips }) {
       </TravelLogLink>
       <Scrollbox>
         <StyledSubheading>Create a new Trip</StyledSubheading>
-        <TripInputForm
+        <TripForm
           handleAddTrip={handleAddTrip}
           startDate={startDate}
           endDate={endDate}
