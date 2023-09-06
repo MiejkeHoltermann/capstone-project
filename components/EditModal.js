@@ -39,10 +39,9 @@ const StyledForm = styled.form`
   display: grid;
   grid-template-columns: 5fr 4fr 1fr;
   gap: 10px;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.3);
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
   border-radius: 0.6rem;
-  padding: 10px;
+  padding: 1rem;
 `;
 
 const StyledInputName = styled.input`
@@ -54,7 +53,7 @@ const StyledInputName = styled.input`
     border-radius: 0.2rem;
   }
   &:focus {
-    border: 1px solid black;
+    border: 1px solid rgba(0, 0, 0, 0.3);
     border-radius: 0.2rem;
     outline: none;
   }
@@ -70,7 +69,7 @@ const StyledInputTime = styled.input`
     border-radius: 0.2rem;
   }
   &:focus {
-    border: 1px solid black;
+    border: 1px solid rgba(0, 0, 0, 0.3);
     border-radius: 0.2rem;
     outline: none;
   }

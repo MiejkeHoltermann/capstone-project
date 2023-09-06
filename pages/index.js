@@ -2,33 +2,53 @@ import styled from "styled-components";
 import { uid } from "uid";
 import Link from "next/link";
 import Image from "next/image";
-import TripInputForm from "@/components/TripInputForm";
+import TripForm from "@/components/TripForm";
 import dynamic from "next/dynamic";
 import { sortTrips, countdown } from "@/components/utils";
+import destinations from "@/db/destinations";
+import { useState } from "react";
+import { format } from "date-fns";
 
 const DynamicCarousel = dynamic(() => import("../components/Carousel"), {
   ssr: false,
 });
 
 export default function Homepage({ trips, setTrips }) {
+  const [startDate, setStartDate] = useState();
+  const [endDate, setEndDate] = useState();
+  const [successMessage, setSuccessMessage] = useState("");
+  function handleChange(dates) {
+    const [start, end] = dates;
+    setStartDate(start);
+    setEndDate(end);
+  }
   const { currentTrips, upcomingTrips } = sortTrips(trips);
 
   function handleAddTrip(event) {
     event.preventDefault();
-    const formData = new FormData(event.target);
-    const trip = Object.fromEntries(formData);
+    const name = event.target.destination.value;
+    const currentDestination = destinations.find(
+      (destination) => destination.name === name
+    );
+    console.log(currentDestination.image);
     const updatedTrips = [
       {
-        ...trip,
-        image: "/placeholder.jpg",
+        slug: name.toLowerCase().replace(/\s+/g, "-"),
+        name: name,
+        startDate: format(startDate, "yyyy-MM-dd"),
+        endDate: format(endDate, "yyyy-MM-dd"),
+        image: currentDestination.image,
+        geocode: currentDestination.geocode,
         id: uid(),
       },
       ...trips,
     ];
     setTrips(updatedTrips);
     event.target.reset();
+    setStartDate();
+    setEndDate();
+    setSuccessMessage("You successfully created a new trip.");
   }
-
   return (
     <>
       <StyledImageWrapperHeader>
@@ -50,45 +70,56 @@ export default function Homepage({ trips, setTrips }) {
         />
       </TravelLogLink>
       <Scrollbox>
-        <StyledHeading2>Create a new Trip</StyledHeading2>
-        <TripInputForm handleAddTrip={handleAddTrip} />
-        <StyledHeading2>Current Trips</StyledHeading2>
-        {currentTrips.length === 0 ? (
-          <p>You do not have any current trips yet.</p>
+        <StyledSubheading>Create a new Trip</StyledSubheading>
+        <TripForm
+          handleAddTrip={handleAddTrip}
+          startDate={startDate}
+          endDate={endDate}
+          handleChange={handleChange}
+        />
+        {successMessage && (
+          <StyledSubheading>{successMessage}</StyledSubheading>
+        )}
+
+        <StyledSubheading>Upcoming Trips</StyledSubheading>
+        {upcomingTrips.length === 0 ? (
+          <p>There are no upcoming trips yet.</p>
         ) : (
-          currentTrips.map((trip) => (
+          upcomingTrips.map((trip) => (
             <StyledArticle key={trip.id}>
-              <StyledLink href="/explore">
+              <StyledLink href={`/${trip.slug}`}>
                 <StyledImageWrapper>
                   <StyledImage
                     src={trip.image}
                     height={800}
                     width={800}
-                    alt={trip.location}
+                    alt={trip.name}
                   />
                 </StyledImageWrapper>
-                <StyledHeading3>{trip.location}</StyledHeading3>
+                <StyledName>
+                  {trip.name} - {countdown(trip.startDate)}
+                </StyledName>
               </StyledLink>
             </StyledArticle>
           ))
         )}
-        <StyledHeading2>Upcoming Trips</StyledHeading2>
-        {upcomingTrips.length === 0 ? (
-          <p>You do not have any upcoming trips yet.</p>
+        <StyledSubheading>Current Trips</StyledSubheading>
+        {currentTrips.length === 0 ? (
+          <p>There are no current trips yet.</p>
         ) : (
-          upcomingTrips.map((trip) => (
+          currentTrips.map((trip) => (
             <StyledArticle key={trip.id}>
-              <StyledImageWrapper>
-                <StyledImage
-                  src={trip.image}
-                  height={800}
-                  width={800}
-                  alt={trip.location}
-                />
-              </StyledImageWrapper>
-              <StyledHeading3>
-                {trip.location} - {countdown(trip.startDate)}
-              </StyledHeading3>
+              <StyledLink href={`/${trip.slug}`}>
+                <StyledImageWrapper>
+                  <StyledImage
+                    src={trip.image}
+                    height={800}
+                    width={800}
+                    alt={trip.name}
+                  />
+                </StyledImageWrapper>
+                <StyledName>{trip.name}</StyledName>
+              </StyledLink>
             </StyledArticle>
           ))
         )}
@@ -130,10 +161,9 @@ const TravelLogLink = styled(Link)`
   position: fixed;
   top: 1rem;
   right: 2rem;
-  z-index: 1;
   background-color: #ef8344;
-  width: 3.4rem;
-  height: 3.4rem;
+  width: 3rem;
+  height: 3rem;
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -144,8 +174,8 @@ const TravelLogLink = styled(Link)`
 `;
 
 const TravelLogLinkImage = styled(Image)`
-  width: 2rem;
-  height: 2rem;
+  width: 1.6rem;
+  height: 1.6rem;
 `;
 
 const Scrollbox = styled.div`
@@ -159,8 +189,10 @@ const Scrollbox = styled.div`
   }
 `;
 
-const StyledHeading2 = styled.h2`
+const StyledSubheading = styled.h2`
   color: teal;
+  width: 60%;
+  text-align: center;
   font-size: 1.2em;
   margin: 3rem 0 1rem 0;
 `;
@@ -188,7 +220,7 @@ const StyledImage = styled(Image)`
   height: 100%;
 `;
 
-const StyledHeading3 = styled.h4`
+const StyledName = styled.h3`
   font-size: 1rem;
   margin: 0;
   text-align: center;

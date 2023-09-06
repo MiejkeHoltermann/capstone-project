@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export default function AddModal({
   sight,
-  trips,
+  trip,
   toggleAddModal,
   handleSortItem,
 }) {
@@ -13,8 +13,8 @@ export default function AddModal({
         <StyledInputDate
           type="date"
           name="plannedDate"
-          min={trips[2].startDate}
-          max={trips[2].endDate}
+          min={trip.startDate}
+          max={trip.endDate}
           required
         />
         <StyledInputTime type="time" name="plannedTime" />
@@ -38,28 +38,22 @@ export default function AddModal({
 const Modal = styled.div`
   margin-top: 1rem;
   background-color: white;
-  border: 1px solid rgba(0, 0, 0, 0.3);
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
   border-radius: 0.4rem;
-  padding: 0.4rem;
+  padding: 1rem;
   width: 280px;
   grid-area: 2/1/3/4;
 `;
 
 const StyledText = styled.p`
-  margin: 0;
-`;
-
-const ButtonContainer = styled.div`
-  margin-top: 1rem;
-  display: flex;
-  gap: 1rem;
+  margin: 0 0 0.6rem 0.6rem;
 `;
 
 const StyledForm = styled.form`
   margin: 0.2rem 0.6rem;
   display: grid;
   grid-template-columns: 5fr 4fr 1fr;
-  gap: 10px;
+  gap: 0.8rem;
 `;
 
 const StyledInputDate = styled.input`

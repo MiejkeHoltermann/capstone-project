@@ -1,30 +1,24 @@
 import styled from "styled-components";
 import Image from "next/image";
 import Link from "next/link";
+import { format } from "date-fns";
 
 export default function TripPreview({ trip }) {
   return (
     <StyledArticle>
-      <StyledLink href="/explore">
+      <StyledLink href={`/${trip.slug}`}>
         <StyledImageWrapper>
           <StyledImage
             src={trip.image}
             height={800}
             width={800}
-            alt={trip.location}
+            alt={trip.name}
           />
         </StyledImageWrapper>
-        {trip.location}
+        {trip.name}
         <br />
-        {`${trip.startDate.substring(8)}/${trip.startDate.substring(
-          5,
-          7
-        )}/${trip.startDate.substring(2, 4)}`}{" "}
-        -{" "}
-        {`${trip.endDate.substring(8)}/${trip.endDate.substring(
-          5,
-          7
-        )}/${trip.endDate.substring(2, 4)}`}
+        {format(new Date(trip.startDate), "dd/MM/yy")} -{" "}
+        {format(new Date(trip.endDate), "dd/MM/yy")}
       </StyledLink>
     </StyledArticle>
   );

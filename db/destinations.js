@@ -2,89 +2,52 @@ import { uid } from "uid";
 
 const destinations = [
   {
+    slug: "australia",
     name: "Australia",
     image: "/destinations/australia.jpg",
+    geocode: [-24.193, 135.17],
     id: uid(),
   },
   {
-    name: "Canada",
-    image: "/destinations/canada.jpg",
-    id: uid(),
-  },
-  {
+    slug: "chile",
     name: "Chile",
     image: "/destinations/chile.jpg",
+    geocode: [-29.207, -70.729],
     id: uid(),
   },
   {
-    name: "Costa Rica",
-    image: "/destinations/costa-rica.jpg",
+    slug: "croatia",
+    name: "Croatia",
+    image: "/destinations/croatia.jpg",
+    geocode: [45.388, 15.539],
     id: uid(),
   },
   {
-    name: "Egypt",
-    image: "/destinations/egypt.jpg",
+    slug: "greece",
+    name: "Greece",
+    image: "/destinations/greece.jpg",
+    geocode: [38.24, 23.039],
     id: uid(),
   },
   {
-    name: "Finland",
-    image: "/destinations/finland.jpg",
+    slug: "jordan",
+    name: "Jordan",
+    image: "/destinations/jordan.jpg",
+    geocode: [31.312, 35.939],
     id: uid(),
   },
   {
-    name: "France",
-    image: "/destinations/france.jpg",
+    slug: "morocco",
+    name: "Morocco",
+    image: "/destinations/morocco.jpg",
+    geocode: [32.531, -6.891],
     id: uid(),
   },
   {
-    name: "Iceland",
-    image: "/destinations/iceland.jpg",
-    id: uid(),
-  },
-  {
-    name: "Italy",
-    image: "/destinations/italy.jpg",
-    id: uid(),
-  },
-  {
-    name: "Japan",
-    image: "/destinations/japan.jpg",
-    id: uid(),
-  },
-
-  {
-    name: "Laos",
-    image: "/destinations/laos.jpg",
-    id: uid(),
-  },
-
-  {
-    name: "Madagascar",
-    image: "/destinations/madagascar.jpg",
-    id: uid(),
-  },
-
-  {
-    name: "Nepal",
-    image: "/destinations/nepal.jpg",
-    id: uid(),
-  },
-
-  {
-    name: "Panama",
-    image: "/destinations/Panama.jpg",
-    id: uid(),
-  },
-
-  {
-    name: "South Africa",
-    image: "/destinations/south-africa.jpg",
-    id: uid(),
-  },
-
-  {
-    name: "Vietnam",
-    image: "/destinations/vietnam.jpg",
+    slug: "thailand",
+    name: "Thailand",
+    image: "/destinations/thailand.jpg",
+    geocode: [12.663, 100.388],
     id: uid(),
   },
 ];
