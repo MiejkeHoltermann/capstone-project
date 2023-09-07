@@ -1,10 +1,6 @@
 import styled from "styled-components";
 
-export default function AddModal({
-  sight,
-  toggleDeleteModal,
-  handleDeleteItem,
-}) {
+export default function AddModal({ id, toggleDeleteModal, handleDeleteItem }) {
   return (
     <Modal>
       <StyledText>Are you sure you want to delete this item?</StyledText>
@@ -12,14 +8,14 @@ export default function AddModal({
         <StyledButton
           type="button"
           className="red"
-          onClick={() => toggleDeleteModal(sight.id)}
+          onClick={() => toggleDeleteModal()}
         >
           Cancel
         </StyledButton>
         <StyledButton
           type="button"
           className="green"
-          onClick={() => handleDeleteItem(sight.id)}
+          onClick={() => handleDeleteItem(id)}
         >
           Yes
         </StyledButton>

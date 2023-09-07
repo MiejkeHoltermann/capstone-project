@@ -1,87 +1,73 @@
 import styled from "styled-components";
-import Link from "next/link";
-import Image from "next/image";
 import { uid } from "uid";
 import { format } from "date-fns";
 import Header from "@/components/Header";
 import { CreateItinerary, SortSights } from "@/components/utils";
-import Overview from "@/components/Overview";
-import ItineraryItem from "@/components/ItineraryItem";
 import { useRouter } from "next/router";
 import Footer from "@/components/Footer";
 import Lottie from "react-lottie-player";
 import lottieJson from "../../public/loadingAnimation.json";
+import ItineraryItem from "@/components/ItineraryItem";
 
-export default function Itinerary({ trips, sights, setSights }) {
+export default function Expenses({ trips, setTrips }) {
   const router = useRouter();
   const currentTrip = trips.find((trip) => trip.slug === router.query.slug);
   if (!currentTrip) {
     return <StyledLottie loop animationData={lottieJson} play />;
   }
+
   function handleAddItem(event, date) {
     event.preventDefault();
-    const name = event.target.itineraryItem.value;
-    const time = event.target.time.value;
-    const updatedSights = [
-      ...sights,
-      {
-        country: router.query.slug,
-        name: name,
-        plannedDate: date,
-        plannedTime: time,
-        id: uid(),
-      },
-    ];
-    setSights(updatedSights);
+    const name = event.target.expenseItem.value;
+    const amount = event.target.amount.value;
+    const formattedAmount = parseFloat(amount).toFixed(2);
+    const index = trips.findIndex((trip) => trip.slug === currentTrip.slug);
+    const updatedTrip = { ...trips[index] };
+    updatedTrip.expenses.push({
+      name: name,
+      amount: formattedAmount,
+      date: date,
+      id: uid(),
+    });
+    const updatedTrips = [...trips];
+    updatedTrips[index] = updatedTrip;
+    setTrips(updatedTrips);
     event.target.reset();
-  }
-  sights;
-
-  function handleSortItem(event, id) {
-    event.preventDefault();
-    const date = event.target.plannedDate.value;
-    const time = event.target.plannedTime.value;
-    const updatedSights = sights.map((sight) =>
-      sight.id === id
-        ? {
-            ...sight,
-            plannedDate: date,
-            plannedTime: time,
-            addModal: false,
-          }
-        : sight
-    );
-    setSights(updatedSights);
   }
 
   function handleUpdateItem(event, id) {
     event.preventDefault();
     const updatedName = event.target.editedItem.value;
-    const time = event.target.editedTime.value;
-    const updatedSights = sights.map((sight) =>
-      sight.id === id
+    const updatedAmount = event.target.editedAmount.value;
+    const index = trips.findIndex((trip) => trip.slug === currentTrip.slug);
+    const updatedTrip = currentTrip;
+    updatedTrip.expenses = updatedTrip.expenses.map((expense) =>
+      expense.id === id
         ? {
-            ...sight,
+            ...expense,
             name: updatedName,
-            plannedTime: time,
-            editModal: !sight.editModal,
+            amount: updatedAmount,
+            editModal: !expense.editModal,
           }
-        : { ...sight }
+        : expense
     );
-    setSights(updatedSights);
+    const updatedTrips = [...trips];
+    updatedTrips[index] = updatedTrip;
+    setTrips(updatedTrips);
   }
 
   function handleDeleteItem(id) {
-    const updatedSights = sights.filter((sight) => sight.id !== id);
-    setSights(updatedSights);
+    const index = trips.findIndex((trip) => trip.slug === currentTrip.slug);
+    const updatedTrip = { ...trips[index] };
+    updatedTrip.expenses = updatedTrip.expenses.filter(
+      (expense) => expense.id !== id
+    );
+    const updatedTrips = [...trips];
+    updatedTrips[index] = updatedTrip;
+    setTrips(updatedTrips);
   }
 
   const datesArray = CreateItinerary(currentTrip);
-
-  const filteredSights = sights.filter(
-    (sight) => sight.country === router.query.slug
-  );
-  const sortedSights = SortSights(filteredSights);
 
   return (
     <>
@@ -91,31 +77,20 @@ export default function Itinerary({ trips, sights, setSights }) {
         startDate={currentTrip.startDate}
         endDate={currentTrip.endDate}
       />
-      <StyledTitle>Itinerary</StyledTitle>
-      <ToggleLink href={`/${currentTrip.slug}/map`}>
-        <ToggleLinkImage src="/map.svg" height={40} width={40} alt="map view" />
-      </ToggleLink>
+      <StyledTitle>My Expenses</StyledTitle>
       <Scrollbox>
-        <Overview
-          trips={trips}
-          sights={sights}
-          trip={currentTrip}
-          setSights={setSights}
-          handleSortItem={handleSortItem}
-        />
-        <StyledItinerary>
+        <StyledExpenses>
           {datesArray.map((date) => (
             <StyledDay key={uid()}>
               <StyledDate>{format(date, "dd/MM/yy")}</StyledDate>
-              {sortedSights.map(
-                (sight) =>
-                  sight.plannedDate === format(date, "yyyy-MM-dd") && (
+              {currentTrip.expenses.map(
+                (expense) =>
+                  expense.date === format(date, "yyyy-MM-dd") && (
                     <ItineraryItem
-                      key={sight.id}
-                      id={sight.id}
-                      name={sight.name}
-                      sight={sight}
-                      plannedTime={sight.plannedTime}
+                      key={expense.id}
+                      id={expense.id}
+                      name={expense.name}
+                      amount={expense.amount}
                       handleDeleteItem={handleDeleteItem}
                       handleUpdateItem={handleUpdateItem}
                     />
@@ -126,26 +101,33 @@ export default function Itinerary({ trips, sights, setSights }) {
                   handleAddItem(event, format(date, "yyyy-MM-dd"))
                 }
               >
-                <StyledLabel htmlFor="dateInput">
+                <StyledLabel htmlFor="expenseInput">
                   Add Item:
                   <StyledInput
                     type="text"
-                    id="dateInput"
-                    name="itineraryItem"
+                    id="expenseInput"
+                    name="expenseItem"
                     placeholder="Add Item"
                     required
                     pattern="\S+"
                   ></StyledInput>
                 </StyledLabel>
-                <StyledLabel htmlFor="time" className="timeInput">
-                  Set time:
-                  <StyledInput type="time" id="time" name="time"></StyledInput>
+                <StyledLabel htmlFor="amount" className="amountInput">
+                  Add amount:
+                  <StyledInput
+                    type="number"
+                    min="-10000"
+                    max="10000"
+                    step="0.01"
+                    id="amount"
+                    name="amount"
+                  ></StyledInput>
                 </StyledLabel>
                 <StyledButton type="submit">+</StyledButton>
               </StyledForm>
             </StyledDay>
           ))}
-        </StyledItinerary>
+        </StyledExpenses>
       </Scrollbox>
       <Footer url={`/${currentTrip.slug}`} linkText="Overview" />
     </>
@@ -175,29 +157,6 @@ const StyledTitle = styled.h1`
   }
 `;
 
-const ToggleLink = styled(Link)`
-  background-color: yellow;
-  position: fixed;
-  top: 11rem;
-  right: 4rem;
-  z-index: 1;
-  background-color: teal;
-  width: 2.2rem;
-  height: 2.2rem;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  @media (min-width: 500px) {
-    left: 400px;
-  }
-`;
-
-const ToggleLinkImage = styled(Image)`
-  width: 1.6rem;
-  height: 1.6rem;
-`;
-
 const Scrollbox = styled.div`
   width: 100%;
   margin-top: 15rem;
@@ -210,7 +169,7 @@ const Scrollbox = styled.div`
   }
 `;
 
-const StyledItinerary = styled.ul`
+const StyledExpenses = styled.ul`
   width: 100%;
   padding-left: 0;
   list-style-type: none;
@@ -223,7 +182,6 @@ const StyledItinerary = styled.ul`
 const StyledDay = styled.li`
   display: flex;
   flex-direction: column;
-  border: 1px solid rgba(0, 0, 0, 0.3);
   border-radius: 0.4rem;
   padding: 0.4rem;
   width: 80%;
@@ -249,7 +207,7 @@ const StyledForm = styled.form`
 
 const StyledLabel = styled.label`
   font-size: 0;
-  &.timeInput {
+  &.amountInput {
     justify-self: end;
   }
 `;
@@ -282,28 +240,4 @@ const StyledButton = styled.button`
     cursor: pointer;
     transform: scale(1.2);
   }
-`;
-
-const StyledFooter = styled.div`
-  position: fixed;
-  bottom: 0;
-  z-index: 1;
-  background-color: white;
-  height: 5rem;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  @media (min-width: 500px) {
-    width: 500px;
-  }
-`;
-
-const StyledLink = styled(Link)`
-  border-radius: 2rem;
-  color: white;
-  text-decoration: none;
-  background-color: darkblue;
-  padding: 0.4rem 1rem;
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
 `;

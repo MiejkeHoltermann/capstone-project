@@ -20,7 +20,12 @@ export default function MapView({ sights, trips }) {
   }
   return (
     <>
-      <Header trip={currentTrip} />
+      <Header
+        name={currentTrip.name}
+        image={currentTrip.image}
+        startDate={currentTrip.startDate}
+        endDate={currentTrip.endDate}
+      />
       <StyledTitle>Itinerary</StyledTitle>
       <ToggleLink href={`/${currentTrip.slug}/itinerary`}>
         <ToggleLinkImage

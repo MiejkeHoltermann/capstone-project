@@ -10,8 +10,8 @@ export function CreateItinerary(trip) {
   return datesArray;
 }
 
-export function FormatTime(sight) {
-  const [hours, minutes] = sight.plannedTime.split(":");
+export function FormatTime(time) {
+  const [hours, minutes] = time.split(":");
   const mode = parseInt(hours) >= 12 ? "pm" : "am";
   return `${hours % 12}.${minutes} ${mode}`;
 }

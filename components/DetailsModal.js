@@ -11,7 +11,7 @@ export default function DetailsModal({
 }) {
   return (
     <Modal>
-      <Clickzone onClick={() => toggleDetailsModal(id)}>
+      <Clickzone onClick={() => toggleDetailsModal()}>
         <StyledImageWrapper>
           <StyledImage src={image} height={800} width={800} alt={name} />
         </StyledImageWrapper>

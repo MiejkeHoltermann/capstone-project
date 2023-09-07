@@ -8,6 +8,7 @@ import { sortTrips, countdown } from "@/components/utils";
 import destinations from "@/db/destinations";
 import { useState } from "react";
 import { format } from "date-fns";
+import Header from "@/components/Header";
 
 const DynamicCarousel = dynamic(() => import("../components/Carousel"), {
   ssr: false,
@@ -30,7 +31,6 @@ export default function Homepage({ trips, setTrips }) {
     const currentDestination = destinations.find(
       (destination) => destination.name === name
     );
-    console.log(currentDestination.image);
     const updatedTrips = [
       {
         slug: name.toLowerCase().replace(/\s+/g, "-"),
@@ -39,6 +39,7 @@ export default function Homepage({ trips, setTrips }) {
         endDate: format(endDate, "yyyy-MM-dd"),
         image: currentDestination.image,
         geocode: currentDestination.geocode,
+        expenses: [],
         id: uid(),
       },
       ...trips,
@@ -51,24 +52,7 @@ export default function Homepage({ trips, setTrips }) {
   }
   return (
     <>
-      <StyledImageWrapperHeader>
-        <StyledImageHeader
-          src="/homepage.jpg"
-          height={600}
-          width={800}
-          layout="responsive"
-          alt="Homepage Header"
-        />
-      </StyledImageWrapperHeader>
-      <StyledLogo>Travel</StyledLogo>
-      <TravelLogLink href="/travellog">
-        <TravelLogLinkImage
-          src="/book.svg"
-          height={40}
-          width={40}
-          alt="travel log"
-        />
-      </TravelLogLink>
+      <Header image="/homepage.jpg" />
       <Scrollbox>
         <StyledSubheading>Create a new Trip</StyledSubheading>
         <TripForm
@@ -128,55 +112,6 @@ export default function Homepage({ trips, setTrips }) {
     </>
   );
 }
-
-const StyledImageWrapperHeader = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 12rem;
-  width: 100%;
-  overflow: clip;
-  @media (min-width: 500px) {
-    width: 500px;
-  }
-`;
-
-const StyledImageHeader = styled(Image)`
-  position: absolute;
-  top: 0;
-  left: 0;
-  object-fit: cover;
-`;
-
-const StyledLogo = styled.p`
-  position: fixed;
-  top: 0;
-  left: 1rem;
-  color: white;
-  font-size: 24px;
-`;
-
-const TravelLogLink = styled(Link)`
-  background-color: yellow;
-  position: fixed;
-  top: 1rem;
-  right: 2rem;
-  background-color: #ef8344;
-  width: 3rem;
-  height: 3rem;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  @media (min-width: 500px) {
-    left: 425px;
-  }
-`;
-
-const TravelLogLinkImage = styled(Image)`
-  width: 1.6rem;
-  height: 1.6rem;
-`;
 
 const Scrollbox = styled.div`
   width: 100%;

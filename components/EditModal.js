@@ -1,28 +1,42 @@
 import styled from "styled-components";
 
 export default function EditModal({
-  sight,
+  id,
+  name,
+  plannedTime,
+  amount,
   handleUpdateItem,
   toggleEditModal,
 }) {
   return (
-    <StyledForm onSubmit={(event) => handleUpdateItem(event, sight.id)}>
+    <StyledForm onSubmit={(event) => handleUpdateItem(event, id)}>
       <StyledInputName
         type="text"
         name="editedItem"
-        defaultValue={sight.name}
+        defaultValue={name}
         required
       />
-      <StyledInputTime
-        type="time"
-        name="editedTime"
-        defaultValue={sight.plannedTime}
-      />
+      {amount ? (
+        <StyledInputAmount
+          type="number"
+          min="-10000"
+          max="10000"
+          step="0.01"
+          name="editedAmount"
+          defaultValue={amount}
+        />
+      ) : (
+        <StyledInputTime
+          type="time"
+          name="editedTime"
+          defaultValue={plannedTime}
+        />
+      )}
       <StyledButtonContainer>
         <StyledButtonRed
           type="button"
           className="cancel"
-          onClick={() => toggleEditModal(sight.id)}
+          onClick={() => toggleEditModal(id)}
         >
           Cancel
         </StyledButtonRed>
@@ -60,6 +74,22 @@ const StyledInputName = styled.input`
 `;
 
 const StyledInputTime = styled.input`
+  justify-self: end;
+  width: 80px;
+  border: none;
+  color: #ef8344;
+  &:hover {
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    border-radius: 0.2rem;
+  }
+  &:focus {
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 0.2rem;
+    outline: none;
+  }
+`;
+
+const StyledInputAmount = styled.input`
   justify-self: end;
   width: 80px;
   border: none;
