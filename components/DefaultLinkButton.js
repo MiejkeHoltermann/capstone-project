@@ -1,32 +1,22 @@
-import styled from "styled-components";
-import { css } from "styled-components";
+import styled, { css } from "styled-components";
 import Link from "next/link";
 import Image from "next/image";
 
-export default function DefaultButton({ url, icon, $orange, children }) {
+export default function DefaultLinkButton({ url, icon, $orange, children }) {
   return (
-    <>
-      <StyledOptionsLinkBorder $orange={$orange}>
-        <StyledButton $orange={$orange}>
-          <StyledLink href={`${url}`}>
-            {icon ? (
-              <Image
-                src={`/${icon}.svg`}
-                width={60}
-                height={60}
-                alt="itinerary"
-              />
-            ) : (
-              <p>{children}</p>
-            )}
-          </StyledLink>
-        </StyledButton>
-      </StyledOptionsLinkBorder>
-    </>
+    <StyledBorder $orange={$orange}>
+      <StyledLink href={`${url}`} $orange={$orange}>
+        {icon ? (
+          <Image src={`/${icon}.svg`} width={60} height={60} alt="itinerary" />
+        ) : (
+          <p>{children}</p>
+        )}
+      </StyledLink>
+    </StyledBorder>
   );
 }
 
-const StyledOptionsLinkBorder = styled.div`
+const StyledBorder = styled.div`
   box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.4);
   border-radius: 0.6rem;
   display: flex;
@@ -52,7 +42,10 @@ const StyledOptionsLinkBorder = styled.div`
         `}
 `;
 
-const StyledButton = styled.div`
+const StyledLink = styled(Link)`
+  color: white;
+  font-size: 1.4rem;
+  text-decoration: none;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -75,10 +68,4 @@ const StyledButton = styled.div`
             background: linear-gradient(180deg, #006f7a 0%, #00938c 100%);
           }
         `}
-`;
-
-const StyledLink = styled(Link)`
-  color: white;
-  font-size: 1.4rem;
-  text-decoration: none !important;
 `;

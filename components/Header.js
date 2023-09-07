@@ -2,9 +2,11 @@ import styled from "styled-components";
 import Image from "next/image";
 import Link from "next/link";
 import { format } from "date-fns";
-import DefaultButton from "@/components/DefaultButton";
+import DefaultLinkButton from "@/components/DefaultLinkButton";
 
 export default function Header({ name, image, startDate, endDate }) {
+  console.log(startDate);
+  console.log(endDate);
   return (
     <StyledHeader>
       <StyledImageWrapper>
@@ -16,7 +18,7 @@ export default function Header({ name, image, startDate, endDate }) {
           alt={name}
         />
         <StyledLogo>Travel</StyledLogo>
-        <DefaultButton slug="travellog" icon="book" />
+        <DefaultLinkButton url="/travellog" icon="book" />
         <StyledTravelLogLinkBorder>
           <StyledTravelLogLink href="/travellog">
             <StyledTravelLogLinkImage
@@ -28,7 +30,7 @@ export default function Header({ name, image, startDate, endDate }) {
           </StyledTravelLogLink>
         </StyledTravelLogLinkBorder>
         {name && <StyledName>{name}</StyledName>}
-        {startDate & endDate && (
+        {startDate && (
           <StyledDate>
             {format(new Date(startDate), "dd/MM/yy")} -{" "}
             {format(new Date(endDate), "dd/MM/yy")}

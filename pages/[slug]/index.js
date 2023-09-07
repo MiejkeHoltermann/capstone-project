@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import Lottie from "react-lottie-player";
 import lottieJson from "../../public/loadingAnimation.json";
 import Footer from "@/components/Footer";
-import DefaultButton from "@/components/DefaultButton";
+import DefaultLinkButton from "@/components/DefaultLinkButton";
 
 export default function Overview({ trips }) {
   const router = useRouter();
@@ -21,13 +21,19 @@ export default function Overview({ trips }) {
         endDate={currentTrip.endDate}
       />
       <Scrollbox>
-        <DefaultButton url={`/${currentTrip.slug}/explore`} $orange>
+        <DefaultLinkButton url={`/${currentTrip.slug}/explore`} $orange>
           Go Explore
-        </DefaultButton>
+        </DefaultLinkButton>
         <StyledButtonContainer>
-          <DefaultButton url={`/${currentTrip.slug}/itinerary`} icon="list" />
-          <DefaultButton url={`/${currentTrip.slug}/map`} icon="map" />
-          <DefaultButton url={`/${currentTrip.slug}/expenses`} icon="euro" />
+          <DefaultLinkButton
+            url={`/${currentTrip.slug}/itinerary`}
+            icon="list"
+          />
+          <DefaultLinkButton url={`/${currentTrip.slug}/map`} icon="map" />
+          <DefaultLinkButton
+            url={`/${currentTrip.slug}/expenses`}
+            icon="euro"
+          />
         </StyledButtonContainer>
       </Scrollbox>
       <Footer url="/" linkText="Home" />

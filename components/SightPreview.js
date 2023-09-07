@@ -3,12 +3,7 @@ import Image from "next/image";
 import DetailsModal from "@/components/DetailsModal";
 import { useState } from "react";
 
-export default function TripPreview({
-  sights,
-  setSights,
-  sight,
-  addSightsToItinerary,
-}) {
+export default function SightPreview({ sight, addSightsToItinerary }) {
   const [detailsModalOpen, setDetailsModalOpen] = useState(false);
 
   function toggleDetailsModal() {
