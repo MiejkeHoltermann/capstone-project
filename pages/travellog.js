@@ -4,22 +4,14 @@ import TripPreview from "@/components/TripPreview";
 import { sortTrips } from "@/components/utils";
 import Link from "next/link";
 import Footer from "@/components/Footer";
+import Header from "@/components/Header";
 
 export default function Travellog({ trips }) {
   const { currentTrips, upcomingTrips, passedTrips } = sortTrips(trips);
 
   return (
     <>
-      <StyledImageWrapper>
-        <StyledImage
-          src="https://source.unsplash.com/dvK_CT1Wg78/640x480"
-          height={800}
-          width={800}
-          layout="responsive"
-          alt="Travel Notebook"
-        />
-      </StyledImageWrapper>
-      <StyledLogo>Travel</StyledLogo>
+      <Header image="/travel-log.jpg" />
       <Scrollbox>
         <StyledTitle>My Travel Log</StyledTitle>
         <StyledSubheading>Current Trips</StyledSubheading>
@@ -45,34 +37,6 @@ export default function Travellog({ trips }) {
     </>
   );
 }
-
-const StyledImageWrapper = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 12rem;
-  width: 100%;
-  overflow: clip;
-  @media (min-width: 500px) {
-    width: 500px;
-  }
-`;
-
-const StyledImage = styled(Image)`
-  position: absolute;
-  top: 0;
-  left: 0;
-  object-fit: cover;
-`;
-
-const StyledLogo = styled.p`
-  position: fixed;
-  top: 0;
-  left: 1rem;
-  color: white;
-  font-size: 24px;
-`;
-
 const Scrollbox = styled.div`
   width: 100%;
   margin-top: 16rem;

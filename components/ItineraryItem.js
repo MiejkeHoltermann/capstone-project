@@ -2,56 +2,62 @@ import styled from "styled-components";
 import { FormatTime } from "@/components/utils";
 import EditModal from "@/components/EditModal";
 import DeleteModal from "@/components/DeleteModal";
+import { useState } from "react";
 
 export default function ItineraryItem({
-  sight,
-  sights,
-  setSights,
+  id,
+  name,
+  plannedTime,
+  amount,
   handleDeleteItem,
   handleUpdateItem,
 }) {
-  function toggleEditModal(id) {
-    const updatedSights = sights.map((sight) =>
-      sight.id === id
-        ? { ...sight, editModal: !sight.editModal }
-        : { ...sight, editModal: false, deleteModal: false }
-    );
-    setSights(updatedSights);
+  const [editModalOpen, setEditModalOpen] = useState(false);
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+
+  function toggleEditModal() {
+    setEditModalOpen(!editModalOpen);
+    setDeleteModalOpen(false);
   }
 
-  function toggleDeleteModal(id) {
-    const updatedSights = sights.map((sight) =>
-      sight.id === id
-        ? { ...sight, deleteModal: !sight.deleteModal }
-        : { ...sight, editModal: false, deleteModal: false }
-    );
-    setSights(updatedSights);
+  function toggleDeleteModal() {
+    setDeleteModalOpen(!deleteModalOpen);
+    setEditModalOpen(false);
   }
 
   return (
     <>
-      {!sight.editModal ? (
+      {!editModalOpen ? (
         <StyledItineraryItem>
-          <StyledItineraryName onClick={() => toggleEditModal(sight.id)}>
-            {sight.name}
+          <StyledItineraryName onClick={() => toggleEditModal()}>
+            {name}
           </StyledItineraryName>
-          <StyledItineraryTime onClick={() => toggleEditModal(sight.id)}>
-            {sight.plannedTime ? FormatTime(sight) : null}
-          </StyledItineraryTime>
-          <StyledDeleteButton onClick={() => toggleDeleteModal(sight.id)}>
+          {amount ? (
+            <StyledAmount onClick={() => toggleEditModal()}>
+              {amount} €
+            </StyledAmount>
+          ) : (
+            <StyledItineraryTime onClick={() => toggleEditModal()}>
+              {plannedTime ? FormatTime(plannedTime) : null}
+            </StyledItineraryTime>
+          )}
+          <StyledDeleteButton onClick={() => toggleDeleteModal()}>
             X
           </StyledDeleteButton>
-          {sight.deleteModal === true ? (
+          {deleteModalOpen && (
             <DeleteModal
-              sight={sight}
+              id={id}
               toggleDeleteModal={toggleDeleteModal}
               handleDeleteItem={handleDeleteItem}
             />
-          ) : null}
+          )}
         </StyledItineraryItem>
       ) : (
         <EditModal
-          sight={sight}
+          id={id}
+          name={name}
+          plannedTime={plannedTime}
+          amount={amount}
           handleUpdateItem={handleUpdateItem}
           toggleEditModal={toggleEditModal}
         />
@@ -78,6 +84,15 @@ const StyledItineraryName = styled.p`
 `;
 
 const StyledItineraryTime = styled.p`
+  margin: 0;
+  justify-self: end;
+  &:hover {
+    cursor: pointer;
+    color: #934d29;
+  }
+`;
+
+const StyledAmount = styled.p`
   margin: 0;
   justify-self: end;
   &:hover {

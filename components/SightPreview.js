@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import Image from "next/image";
 import DetailsModal from "@/components/DetailsModal";
+import { useState } from "react";
 
 export default function TripPreview({
   sights,
@@ -8,19 +9,16 @@ export default function TripPreview({
   sight,
   addSightsToItinerary,
 }) {
-  function toggleDetailsModal(id) {
-    const updatedSights = sights.map((sight) =>
-      sight.id === id
-        ? { ...sight, detailsModal: !sight.detailsModal }
-        : { ...sight }
-    );
-    setSights(updatedSights);
+  const [detailsModalOpen, setDetailsModalOpen] = useState(false);
+
+  function toggleDetailsModal() {
+    setDetailsModalOpen(!detailsModalOpen);
   }
 
   return (
     <>
-      {!sight.detailsModal ? (
-        <StyledArticle onClick={() => toggleDetailsModal(sight.id)}>
+      {!detailsModalOpen ? (
+        <StyledArticle onClick={() => toggleDetailsModal()}>
           <StyledImageWrapper>
             <StyledImage
               src={sight.image}

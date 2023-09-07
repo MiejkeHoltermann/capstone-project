@@ -2,32 +2,38 @@ import styled from "styled-components";
 import Image from "next/image";
 import Link from "next/link";
 import { format } from "date-fns";
+import DefaultButton from "@/components/DefaultButton";
 
-export default function Header({ trip }) {
+export default function Header({ name, image, startDate, endDate }) {
   return (
     <StyledHeader>
       <StyledImageWrapper>
         <StyledImage
-          src={trip.image}
+          src={image}
           height={450}
           width={600}
           layout="responsive"
-          alt={trip.name}
+          alt={name}
         />
         <StyledLogo>Travel</StyledLogo>
-        <StyledTravelLogLink href="/travellog">
-          <StyledTravelLogLinkImage
-            src="/book.svg"
-            height={40}
-            width={40}
-            alt="travel log"
-          />
-        </StyledTravelLogLink>
-        <StyledName>{trip.name}</StyledName>
-        <StyledDate>
-          {format(new Date(trip.startDate), "dd/MM/yy")} -{" "}
-          {format(new Date(trip.endDate), "dd/MM/yy")}
-        </StyledDate>
+        <DefaultButton slug="travellog" icon="book" />
+        <StyledTravelLogLinkBorder>
+          <StyledTravelLogLink href="/travellog">
+            <StyledTravelLogLinkImage
+              src="/book.svg"
+              height={40}
+              width={40}
+              alt="travel log"
+            />
+          </StyledTravelLogLink>
+        </StyledTravelLogLinkBorder>
+        {name && <StyledName>{name}</StyledName>}
+        {startDate & endDate && (
+          <StyledDate>
+            {format(new Date(startDate), "dd/MM/yy")} -{" "}
+            {format(new Date(endDate), "dd/MM/yy")}
+          </StyledDate>
+        )}
       </StyledImageWrapper>
     </StyledHeader>
   );
@@ -63,12 +69,29 @@ const StyledLogo = styled.p`
   font-size: 24px;
 `;
 
-const StyledTravelLogLink = styled(Link)`
-  background-color: yellow;
+const StyledTravelLogLinkBorder = styled.div`
+  width: 3.6rem;
+  height: 3.6rem;
   position: fixed;
   top: 1rem;
   right: 2rem;
-  background-color: #ef8344;
+  border-radius: 50%;
+  background: linear-gradient(180deg, #ef8344 60%, #ffaf3b 100%);
+  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @media (min-width: 500px) {
+    left: 26.7rem;
+  }
+`;
+
+const StyledTravelLogLink = styled(Link)`
+  background-color: yellow;
+  position: fixed;
+  top: 1.3rem;
+  right: 2.3rem;
+  background: linear-gradient(180deg, #ffaf3b 0%, #ef8344 60%);
   width: 3rem;
   height: 3rem;
   border-radius: 50%;
@@ -76,7 +99,7 @@ const StyledTravelLogLink = styled(Link)`
   justify-content: center;
   align-items: center;
   @media (min-width: 500px) {
-    left: 435px;
+    left: 27rem;
   }
 `;
 

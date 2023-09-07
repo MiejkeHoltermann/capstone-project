@@ -34,7 +34,9 @@ export default function TripForm({
           required
         />
       </StyledDatePickerWrapper>
-      <StyledButton type="submit">Save</StyledButton>
+      <StyledButtonBorder>
+        <StyledButton type="submit">Save</StyledButton>
+      </StyledButtonBorder>
     </StyledForm>
   );
 }
@@ -83,11 +85,27 @@ const StyledDatePicker = styled(DatePicker)`
   color: darkgrey;
 `;
 
+const StyledButtonBorder = styled.div`
+  width: 8rem;
+  height: 3rem;
+  border-radius: 5rem;
+  background: linear-gradient(180deg, #0a3d62 0%, #105688 100%);
+  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 const StyledButton = styled.button`
-  border-radius: 2rem;
+  font-size: 1rem;
+  width: 7.5rem;
+  height: 2.5rem;
+  border-radius: 5rem;
   color: white;
+  text-decoration: none;
+  display: flex;
   border: none;
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-  background-color: darkblue;
-  padding: 0.4rem 1rem;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(180deg, #105688 0%, #0a3d62 100%);
 `;

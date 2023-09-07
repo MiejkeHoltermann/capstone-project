@@ -23,7 +23,12 @@ export default function Explore({
   );
   return (
     <>
-      <Header trip={currentTrip} />
+      <Header
+        name={currentTrip.name}
+        image={currentTrip.image}
+        startDate={currentTrip.startDate}
+        endDate={currentTrip.endDate}
+      />
       <StyledTitle>Explore</StyledTitle>
       <Scrollbox>
         {filteredSights.length === 0 ? (
