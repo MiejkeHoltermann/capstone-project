@@ -9,7 +9,7 @@ import Lottie from "react-lottie-player";
 import lottieJson from "../../public/loadingAnimation.json";
 import ItineraryItem from "@/components/ItineraryItem";
 
-export default function Itinerary({ trips, setTrips }) {
+export default function Expenses({ trips, setTrips }) {
   const router = useRouter();
   const currentTrip = trips.find((trip) => trip.slug === router.query.slug);
   if (!currentTrip) {

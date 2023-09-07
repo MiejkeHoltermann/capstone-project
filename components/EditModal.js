@@ -8,7 +8,6 @@ export default function EditModal({
   handleUpdateItem,
   toggleEditModal,
 }) {
-  console.log(amount);
   return (
     <StyledForm onSubmit={(event) => handleUpdateItem(event, id)}>
       <StyledInputName

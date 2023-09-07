@@ -5,8 +5,6 @@ import { format } from "date-fns";
 import DefaultLinkButton from "@/components/DefaultLinkButton";
 
 export default function Header({ name, image, startDate, endDate }) {
-  console.log(startDate);
-  console.log(endDate);
   return (
     <StyledHeader>
       <StyledImageWrapper>
