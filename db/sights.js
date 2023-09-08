@@ -8,6 +8,7 @@ const sights = [
     details:
       "Petra, originally known to its inhabitants as Raqmus a historic and archaeological city in southern Jordan. It is adjacent to the mountain of Jabal Al-Madbah, in a basin surrounded by mountains forming the eastern flank of the Arabah valley running from the Dead Sea to the Gulf of Aqaba. The area around Petra has been inhabited from as early as 7000 BC, and the Nabataeans might have settled in what would become the capital city of their kingdom as early as the 4th century BC.",
     id: uid(),
+    inItinerary: false,
     plannedDate: "2025-09-01",
     plannedTime: "20:00",
     geocode: [30.328, 35.444],
@@ -19,6 +20,7 @@ const sights = [
     details:
       "The Dead Sea is a salt lake bordered by Jordan to the east and the West Bank and Israel to the west. It lies in the Jordan Rift Valley, and its main tributary is the Jordan River. As of 2019, the lake's surface is 430.5 metres, making its shores the lowest land-based elevation on Earth. With a salinity of 34.2% it is one of the world's saltiest bodies of water – 9.6 times as salty as the ocean.",
     id: uid(),
+    inItinerary: false,
     plannedDate: "2025-08-31",
     plannedTime: "",
     geocode: [31.757, 35.578],
@@ -30,6 +32,7 @@ const sights = [
     details:
       "Wadi Rum, known also as the Valley of the Moon, is a valley cut into the sandstone and granite rock in southern Jordan, near the border with Saudi Arabia and about 60 km to the east of the city of Aqaba. With an area of 720 km2 it is the largest wadi (river valley) in Jordan. Several prehistoric civilizations left petroglyphs, rock inscriptions and ruins in Wadi Rum. Today it is a tourist attraction, offering guided tours, hiking and rock climbing. The Wadi Rum Protected Area has been a UNESCO World Heritage site since 2011.",
     id: uid(),
+    inItinerary: false,
     plannedDate: "2025-09-04",
     plannedTime: "10:00",
     geocode: [29.592, 35.416],
@@ -41,6 +44,7 @@ const sights = [
     details:
       "The Bedouin are pastorally nomadic Arab tribes who have historically inhabited the desert regions in the Arabian Peninsula, North Africa, the Levant, and Mesopotamia. The Bedouin originated in the Syrian Desert and Arabian Desert but spread across the rest of the Arab world in West Asia and North Africa after the spread of Islam. The English word bedouin comes from the Arabic badawī, which means 'desert dweller'. Book a night in a traditional Bedouin camp in the middle of the desert.",
     id: uid(),
+    inItinerary: false,
     plannedDate: "2025-09-04",
     plannedTime: "21:00",
     geocode: [29.504, 35.426],
@@ -52,6 +56,7 @@ const sights = [
     details:
       "Amman is the capital and the largest city of Jordan, and the country's economic, political, and cultural center. With a population of over 4 million, Amman is Jordan's primate city and is the largest city in the Levant region, the fifth-largest city in the Arab world, and the ninth-largest metropolitan area in the Middle East. The earliest evidence of settlement in Amman dates to the 8th millennium BC, in a Neolithic site known as 'Ain Ghazal, where the world's oldest statues of the human form have been unearthed.",
     id: uid(),
+    inItinerary: false,
     plannedDate: "2025-08-29",
     plannedTime: "",
     geocode: [31.968, 35.91],
@@ -63,6 +68,7 @@ const sights = [
     details:
       "Aqaba is the only coastal city in Jordan and the largest and most populous city on the Gulf of Aqaba. Situated in southernmost Jordan, Aqaba is the administrative center of the Aqaba Governorate. The city had a population of 148,398 and a land area of 375 square kilometres. Aqaba's strategic location at the northeastern tip of the Red Sea between the continents of Asia and Africa has made its port important throughout thousands of years.",
     id: uid(),
+    inItinerary: false,
     plannedDate: "2025-09-05",
     plannedTime: "",
     geocode: [29.535, 35.0],
@@ -74,6 +80,7 @@ const sights = [
     details:
       "Little Petra, also known as Siq al-Barid is an archaeological site located north of Petra and the town of Wadi Musa in the Ma'an Governorate of Jordan. Like Petra, it is a Nabataean site, with buildings carved into the walls of the sandstone canyons. As its name suggests, it is much smaller, consisting of three wider open areas connected by a 450-metre canyon. It is part of the Petra Archeological Park, though accessed separately, and included in Petra's inscription as a UNESCO World Heritage Site. It is often visited by tourists in conjunction with Petra itself, since it is free and usually less crowded.",
     id: uid(),
+    inItinerary: false,
     plannedDate: "2025-09-01",
     plannedTime: "12:30",
     geocode: [30.375, 35.45],
@@ -85,6 +92,7 @@ const sights = [
     details:
       "The Dana Biosphere Reserve is Jordan's largest nature reserve, located in south-central Jordan. Dana Biosphere Reserve was founded in 1989 in the area in and around the Dana village and Wadi Dana comprising 308 square kilometres. The people of the Ata'ta tribe are the native inhabitants of Dana Biosphere Reserve. Their history in Dana dates back 400 years, with human settlement in the area dating back more than 6000 years.",
     id: uid(),
+    inItinerary: false,
     plannedDate: "2025-09-02",
     plannedTime: "",
     geocode: [30.671, 35.583],
@@ -96,6 +104,7 @@ const sights = [
     details:
       "Wadi Mujib, also known as Arnon Stream, is a river in Jordan. The river empties into the Dead Sea circa 420 metres below sea level. Today, Wadi Mujib is fed by seven tributaries. The western part of the river is the site of the Mujib Biosphere Reserve, popular for hikes and canyoning amid dramatic rock formations. The Mujib Dam was completed in 2004 at the bottom of the wadi, where the modern road crosses the river. As a result, a large lake has formed.",
     id: uid(),
+    inItinerary: false,
     plannedDate: "2025-09-03",
     plannedTime: "14:00",
     geocode: [31.453, 35.813],
@@ -107,6 +116,7 @@ const sights = [
     details:
       "Jerash is a city in northern Jordan. The city is the administrative center of the Jerash Governorate, and has a population of 50,745 as of 2015. It is located 48 kilometres north of the capital city Amman. The earliest evidence of settlement in Jerash is in a Neolithic site known as Tal Abu Sowan, where rare human remains dating to around 7500 BC were uncovered. Jerash flourished during the Greek, Hellenistic, Roman, and Byzantine periods.",
     id: uid(),
+    inItinerary: false,
     plannedDate: "",
     plannedTime: "",
     geocode: [32.274, 35.896],
@@ -115,6 +125,7 @@ const sights = [
     country: "jordan",
     name: "Amman Airport",
     id: uid(),
+    inItinerary: false,
     plannedDate: "2025-08-29",
     plannedTime: "06:00",
   },
@@ -122,6 +133,7 @@ const sights = [
     country: "jordan",
     name: "Sufra Restaurant",
     id: uid(),
+    inItinerary: false,
     plannedDate: "2025-08-29",
     plannedTime: "18:00",
   },
@@ -129,6 +141,7 @@ const sights = [
     country: "jordan",
     name: "Amman Citadel",
     id: uid(),
+    inItinerary: false,
     plannedDate: "2025-08-30",
     plannedTime: "",
   },
@@ -136,6 +149,7 @@ const sights = [
     country: "jordan",
     name: "Roman Theater",
     id: uid(),
+    inItinerary: false,
     plannedDate: "2025-08-30",
     plannedTime: "",
   },
@@ -143,6 +157,7 @@ const sights = [
     country: "jordan",
     name: "Falafel in Hasehm",
     id: uid(),
+    inItinerary: false,
     plannedDate: "2025-08-30",
     plannedTime: "19:00",
   },
@@ -150,6 +165,7 @@ const sights = [
     country: "jordan",
     name: "Bus to Dead Sea",
     id: uid(),
+    inItinerary: false,
     plannedDate: "2025-08-31",
     plannedTime: "08:30",
   },
@@ -157,6 +173,7 @@ const sights = [
     country: "jordan",
     name: "Massage",
     id: uid(),
+    inItinerary: false,
     plannedDate: "2025-08-31",
     plannedTime: "04:00",
   },
@@ -164,6 +181,7 @@ const sights = [
     country: "jordan",
     name: "Dinner Burj Al Hamam",
     id: uid(),
+    inItinerary: false,
     plannedDate: "2025-08-31",
     plannedTime: "20:30",
   },
@@ -171,6 +189,7 @@ const sights = [
     country: "jordan",
     name: "Bus to Little Petra",
     id: uid(),
+    inItinerary: false,
     plannedDate: "2025-09-01",
     plannedTime: "07:00",
   },
@@ -178,6 +197,7 @@ const sights = [
     country: "jordan",
     name: "Homestay",
     id: uid(),
+    inItinerary: false,
     plannedDate: "2025-09-02",
     plannedTime: "17:30",
   },
@@ -185,6 +205,7 @@ const sights = [
     country: "jordan",
     name: "Bus to Aqaba",
     id: uid(),
+    inItinerary: false,
     plannedDate: "2025-09-05",
     plannedTime: "09:45",
   },
@@ -192,6 +213,7 @@ const sights = [
     country: "jordan",
     name: "Red Sea Snorkelling",
     id: uid(),
+    inItinerary: false,
     plannedDate: "2025-09-06",
     plannedTime: "08:00",
   },
@@ -199,6 +221,7 @@ const sights = [
     country: "jordan",
     name: "Red Sea Grill",
     id: uid(),
+    inItinerary: false,
     plannedDate: "2025-09-06",
     plannedTime: "20:00",
   },
@@ -206,6 +229,7 @@ const sights = [
     country: "jordan",
     name: "Aqaba Airport",
     id: uid(),
+    inItinerary: false,
     plannedDate: "2025-09-07",
     plannedTime: "11:15",
   },
@@ -216,6 +240,7 @@ const sights = [
     details:
       "The Great Barrier Reef is the world's largest coral reef system, composed of over 2,900 individual reefs and 900 islands stretching for over 2,300 kilometres over an area of approximately 344,400 square kilometres. The reef is located in the Coral Sea, off the coast of Queensland, separated from the coast by a channel 160 kilometres wide in places and over 61 metres deep. The Great Barrier Reef can be seen from outer space and is the world's biggest single structure made by living organisms. This reef structure is composed of and built by billions of tiny organisms, known as coral polyps. It supports a wide diversity of life and was selected as a World Heritage Site in 1981. CNN labelled it one of the Seven Natural Wonders of the World in 1997.",
     id: uid(),
+    inItinerary: false,
     plannedDate: "",
     plannedTime: "",
     geocode: [-18.739, 147.743],
@@ -227,6 +252,7 @@ const sights = [
     details:
       "The Daintree Rainforest is a region on the northeastern coast of Queensland, about 105 km north of the city of Cairns. Whilst the terms 'Daintree Rainforest' and 'the Daintree' are not officially defined, it is generally accepted and understood that they refer to the area from the Daintree River north to Cooktown, and from the coastline west to the Great Dividing Range. The popular tourist destination of Mossman Gorge, some 30 km south of the Daintree River, is often included in the definition.",
     id: uid(),
+    inItinerary: false,
     plannedDate: "",
     plannedTime: "",
     geocode: [-16.17, 145.416],
@@ -238,6 +264,7 @@ const sights = [
     details:
       "Fraser Island is a World Heritage-listed island along the south-eastern coast in the Wide Bay–Burnett region. The island is approximately 250 km north of the state capital, Brisbane, and is within the Fraser Coast Region local government area. The world heritage listing includes the island, its surrounding waters and parts of the nearby mainland. The island is part of the traditional lands of the Butchulla people, under the traditional name of 'K'gari'. European settlers who arrived in 1847 named the island 'Fraser Island' after Captain James Fraser, master of Stirling Castle, who was shipwrecked and died on the island in early August 1836. In the 2021 census, the island had a population of 152 people.",
     id: uid(),
+    inItinerary: false,
     plannedDate: "",
     plannedTime: "",
     geocode: [-25.317, 153.132],
@@ -249,6 +276,7 @@ const sights = [
     details:
       "The Whitsunday Islands are 74 continental islands of various sizes off the central coast of Queensland, 900 kilometres north of Brisbane. The northernmost of the islands are off the coast by the town of Bowen, while the southernmost islands are off the coast by Proserpine. The island group is centred on Whitsunday Island, while the commercial centre is Hamilton Island. The traditional owners of the area are the Ngaro people and the Gia people, whose Juru people has the only legally recognised native title in the Whitsunday Region.",
     id: uid(),
+    inItinerary: false,
     plannedDate: "",
     plannedTime: "",
     geocode: [-20.114, 148.935],
@@ -260,6 +288,7 @@ const sights = [
     details:
       "The Gold Coast is a coastal city and region in the state of Queensland, Australia, approximately 66 kilometres  south-southeast of the centre of the state capital Brisbane. With a population over 600,000, the Gold Coast is the sixth-largest city in Australia, the nation's largest non-capital city, and Queensland's second-largest city after Brisbane. The Gold Coast is a major tourist destination with a sunny, subtropical climate and has become widely known for its surfing beaches (such as Surfers Paradise), high-rise dominated skyline, theme parks, nightlife, and rainforest hinterland. The city is part of the nation's entertainment industry with television productions and a major film industry.",
     id: uid(),
+    inItinerary: false,
     plannedDate: "",
     plannedTime: "",
     geocode: [-28.031, 153.397],
@@ -271,6 +300,7 @@ const sights = [
     details:
       "The Twelve Apostles are a collection of limestone stacks off the shore of Port Campbell National Park, by the Great Ocean Road in Victoria. The Twelve Apostles are located on the traditional lands of the Eastern Maar peoples. Their proximity to one another has made the site a popular tourist attraction. Eight of the original nine stacks remain standing at the Twelve Apostles viewpoint, after one collapsed in July 2005. Though the view from the promontory by the Twelve Apostles never included twelve stacks, additional stacks – not considered part of the Apostles group – are located to the west within the national park.",
     id: uid(),
+    inItinerary: false,
     plannedDate: "",
     plannedTime: "",
     geocode: [-38.654, 143.08],
@@ -282,6 +312,7 @@ const sights = [
     details:
       "Sydney is the capital city of the state of New South Wales, and the most populous city in Australia. Located on Australia's east coast, the metropolis surrounds Sydney Harbour and extends about 70 km towards the Blue Mountains to the west, Hawkesbury to the north, and the Royal National Park and Macarthur to the south and south-west. Greater Sydney consists of 658 suburbs, spread across 33 local government areas. Residents of the city are colloquially known as 'Sydneysiders'. The estimated population in June 2022 was 5,297,089. The city's nicknames include the 'Emerald City' and the 'Harbour City'.",
     id: uid(),
+    inItinerary: false,
     plannedDate: "",
     plannedTime: "",
     geocode: [-33.89, 151.174],
@@ -293,6 +324,7 @@ const sights = [
     details:
       "The Blue Mountains are a mountainous region and a mountain range located in New South Wales, Australia. The region is considered to be part of the western outskirts of the Greater Sydney area. The region borders on Sydney's main metropolitan area, its foothills starting about 50 kilometres west of centre of the state capital, close to Penrith. The public's understanding of the extent of the Blue Mountains is varied, as it forms only part of an extensive mountainous area associated with the Great Dividing Range.",
     id: uid(),
+    inItinerary: false,
     plannedDate: "",
     plannedTime: "",
     geocode: [-33.629, 150.513],
@@ -304,6 +336,7 @@ const sights = [
     details:
       "Uluru, also known as Ayers Rock, is a large sandstone formation in the centre of Australia. It is in the southern part of the Northern Territory, 335 km south-west of Alice Springs. Uluru is sacred to the Pitjantjatjara, the Aboriginal people of the area, known as the Aṉangu. The area around the formation is home to an abundance of springs, waterholes, rock caves and ancient paintings. Uluru is listed as a UNESCO World Heritage Site. Uluru and Kata Tjuta, also known as the Olgas, are the two major features of the Uluṟu-Kata Tjuṯa National Park. Uluru is one of Australia's most recognisable natural landmarks and has been a popular destination for tourists since the late 1930s. It is also one of the most important indigenous sites in Australia. ",
     id: uid(),
+    inItinerary: false,
     plannedDate: "",
     plannedTime: "",
     geocode: [-25.345, 131.033],
@@ -315,6 +348,7 @@ const sights = [
     details:
       "Tasmania is an island state of Australia. It is located 240 kilometres to the south of the Australian mainland, separated from it by the Bass Strait, with the archipelago containing the southernmost point of the country. The state encompasses the main island of Tasmania, the 26th-largest island in the world, and the surrounding 1000 islands. It is Australia's least populous state, with 569,825 residents as of December 2021. The state capital and largest city is Hobart, with around 40 percent of the population living in the Greater Hobart area.",
     id: uid(),
+    inItinerary: false,
     plannedDate: "",
     plannedTime: "",
     geocode: [-42.209, 146.575],
@@ -326,6 +360,7 @@ const sights = [
     details:
       "Torres del Paine National Park is a national park encompassing mountains, glaciers, lakes, and rivers in southern Chilean Patagonia. The Cordillera del Paine is the centerpiece of the park. It lies in a transition area between the Magellanic subpolar forests and the Patagonian Steppes. The park is located 112 km north of Puerto Natales and 312 km north of Punta Arenas. The park borders Bernardo O'Higgins National Park to the west and the Los Glaciares National Park to the north in Argentine territory. Paine means 'blue' in the native Tehuelche (Aonikenk) language and is pronounced PIE-neh, while Torres means 'towers'.",
     id: uid(),
+    inItinerary: false,
     plannedDate: "",
     plannedTime: "",
     geocode: [-50.942, -73.406],
@@ -337,6 +372,7 @@ const sights = [
     details:
       "The Atacama Desert is a desert plateau located on the Pacific coast of South America (Argentina and Chile). Stretching over a 1,600 km strip of land west of the Andes Mountains, it covers an area of 105,000 km², which increases to 128,000 km2 if the barren lower slopes of the Andes are included. The Atacama Desert is the driest nonpolar desert in the world, and the second driest overall, behind some specific spots within the McMurdo Dry Valleys. It is the only hot true desert to receive less precipitation than polar deserts, and the largest fog desert in the world. The area has been used as an experimentation site for Mars expedition simulations due to its similarities to the Martian environment.",
     id: uid(),
+    inItinerary: false,
     plannedDate: "",
     plannedTime: "",
     geocode: [-23.863, -69.133],
@@ -348,6 +384,7 @@ const sights = [
     details:
       "Easter Island is an island and special territory of Chile in the southeastern Pacific Ocean, at the southeasternmost point of the Polynesian Triangle in Oceania. The island is most famous for its nearly 1,000 extant monumental statues, called moai, which were created by the early Rapa Nui people. In 1995, UNESCO named Easter Island a World Heritage Site, with much of the island protected within Rapa Nui National Park. ",
     id: uid(),
+    inItinerary: false,
     plannedDate: "",
     plannedTime: "",
     geocode: [-27.118, -109.367],
@@ -359,6 +396,7 @@ const sights = [
     details:
       "Santiago, also known as Santiago de Chile, is the capital and largest city of Chile and one of the largest cities in the Americas. It is located in the country's central valley and is the center of the Santiago Metropolitan Region, which has a population of 7 million, representing 40% of Chile's total population. Most of the city is situated between 500 – 650 m above sea level.",
     id: uid(),
+    inItinerary: false,
     plannedDate: "",
     plannedTime: "",
     geocode: [-33.47, -70.674],
@@ -370,6 +408,7 @@ const sights = [
     details:
       "Cape Horn is the southernmost headland of the Tierra del Fuego archipelago of southern Chile, and is located on the small Hornos Island. Although not the most southerly point of South America, Cape Horn marks the northern boundary of the Drake Passage and marks where the Atlantic and Pacific Oceans meet.",
     id: uid(),
+    inItinerary: false,
     plannedDate: "",
     plannedTime: "",
     geocode: [-55.979, -67.28],
@@ -381,6 +420,7 @@ const sights = [
     details:
       "Valparaíso is a major city, commune, seaport, naval base, and educational centre in the Valparaíso Region, Chile. 'Greater Valparaíso' is the second largest metropolitan area in the country. Despite only being the second largest city in the metropolitan area of Greater Valparaíso, with the first being Viña del Mar, Valparaíso serves as the namesake for the region due to its historical and cultural significance. Valparaíso is located about 120 km northwest of Santiago by road and is one of the Pacific Ocean's most important seaports. Valparaíso is the capital of Chile's second most populated administrative region and has been the headquarters for the Chilean Navy since 1817 and the seat of the Chilean National Congress since 1990.",
     id: uid(),
+    inItinerary: false,
     plannedDate: "",
     plannedTime: "",
     geocode: [-33.039, -71.607],
@@ -392,6 +432,7 @@ const sights = [
     details:
       "Lauca National Park is located in Chile's far north, in the Andean range. It encompasses an area of 1,379 km2 of altiplano and mountains, the latter consisting mainly of enormous volcanoes. Las Vicuñas National Reserve is its neighbour to the south. Both protected areas, along with Salar de Surire Natural Monument, form Lauca Biosphere Reserve. The park borders Sajama National Park in Bolivia.",
     id: uid(),
+    inItinerary: false,
     plannedDate: "",
     plannedTime: "",
     geocode: [-18.232, -69.315],
@@ -403,6 +444,7 @@ const sights = [
     details:
       "Pucón is a Chilean city and commune administered by the municipality of Pucón. It is located in the Province of Cautín, Araucanía Region, 100 km to the southeast of Temuco and 780 km to the south of Santiago. It is on the eastern shore of Lake Villarrica, and Villarrica volcano is located roughly 17 km to the south. Pucón's location by a lake and volcano, along with its relatively stable climate, especially in summer, make it a popular destination for tourists. It offers a variety of sports and activities for tourists, including water skiing, snow skiing, backpacking, white water rafting and kayaking, horse back riding, natural hot springs, zip line rides, skydiving and guided ascents of Villarrica volcano.",
     id: uid(),
+    inItinerary: false,
     plannedDate: "",
     plannedTime: "",
     geocode: [-39.27, -71.988],
@@ -414,6 +456,7 @@ const sights = [
     details:
       "Aysén or Aisén is a commune located in Aysén Province, Aysén del General Carlos Ibáñez del Campo Region. It is home to the city of Puerto Aysén and to the towns of Villa Mañiguales and Puerto Chacabuco. It is the largest commune in Chile in total area, and it is slightly larger than Armenia.",
     id: uid(),
+    inItinerary: false,
     plannedDate: "",
     plannedTime: "",
     geocode: [-45.793, -73, 788],
@@ -425,6 +468,7 @@ const sights = [
     details:
       "The Chiloé Archipelago is a group of islands lying off the coast of Chile, in the Los Lagos Region. It is separated from mainland Chile by the Chacao Channel in the north, the Sea of Chiloé in the east and the Gulf of Corcovado in the southeast. All islands except the Desertores Islands form Chiloé Province. The main island is Chiloé Island. Of roughly rectangular shape, the southwestern half of this island is a wilderness of contiguous forests, wetlands and, in some places, mountains. The landscape of the northeastern sectors of Chiloé Island and the islands to the east is dominated by rolling hills, with a mosaic of pastures, forests and cultivated fields. ",
     id: uid(),
+    inItinerary: false,
     plannedDate: "",
     plannedTime: "",
     geocode: [-42.618, -73.748],
@@ -436,6 +480,7 @@ const sights = [
     details:
       "The Blue Grotto or Blue Cave, is a waterlogged sea cave located in a small bay called Balun, on the east side of the island of Biševo and about 8.3 km from Komiža, in the Croatian Adriatic. It is situated in the central Dalmatian archipelago, 5 km south-west of the island of Vis. The grotto is one of the best known natural beauty spots on the Adriatic and a popular show cave because of the glowing blue light that appears at certain times of day.",
     id: uid(),
+    inItinerary: false,
     plannedDate: "",
     plannedTime: "",
     geocode: [42.98, 16.022],
@@ -447,6 +492,7 @@ const sights = [
     details:
       "Plitvice Lakes National Park is one of the oldest and largest national parks in Croatia. In 1979, Plitvice Lakes National Park was inscribed on the UNESCO World Heritage list, due to its outstanding and picturesque series of tufa lakes, caves, connected by waterfalls. The national park was founded in 1949 and is in the mountainous karst area of central Croatia, at the border to Bosnia and Herzegovina. The important north–south road that passes through the national park area connects the Croatian inland with the Adriatic coastal region. The protected area extends over 296.85 square kilometres.",
     id: uid(),
+    inItinerary: false,
     plannedDate: "",
     plannedTime: "",
     geocode: [44.865, 15.58],
@@ -458,6 +504,7 @@ const sights = [
     details:
       "Zagreb is the capital and largest city of Croatia. It is in the north of the country, along the Sava river, at the southern slopes of the Medvednica mountain. Zagreb stands near the international border between Croatia and Slovenia at an elevation of approximately 122 m above sea level. The population of the Zagreb urban agglomeration is 1,271,150, between a quarter and a third of the total population of Croatia.",
     id: uid(),
+    inItinerary: false,
     plannedDate: "",
     plannedTime: "",
     geocode: [45.798, 15.973],
@@ -469,6 +516,7 @@ const sights = [
     details:
       "Krka National Park is one of the Croatian national parks, named after the river Krka that it encloses. It is located along the middle-lower course of the Krka River in central Dalmatia, in Šibenik-Knin county, downstream Miljevci area, and just a few kilometers northeast of the city of Šibenik. It was formed to protect the Krka River and is intended primarily for scientific, cultural, educational, recreational, and tourism activities. It is the seventh national park in Croatia and was proclaimed a national park in 1985.",
     id: uid(),
+    inItinerary: false,
     plannedDate: "",
     plannedTime: "",
     geocode: [43.865, 15.971],
@@ -480,6 +528,7 @@ const sights = [
     details:
       "Korčula is a Croatian island in the Adriatic Sea. It has an area of 279 km2, is 46.8 km long and on average 7.8 km, and lies just off the Dalmatian coast. Its 15,522 inhabitants make it the second most populous Adriatic island after Krk.",
     id: uid(),
+    inItinerary: false,
     plannedDate: "",
     plannedTime: "",
     geocode: [42.948, 16.914],
@@ -491,6 +540,7 @@ const sights = [
     details:
       "Pula is the largest city in Istria County, and the seventh-largest city in the country, situated at the southern tip of the Istrian peninsula in northwestern Croatia. It is known for its multitude of ancient Roman buildings, the most famous of which is the Pula Arena, one of the best preserved Roman amphitheaters. The city has a long tradition of wine making, fishing, shipbuilding, and tourism. It was the administrative centre of Istria from ancient Roman times until superseded by Pazin in 1991.",
     id: uid(),
+    inItinerary: false,
     plannedDate: "",
     plannedTime: "",
     geocode: [44.873, 13.841],
@@ -502,6 +552,7 @@ const sights = [
     details:
       "Zadar is the oldest continuously inhabited city in Croatia. It is situated on the Adriatic Sea, at the northwestern part of Ravni Kotari region. Zadar serves as the seat of Zadar County and of the wider northern Dalmatian region. The city proper covers 25 km² with a population of 75,082, making it the second-largest city of the region of Dalmatia and the fifth-largest city in the country.",
     id: uid(),
+    inItinerary: false,
     plannedDate: "",
     plannedTime: "",
     geocode: [44.129, 15.228],
@@ -513,6 +564,7 @@ const sights = [
     details:
       "Rovinj (Italian: Rovigno) is a city in Croatia situated on the north Adriatic Sea with a population of 14,294. Located on the western coast of the Istrian peninsula, it is a popular tourist resort and an active fishing port. Istriot, a Romance language once widely spoken in this part of Istria, is still spoken by some of the residents. The town is officially bilingual, Croatian and Italian, hence both town names are official and equal.",
     id: uid(),
+    inItinerary: false,
     plannedDate: "",
     plannedTime: "",
     geocode: [45.074, 13.641],
@@ -524,6 +576,7 @@ const sights = [
     details:
       "Split is the second-largest city of Croatia after the capital Zagreb, the largest city in Dalmatia and the largest city on the Croatian coast. It lies on the eastern shore of the Adriatic Sea and is spread over a central peninsula and its surroundings. An intraregional transport hub and popular tourist destination, the city is linked to the Adriatic islands and the Apennine Peninsula.",
     id: uid(),
+    inItinerary: false,
     plannedDate: "",
     plannedTime: "",
     geocode: [42.504, 16.437],
@@ -535,6 +588,7 @@ const sights = [
     details:
       "Dubrovnik is a city in southern Dalmatia, Croatia, by the Adriatic Sea. It is one of the most prominent tourist destinations in the Mediterranean, a seaport and the centre of the Dubrovnik-Neretva County. Its total population is 41,562. In 1979, the city of Dubrovnik was added to the UNESCO list of World Heritage Sites in recognition of its outstanding medieval architecture and fortified old town.",
     id: uid(),
+    inItinerary: false,
     plannedDate: "",
     plannedTime: "",
     geocode: [42.645, 18.083],
@@ -546,6 +600,7 @@ const sights = [
     details:
       "Athens is a major coastal urban area in the Mediterranean and it is both the capital and the largest city of Greece. With its urban area's population numbering over three million, it is also the eighth largest urban area in the European Union. Athens dominates and is the capital of the Attica region and is one of the world's oldest cities, with its recorded history spanning over 3,400 years, and its earliest human presence beginning somewhere between the 11th and 7th millennia BC. The city was named after Athena, the ancient Greek goddess of wisdom.",
     id: uid(),
+    inItinerary: false,
     plannedDate: "",
     plannedTime: "",
     geocode: [37.972, 23.688],
@@ -557,6 +612,7 @@ const sights = [
     details:
       "The Peloponnese, or Morea is a peninsula and geographic region in southern Greece. It is connected to the central part of the country by the Isthmus of Corinth land bridge which separates the Gulf of Corinth from the Saronic Gulf. From the late Middle Ages until the 19th century, the peninsula was known as the Morea, a name still in colloquial use in its demotic form.",
     id: uid(),
+    inItinerary: false,
     plannedDate: "",
     plannedTime: "",
     geocode: [37.47, 22.339],
@@ -568,6 +624,7 @@ const sights = [
     details:
       "Delphi was an ancient sacred precinct and the seat of Pythia, the major oracle who was consulted about important decisions throughout the ancient classical world. The ancient Greeks considered the centre of the world to be in Delphi, marked by the stone monument known as the omphalos (navel). According to the Suda, Delphi took its name from the Delphyne, the she-serpent (drakaina) who lived there and was killed by the god Apollo.",
     id: uid(),
+    inItinerary: false,
     plannedDate: "",
     plannedTime: "",
     geocode: [38.48, 22.496],
@@ -579,6 +636,7 @@ const sights = [
     details:
       "The Meteora is a rock formation in the regional unit of Trikala, hosting one of the largest and most precipitously built complexes of Eastern Orthodox monasteries, second in importance only to Mount Athos. The six (of an original twenty-four) monasteries are built on immense natural pillars and hill-like rounded boulders that dominate the local area. Between the 13th and 14th centuries, the twenty-four monasteries were established atop the rocks. Meteora is located near the town of Kalabaka at the northwestern edge of the Plain of Thessaly near the Pineios river and Pindus Mountains.",
     id: uid(),
+    inItinerary: false,
     plannedDate: "",
     plannedTime: "",
     geocode: [39.721, 21.63],
@@ -590,6 +648,7 @@ const sights = [
     details:
       "Thessaloniki is the second-largest city in Greece, with slightly over one million inhabitants in its metropolitan area, and the capital of the geographic region of Macedonia, the administrative region of Central Macedonia and the Decentralized Administration of Macedonia and Thrace.",
     id: uid(),
+    inItinerary: false,
     plannedDate: "",
     plannedTime: "",
     geocode: [40.63, 22.955],
@@ -601,6 +660,7 @@ const sights = [
     details:
       "Mount Athos is a mountain on the Athos peninsula in northeastern Greece. It is an important centre of Eastern Orthodox monasticism. The mountain and most of the Athos peninsula are governed as an autonomous region in Greece by the monastic community of Mount Athos, which is ecclesiastically under the direct jurisdiction of the Ecumenical Patriarch of Constantinople. The remainder of the peninsula forms part of the Aristotelis municipality. Women are prohibited from entering the area governed by the monastic community by Greek law and by religious tradition.",
     id: uid(),
+    inItinerary: false,
     plannedDate: "",
     plannedTime: "",
     geocode: [40.149, 24.334],
@@ -612,6 +672,7 @@ const sights = [
     details:
       "The Cyclades are an island group in the Aegean Sea, southeast of mainland Greece and a former administrative prefecture of Greece. They are one of the island groups which constitute the Aegean archipelago. The name refers to the archipelago forming a circle around the sacred island of Delos. The largest island of the Cyclades is Naxos, however the most populated is Syros.",
     id: uid(),
+    inItinerary: false,
     plannedDate: "",
     plannedTime: "",
     geocode: [37.084, 25.171],
@@ -623,6 +684,7 @@ const sights = [
     details:
       "The Dodecanese are a group of 15 larger plus 150 smaller Greek islands in the southeastern Aegean Sea and Eastern Mediterranean, off the coast of Turkey's Anatolia, of which 26 are inhabited. This island group generally defines the eastern limit of the Sea of Crete. They belong to the wider Southern Sporades island group. Rhodes has been the area's dominant island since antiquity. Of the others, Kos and Patmos are historically the more important.",
     id: uid(),
+    inItinerary: false,
     plannedDate: "",
     plannedTime: "",
     geocode: [36.257, 27.836],
@@ -634,6 +696,7 @@ const sights = [
     details:
       "The Ionian Islands are a group of islands in the Ionian Sea, west of mainland Greece. As a distinct historic region, they date to the centuries-long Venetian rule, which preserved them from Muslim conquests for the Ottoman Empire, and created a distinct cultural identity with many Italian influences. The Ionian Islands became part of the modern Greek state in 1864. Administratively today, they belong to the Ionian Islands Region except for Kythera, which belongs to the Attica Region.",
     id: uid(),
+    inItinerary: false,
     plannedDate: "",
     plannedTime: "",
     geocode: [38.271, 20.574],
@@ -645,6 +708,7 @@ const sights = [
     details:
       "Crete is the largest and most populous of the Greek islands, the 88th largest island in the world and the fifth largest island in the Mediterranean Sea, after Sicily, Sardinia, Cyprus, and Corsica. Crete rests about 160 km south of the Greek mainland, and about 100 km southwest of Anatolia. It bounds the southern border of the Aegean Sea, with the Sea of Crete to the north and the Libyan Sea to the south. Crete covers a vast distance from west to east but is narrow from north to south.",
     id: uid(),
+    inItinerary: false,
     plannedDate: "",
     plannedTime: "",
     geocode: [35.232, 24.716],
@@ -656,6 +720,7 @@ const sights = [
     details:
       "Marrakesh is the fourth largest city in Morocco. It is one of the four Imperial cities of Morocco and the capital of the Marrakesh-Safi region. It is situated west of the foothills of the Atlas Mountains. The region has been inhabited by Berber farmers since Neolithic times. The city was founded in 1070 by Emir Abu Bakr ibn Umar as the imperial capital of the Almoravid Empire. The Almoravids established the first major structures in the city and shaped its layout for centuries to come. The red walls of the city, built by Ali ibn Yusuf in 1122–1123, and various buildings constructed in red sandstone afterwards, have given the city the nickname of the 'Red City'. Marrakesh grew rapidly and established itself as a cultural, religious, and trading center for the Maghreb.",
     id: uid(),
+    inItinerary: false,
     plannedDate: "",
     plannedTime: "",
     geocode: [31.61, -8.04],
@@ -667,6 +732,7 @@ const sights = [
     details:
       "Fez is a city in northern inland Morocco and the capital of the Fès-Meknès administrative region. It is the second largest city in Morocco, with a population of 1.11 million. Located to the northwest of the Atlas Mountains, it is surrounded by hills and the old city is centered around the Fez River (Oued Fes) flowing from west to east.",
     id: uid(),
+    inItinerary: false,
     plannedDate: "",
     plannedTime: "",
     geocode: [31.633, -8.003],
@@ -678,6 +744,7 @@ const sights = [
     details:
       "Aït Benhaddou is a historic ighrem or ksar (fortified village) along the former caravan route between the Sahara and Marrakesh in Morocco. It is considered a great example of Moroccan earthen clay architecture and has been a UNESCO World Heritage Site since 1987.",
     id: uid(),
+    inItinerary: false,
     plannedDate: "",
     plannedTime: "",
     geocode: [31.045, -7.131],
@@ -689,6 +756,7 @@ const sights = [
     details:
       "The Atlas Mountains are a mountain range in the Maghreb in North Africa. It separates the Sahara Desert from the Mediterranean Sea and the Atlantic Ocean; the name 'Atlantic' is derived from the mountain range. It stretches around 2,500 km through Morocco, Algeria and Tunisia. The range's highest peak is Toubkal, which is in central Morocco, with an elevation of 4,167 metres. The Atlas mountains are primarily inhabited by Berber populations.",
     id: uid(),
+    inItinerary: false,
     plannedDate: "",
     plannedTime: "",
     geocode: [31.492, -7.385],
@@ -700,6 +768,7 @@ const sights = [
     details:
       "Essaouira, known until the 1960s as Mogador, is a port city in the western Moroccan region of Marakesh-Safi, on the Atlantic coast. The foundation of the city of Essaouira was the work of the Moroccan 'Alawid sultan Mohammed bin Abdallah, who made an original experiment by entrusting it to several renowned architects in 1760, in particular Théodore Cornut and Ahmed al-Inglizi, who designed the city using French captives from the failed French expedition to Larache in 1765, and with the mission of building a city adapted to the needs of foreign merchants. Once built, it continued to grow and experienced a golden age and exceptional development, becoming the country's most important commercial port but also its diplomatic capital between the end of the 18th century and the first half of the 19th century. Medina of Essaouira was designated by the UNESCO a World Heritage Site in 2001.",
     id: uid(),
+    inItinerary: false,
     plannedDate: "",
     plannedTime: "",
     geocode: [31.507, -9.765],
@@ -711,6 +780,7 @@ const sights = [
     details:
       "Chefchaouen is a city in northwest Morocco. It is the chief town of the province of the same name and is noted for its buildings in shades of blue, for which it is nicknamed the 'Blue City'. Chefchaouen is situated just inland from Tangier and Tétouan. It was founded as a military outpost shortly before the Spanish Reconquista of Granada, and its population grew quickly with Muslim and Jewish refugees fleeing from Spain. The economy is based on a traditional agro-pastoral system with olive and fig plantations; numerous water mills for grinding grain and olives; a handicrafts sector focusing on leather, iron, textiles, and carpentry; and summer-dominated tourism.",
     id: uid(),
+    inItinerary: false,
     plannedDate: "",
     plannedTime: "",
     geocode: [35.162, -5.274],
@@ -722,6 +792,7 @@ const sights = [
     details:
       "The Sahara is a desert on the African continent. With an area of 9,200,000 square kilometres, it is the largest hot desert in the world and the third-largest desert overall, smaller only than the deserts of Antarctica and the northern Arctic. The name 'Sahara' is derived from the Arabic word for 'desert' in the feminine irregular form. The desert covers much of North Africa, excluding the fertile region on the Mediterranean Sea coast, the Atlas Mountains of the Maghreb, and the Nile Valley in Egypt and the Sudan.",
     id: uid(),
+    inItinerary: false,
     plannedDate: "",
     plannedTime: "",
     geocode: [30.744, -6.284],
@@ -733,6 +804,7 @@ const sights = [
     details:
       "Rabat is the capital city of Morocco and the country's seventh-largest city with a metropolitan population of over 1.2 million. It is also the capital city of the Rabat-Salé-Kénitra administrative region. Rabat is located on the Atlantic Ocean at the mouth of the river Bou Regreg, opposite Salé, the city's main commuter town.",
     id: uid(),
+    inItinerary: false,
     plannedDate: "",
     plannedTime: "",
     geocode: [33.971, -6.882],
@@ -744,6 +816,7 @@ const sights = [
     details:
       "Casablanca is the largest city in Morocco and the country's economic and business center. Located on the Atlantic coast of the Chaouia plain in the central-western part of Morocco, the city has a population of about 3.71 million in the urban area, and over 4.27 million in the Greater Casablanca, making it the most populous city in the Maghreb region, and the eighth-largest in the Arab world. Casablanca is Morocco's chief port, with the Port of Casablanca being one of the largest artificial ports in the world, and the second largest port in North Africa, after Tanger-Med.",
     id: uid(),
+    inItinerary: false,
     plannedDate: "",
     plannedTime: "",
     geocode: [33.606, -7.609],
@@ -755,6 +828,7 @@ const sights = [
     details:
       "Ouarzazate, nicknamed the door of the desert, is a city and capital of Ouarzazate Province in the region of Drâa-Tafilalet, south-central Morocco. Ouarzazate is at an elevation of 1,160 metres in the middle of a bare plateau south of the High Atlas Mountains, with a desert to the city's south. Berber-speakers make up the majority of the town's inhabitants, who were responsible for the creation of many of the prominent kasbahs. Ouarzazate is a primary tourist destination in Morocco during the holidays, as well as a starting point for excursions into and across the Draa Valley and the desert.",
     id: uid(),
+    inItinerary: false,
     plannedDate: "",
     plannedTime: "",
     geocode: [30.929, -6.918],
@@ -766,6 +840,7 @@ const sights = [
     details:
       "Bangkok is the capital and most populous city of Thailand. The city occupies 1,568 square kilometres in the Chao Phraya River delta in central Thailand and has an estimated population of 10.54 million, 15 per cent of the country's population. Over 14 million people live within the surrounding Bangkok Metropolitan Region, making Bangkok an extreme primate city, dwarfing Thailand's other urban centres in both size and importance to the national economy.",
     id: uid(),
+    inItinerary: false,
     plannedDate: "",
     plannedTime: "",
     geocode: [13.681, 100.555],
@@ -777,6 +852,7 @@ const sights = [
     details:
       "Chiang Mai is the largest city in northern Thailand, the capital of Chiang Mai province and the second largest city in Thailand. It is 700 km north of Bangkok in a mountainous region called the Thai highlands and has a population of 1.2 million people which is more than 66 percent of the total population of Chiang Mai province. Chiang Mai (meaning 'New City' in Thai) was founded in 1296 as the new capital of Lan Na, succeeding the former capital, Chiang Rai. The city's location on the Ping River and its proximity to major trading routes contributed to its historic importance.",
     id: uid(),
+    inItinerary: false,
     plannedDate: "",
     plannedTime: "",
     geocode: [18.789, 98.999],
@@ -788,6 +864,7 @@ const sights = [
     details:
       "Chiang Rai is the northernmost major city in Thailand, with a population of about 200,000 people. It is located in Mueang Chiang Rai District, Chiang Rai Province. Chiang Rai was established as a capital city in the reign of King Mangrai, in 1262 CE.",
     id: uid(),
+    inItinerary: false,
     plannedDate: "",
     plannedTime: "",
     geocode: [19.878, 99.851],
@@ -799,6 +876,7 @@ const sights = [
     details:
       "Pai is a small town in northern Thailand's Mae Hong Son Province, near the Myanmar border, about 146 km northwest of Chiang Mai on the northern route to Mae Hong Son. It lies on the Pai River. The town has thesaban tambon status and covers parts of the tambon Wiang Tai of Pai District.",
     id: uid(),
+    inItinerary: false,
     plannedDate: "",
     plannedTime: "",
     geocode: [19.358, 98.432],
@@ -810,6 +888,7 @@ const sights = [
     details:
       "Krabi is the capital of and main town in Krabi Province, on the west coast of southern Thailand, where the Krabi River flows into Phang Nga Bay. The town lies 650 km south of Bangkok, and as of 2020, has a population of 32,644. As in much of southern Thailand, the local economy centers largely on tourism.",
     id: uid(),
+    inItinerary: false,
     plannedDate: "",
     plannedTime: "",
     geocode: [8.027, 98.983],
@@ -821,6 +900,7 @@ const sights = [
     details:
       "Phuket is one of the southern provinces of Thailand. It consists of the island of Phuket, the country's largest island, and another 32 smaller islands off its coast. It lies off the west coast of mainland Thailand in the Andaman Sea. Phuket Island is connected by the Sarasin Bridge to Phang Nga province to the north. The next nearest province is Krabi, to the east across Phang Nga Bay. It formerly derived its wealth from tin and rubber and now from tourism.",
     id: uid(),
+    inItinerary: false,
     plannedDate: "",
     plannedTime: "",
     geocode: [7.905, 98.34],
@@ -832,6 +912,7 @@ const sights = [
     details:
       "The Phi Phi Islands are an island group in Thailand between the large island of Phuket and the Straits of Malacca coast of Thailand. The islands are administratively part of Krabi Province. Ko Phi Phi Don is the largest and most populated island of the group, although the beaches of the second largest island, Ko Phi Phi Le are visited by many people as well. The rest of the islands in the group, including Bida Nok, Bida Nai, and Ko Mai Phai, are not much more than large limestone rocks jutting out of the sea. The islands are reachable by ferries, speedboats or long-tail boats, most often from Krabi town or from ports in Phuket Province.",
     id: uid(),
+    inItinerary: false,
     plannedDate: "",
     plannedTime: "",
     geocode: [7.739, 98.773],
@@ -843,6 +924,7 @@ const sights = [
     details:
       "Ko Lipe is a small island in the Adang-Rawi Archipelago of the Strait of Malacca, in Satun Province of southwest Thailand, close to the Malaysian border. Ko Lipe is on the border of the Tarutao National Marine Park and is directly south of the larger islands Ko Adang and Ko Rawi, and about 50 km from the island of Ko Tarutao. It was originally settled by a group of Malayic-speaking people, sea gypsies, known as the Urak Lawoi’ people. The islands economy is largely centered around tourism, especially because of its white sandy beaches and scuba diving.",
     id: uid(),
+    inItinerary: false,
     plannedDate: "",
     plannedTime: "",
     geocode: [6.49, 99.303],
@@ -854,6 +936,7 @@ const sights = [
     details:
       "Ayutthaya Historical Park covers the ruins of the old city of Ayutthaya, Phra Nakhon Si Ayutthaya Province, Thailand. The city of Ayutthaya was founded by King Ramathibodi I in 1351, though it is likely to be significantly older, based on evidence showing that the area was already populated during the Mon Dvaravati period. Sources further mention that around 850 AD, the Khmers occupied the area and established a stronghold there, naming it Ayodhya, after one of the holiest Hindu cities in India of the same name. The early history of Ayutthaya is connected to this Khmer settlement. Additionally, Prince Damrong has also attested to the existence of a city named Ayodhya, founded by the Khmers ruling from Lopburi at the point where the three rivers meet. An excavation map shows traces of an ancient baray (water reservoir) close to the southwestern tip of Wat Yai Chai Mongkhon, which could have been built on a former important Khmer temple complex.",
     id: uid(),
+    inItinerary: false,
     plannedDate: "",
     plannedTime: "",
     geocode: [14.356, 100.576],
@@ -865,6 +948,7 @@ const sights = [
     details:
       "Lopburi is the capital city of Lopburi Province in Thailand. It is about 150 kilometres northeast of Bangkok. It has a population of 58,000. The town covers the whole tambon Tha Hin and parts of Thale Chup Son of Mueang Lopburi District, a total area of 6.85 km2 and is famous for its large monkey population.",
     id: uid(),
+    inItinerary: false,
     plannedDate: "",
     plannedTime: "",
     geocode: [14.801, 100.612],

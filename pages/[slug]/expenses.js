@@ -1,19 +1,27 @@
 import styled from "styled-components";
+import { useRouter } from "next/router";
 import { uid } from "uid";
 import { format } from "date-fns";
-import Header from "@/components/Header";
 import { CreateItinerary, SortSights } from "@/components/utils";
-import { useRouter } from "next/router";
+import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import ItineraryItem from "@/components/ItineraryItem";
+import AddButton from "@/components/AddButton";
 import Lottie from "react-lottie-player";
 import lottieJson from "../../public/loadingAnimation.json";
-import ItineraryItem from "@/components/ItineraryItem";
 
 export default function Expenses({ trips, setTrips }) {
   const router = useRouter();
   const currentTrip = trips.find((trip) => trip.slug === router.query.slug);
   if (!currentTrip) {
-    return <StyledLottie loop animationData={lottieJson} play />;
+    return (
+      <Lottie
+        loop
+        animationData={lottieJson}
+        play
+        className="loadingAnimation"
+      />
+    );
   }
 
   function handleAddItem(event, date) {
@@ -77,8 +85,8 @@ export default function Expenses({ trips, setTrips }) {
         startDate={currentTrip.startDate}
         endDate={currentTrip.endDate}
       />
-      <StyledTitle>My Expenses</StyledTitle>
-      <Scrollbox>
+      <h1 className="title">My Expenses</h1>
+      <StyledMain className="mainContent">
         <StyledExpenses>
           {datesArray.map((date) => (
             <StyledDay key={uid()}>
@@ -103,70 +111,43 @@ export default function Expenses({ trips, setTrips }) {
               >
                 <StyledLabel htmlFor="expenseInput">
                   Add Item:
-                  <StyledInput
+                  <StyledItemInput
                     type="text"
                     id="expenseInput"
                     name="expenseItem"
                     placeholder="Add Item"
+                    maxLength="100"
                     required
-                    pattern="\S+"
-                  ></StyledInput>
+                    pattern=".*\S+.*"
+                    className="lowkeyInput"
+                  ></StyledItemInput>
                 </StyledLabel>
                 <StyledLabel htmlFor="amount" className="amountInput">
                   Add amount:
-                  <StyledInput
+                  <StyledAmountInput
                     type="number"
                     min="-10000"
                     max="10000"
                     step="0.01"
+                    required
                     id="amount"
                     name="amount"
-                  ></StyledInput>
+                    className="lowkeyInput"
+                  ></StyledAmountInput>
                 </StyledLabel>
-                <StyledButton type="submit">+</StyledButton>
+                <AddButton />
               </StyledForm>
             </StyledDay>
           ))}
         </StyledExpenses>
-      </Scrollbox>
+      </StyledMain>
       <Footer url={`/${currentTrip.slug}`} linkText="Overview" />
     </>
   );
 }
 
-const StyledLottie = styled(Lottie)`
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: 50vw;
-  height: 50vw;
-`;
-
-const StyledTitle = styled.h1`
-  margin: 0;
-  position: fixed;
-  text-align: center;
-  top: 10rem;
-  font-size: 1.6rem;
-  width: 100%;
-  padding: 1rem 0;
-  background-color: white;
-  @media (min-width: 500px) {
-    width: 500px;
-  }
-`;
-
-const Scrollbox = styled.div`
-  width: 100%;
-  margin-top: 15rem;
-  margin-bottom: 6rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  @media (min-width: 500px) {
-    width: 500px;
-  }
+const StyledMain = styled.main`
+  margin: 19rem 0 7rem 0;
 `;
 
 const StyledExpenses = styled.ul`
@@ -176,33 +157,31 @@ const StyledExpenses = styled.ul`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.6rem;
+  gap: 1.2rem;
 `;
 
 const StyledDay = styled.li`
   display: flex;
   flex-direction: column;
-  border-radius: 0.4rem;
-  padding: 0.4rem;
+  align-items: center;
+  gap: 0.8rem;
+  border-radius: 0.5rem;
   width: 80%;
-  min-height: 40px;
-  gap: 0.6rem;
-  @media (min-width: 500px) {
-    width: 400px;
-  }
+  min-height: 3rem;
 `;
 
-const StyledDate = styled.h2`
-  color: teal;
-  font-size: 1rem;
-  margin: 0;
+const StyledDate = styled.p`
+  color: var(--darkTeal);
+  align-self: flex-start;
+  margin-left: 1rem;
+  font-weight: bold;
 `;
 
 const StyledForm = styled.form`
-  margin: 0.2rem 0.6rem;
-  display: grid;
-  grid-template-columns: 5fr 4fr 1fr;
-  gap: 10px;
+  width: 90%;
+  margin-top: 0.8rem;
+  display: flex;
+  justify-content: space-between;
 `;
 
 const StyledLabel = styled.label`
@@ -212,32 +191,12 @@ const StyledLabel = styled.label`
   }
 `;
 
-const StyledInput = styled.input`
-  border-radius: 2rem;
-  padding: 0.3rem 0.6rem;
-  color: rgba(0, 0, 0, 0.5);
-  width: 6rem;
-  border: none;
-  &:hover {
-    border: 1px solid rgba(0, 0, 0, 0.4);
-    border-radius: 0.2rem;
-  }
-  &:focus {
-    border: 1px solid rgba(0, 0, 0, 0.3);
-    border-radius: 0.2rem;
-    outline: none;
-  }
+const StyledItemInput = styled.input`
+  width: 7rem;
+  color: darkgrey;
 `;
 
-const StyledButton = styled.button`
-  background-color: transparent;
-  border: none;
-  font-size: 1.4rem;
-  font-weight: bold;
-  color: teal;
-  justify-self: end;
-  &:hover {
-    cursor: pointer;
-    transform: scale(1.2);
-  }
+const StyledAmountInput = styled.input`
+  width: 7rem;
+  color: darkgrey;
 `;

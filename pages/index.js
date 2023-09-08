@@ -1,14 +1,15 @@
 import styled from "styled-components";
-import { uid } from "uid";
 import Link from "next/link";
 import Image from "next/image";
-import TripForm from "@/components/TripForm";
-import dynamic from "next/dynamic";
-import { sortTrips, countdown } from "@/components/utils";
-import destinations from "@/db/destinations";
 import { useState } from "react";
+import dynamic from "next/dynamic";
+import { uid } from "uid";
 import { format } from "date-fns";
 import Header from "@/components/Header";
+import TripForm from "@/components/TripForm";
+import { sortTrips, countdown } from "@/components/utils";
+import destinations from "@/db/destinations";
+import packingList from "@/db/packingList";
 
 const DynamicCarousel = dynamic(() => import("../components/Carousel"), {
   ssr: false,
@@ -23,7 +24,6 @@ export default function Homepage({ trips, setTrips }) {
     setStartDate(start);
     setEndDate(end);
   }
-  const { currentTrips, upcomingTrips } = sortTrips(trips);
 
   function handleAddTrip(event) {
     event.preventDefault();
@@ -40,6 +40,7 @@ export default function Homepage({ trips, setTrips }) {
         image: currentDestination.image,
         geocode: currentDestination.geocode,
         expenses: [],
+        packingList: packingList,
         id: uid(),
       },
       ...trips,
@@ -50,22 +51,23 @@ export default function Homepage({ trips, setTrips }) {
     setEndDate();
     setSuccessMessage("You successfully created a new trip.");
   }
+
+  const { currentTrips, upcomingTrips } = sortTrips(trips);
+
   return (
     <>
       <Header image="/homepage.jpg" />
-      <Scrollbox>
-        <StyledSubheading>Create a new Trip</StyledSubheading>
+      <StyledMain className="mainContent">
+        <h2 className="subtitle">Create a new Trip</h2>
         <TripForm
           handleAddTrip={handleAddTrip}
           startDate={startDate}
           endDate={endDate}
           handleChange={handleChange}
         />
-        {successMessage && (
-          <StyledSubheading>{successMessage}</StyledSubheading>
-        )}
+        {successMessage && <h2 className="subtitle">{successMessage}</h2>}
 
-        <StyledSubheading>Upcoming Trips</StyledSubheading>
+        <h2 className="subtitle">Upcoming Trips</h2>
         {upcomingTrips.length === 0 ? (
           <p>There are no upcoming trips yet.</p>
         ) : (
@@ -80,14 +82,14 @@ export default function Homepage({ trips, setTrips }) {
                     alt={trip.name}
                   />
                 </StyledImageWrapper>
-                <StyledName>
+                <p className="label">
                   {trip.name} - {countdown(trip.startDate)}
-                </StyledName>
+                </p>
               </StyledLink>
             </StyledArticle>
           ))
         )}
-        <StyledSubheading>Current Trips</StyledSubheading>
+        <h2 className="subtitle">Current Trips</h2>
         {currentTrips.length === 0 ? (
           <p>There are no current trips yet.</p>
         ) : (
@@ -102,66 +104,46 @@ export default function Homepage({ trips, setTrips }) {
                     alt={trip.name}
                   />
                 </StyledImageWrapper>
-                <StyledName>{trip.name}</StyledName>
+                <p className="label">{trip.name}</p>
               </StyledLink>
             </StyledArticle>
           ))
         )}
         <DynamicCarousel />
-      </Scrollbox>
+      </StyledMain>
     </>
   );
 }
 
-const Scrollbox = styled.div`
-  width: 100%;
-  margin-top: 12rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  @media (min-width: 500px) {
-    width: 500px;
-  }
-`;
-
-const StyledSubheading = styled.h2`
-  color: teal;
-  width: 60%;
-  text-align: center;
-  font-size: 1.2em;
-  margin: 3rem 0 1rem 0;
+const StyledMain = styled.main`
+  margin-top: 15rem;
 `;
 
 const StyledArticle = styled.article`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
+  width: 60%;
   &:hover {
     transform: scale(1.05);
   }
 `;
 
+const StyledLink = styled(Link)`
+  width: 100%;
+  color: black;
+  text-decoration: none;
+`;
+
 const StyledImageWrapper = styled.div`
-  height: 120px;
-  width: 260px;
+  height: 9rem;
+  width: 100%;
   margin: 1rem 0 0.6rem 0;
 `;
 
 const StyledImage = styled(Image)`
-  border-radius: 0.6rem;
+  border-radius: 0.5rem;
   object-fit: cover;
   width: 100%;
   height: 100%;
-`;
-
-const StyledName = styled.h3`
-  font-size: 1rem;
-  margin: 0;
-  text-align: center;
-`;
-
-const StyledLink = styled(Link)`
-  color: black;
-  text-decoration: none;
 `;

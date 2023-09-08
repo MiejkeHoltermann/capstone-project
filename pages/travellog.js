@@ -12,79 +12,32 @@ export default function Travellog({ trips }) {
   return (
     <>
       <Header image="/travel-log.jpg" />
-      <Scrollbox>
-        <StyledTitle>My Travel Log</StyledTitle>
-        <StyledSubheading>Current Trips</StyledSubheading>
+      <StyledMain className="mainContent">
+        <h1 className="title">My Travel Log</h1>
+        <h2 className="subtitle">Current Trips</h2>
         {currentTrips.length === 0 ? (
           <p>There are no current trips in your travel log.</p>
         ) : (
           currentTrips.map((trip) => <TripPreview key={trip.id} trip={trip} />)
         )}
-        <StyledSubheading>Upcoming Trips</StyledSubheading>
+        <h2 className="subtitle">Upcoming Trips</h2>
         {upcomingTrips.length === 0 ? (
           <p>There are no upcoming trips in your travel log.</p>
         ) : (
           upcomingTrips.map((trip) => <TripPreview key={trip.id} trip={trip} />)
         )}
-        <StyledSubheading>Passed Trips</StyledSubheading>
+        <h2 className="subtitle">Passed Trips</h2>
         {passedTrips.length === 0 ? (
           <p>There are no passed trips in your travel log.</p>
         ) : (
           passedTrips.map((trip) => <TripPreview key={trip.id} trip={trip} />)
         )}
-      </Scrollbox>
+      </StyledMain>
       <Footer url="/" linkText="Home" />
     </>
   );
 }
-const Scrollbox = styled.div`
-  width: 100%;
-  margin-top: 16rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  @media (min-width: 500px) {
-    width: 500px;
-  }
-`;
-
-const StyledTitle = styled.h1`
-  margin: 0;
-  position: fixed;
-  text-align: center;
-  top: 12rem;
-  font-size: 1.6rem;
-  width: 100%;
-  padding: 1rem 0;
-  background-color: white;
-`;
-
-const StyledSubheading = styled.h2`
-  color: teal;
-  font-size: 1.2em;
-  margin-bottom: 1rem;
-`;
-
-const StyledFooter = styled.div`
-  position: fixed;
-  bottom: 0;
-  z-index: 1;
-  background-color: white;
-  height: 5rem;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  @media (min-width: 500px) {
-    width: 500px;
-  }
-`;
-
-const StyledLink = styled(Link)`
-  border-radius: 2rem;
-  color: white;
-  text-decoration: none;
-  background-color: darkblue;
-  padding: 0.4rem 1rem;
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+const StyledMain = styled.main`
+  margin-top: 19rem;
+  margin-bottom: 7rem;
 `;

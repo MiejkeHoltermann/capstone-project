@@ -1,14 +1,12 @@
 import styled from "styled-components";
-import Link from "next/link";
-import Image from "next/image";
+import { useRouter } from "next/router";
 import { uid } from "uid";
 import { format } from "date-fns";
 import Header from "@/components/Header";
-import { CreateItinerary, SortSights } from "@/components/utils";
-import Overview from "@/components/Overview";
 import ItineraryItem from "@/components/ItineraryItem";
-import { useRouter } from "next/router";
 import Footer from "@/components/Footer";
+import AddButton from "@/components/AddButton";
+import { CreateItinerary, SortSights } from "@/components/utils";
 import Lottie from "react-lottie-player";
 import lottieJson from "../../public/loadingAnimation.json";
 
@@ -16,8 +14,16 @@ export default function Itinerary({ trips, sights, setSights }) {
   const router = useRouter();
   const currentTrip = trips.find((trip) => trip.slug === router.query.slug);
   if (!currentTrip) {
-    return <StyledLottie loop animationData={lottieJson} play />;
+    return (
+      <Lottie
+        loop
+        animationData={lottieJson}
+        play
+        className="loadingAnimation"
+      />
+    );
   }
+
   function handleAddItem(event, date) {
     event.preventDefault();
     const name = event.target.itineraryItem.value;
@@ -36,23 +42,6 @@ export default function Itinerary({ trips, sights, setSights }) {
     event.target.reset();
   }
   sights;
-
-  function handleSortItem(event, id) {
-    event.preventDefault();
-    const date = event.target.plannedDate.value;
-    const time = event.target.plannedTime.value;
-    const updatedSights = sights.map((sight) =>
-      sight.id === id
-        ? {
-            ...sight,
-            plannedDate: date,
-            plannedTime: time,
-            addModal: false,
-          }
-        : sight
-    );
-    setSights(updatedSights);
-  }
 
   function handleUpdateItem(event, id) {
     event.preventDefault();
@@ -91,18 +80,8 @@ export default function Itinerary({ trips, sights, setSights }) {
         startDate={currentTrip.startDate}
         endDate={currentTrip.endDate}
       />
-      <StyledTitle>Itinerary</StyledTitle>
-      <ToggleLink href={`/${currentTrip.slug}/map`}>
-        <ToggleLinkImage src="/map.svg" height={40} width={40} alt="map view" />
-      </ToggleLink>
-      <Scrollbox>
-        <Overview
-          trips={trips}
-          sights={sights}
-          trip={currentTrip}
-          setSights={setSights}
-          handleSortItem={handleSortItem}
-        />
+      <h1 className="title">Itinerary</h1>
+      <StyledMain className="mainContent">
         <StyledItinerary>
           {datesArray.map((date) => (
             <StyledDay key={uid()}>
@@ -126,88 +105,41 @@ export default function Itinerary({ trips, sights, setSights }) {
                   handleAddItem(event, format(date, "yyyy-MM-dd"))
                 }
               >
-                <StyledLabel htmlFor="dateInput">
+                <StyledLabel htmlFor="itemInput" className="invisibleLabel">
                   Add Item:
                   <StyledInput
                     type="text"
-                    id="dateInput"
+                    id="itemInput"
                     name="itineraryItem"
                     placeholder="Add Item"
+                    maxlength="100"
                     required
-                    pattern="\S+"
+                    pattern=".*\S+.*"
+                    className="lowkeyInput"
                   ></StyledInput>
                 </StyledLabel>
                 <StyledLabel htmlFor="time" className="timeInput">
                   Set time:
-                  <StyledInput type="time" id="time" name="time"></StyledInput>
+                  <StyledInput
+                    type="time"
+                    id="time"
+                    name="time"
+                    className="lowkeyInput"
+                  ></StyledInput>
                 </StyledLabel>
-                <StyledButton type="submit">+</StyledButton>
+                <AddButton />
               </StyledForm>
             </StyledDay>
           ))}
         </StyledItinerary>
-      </Scrollbox>
+      </StyledMain>
       <Footer url={`/${currentTrip.slug}`} linkText="Overview" />
     </>
   );
 }
 
-const StyledLottie = styled(Lottie)`
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: 50vw;
-  height: 50vw;
-`;
-
-const StyledTitle = styled.h1`
-  margin: 0;
-  position: fixed;
-  text-align: center;
-  top: 10rem;
-  font-size: 1.6rem;
-  width: 100%;
-  padding: 1rem 0;
-  background-color: white;
-  @media (min-width: 500px) {
-    width: 500px;
-  }
-`;
-
-const ToggleLink = styled(Link)`
-  background-color: yellow;
-  position: fixed;
-  top: 11rem;
-  right: 4rem;
-  z-index: 1;
-  background-color: teal;
-  width: 2.2rem;
-  height: 2.2rem;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  @media (min-width: 500px) {
-    left: 400px;
-  }
-`;
-
-const ToggleLinkImage = styled(Image)`
-  width: 1.6rem;
-  height: 1.6rem;
-`;
-
-const Scrollbox = styled.div`
-  width: 100%;
-  margin-top: 15rem;
-  margin-bottom: 6rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  @media (min-width: 500px) {
-    width: 500px;
-  }
+const StyledMain = styled.main`
+  margin: 19rem 0 7rem 0;
 `;
 
 const StyledItinerary = styled.ul`
@@ -217,34 +149,33 @@ const StyledItinerary = styled.ul`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.6rem;
+  gap: 1.2rem;
 `;
 
 const StyledDay = styled.li`
   display: flex;
   flex-direction: column;
-  border: 1px solid rgba(0, 0, 0, 0.3);
-  border-radius: 0.4rem;
-  padding: 0.4rem;
+  align-items: center;
+  gap: 0.8rem;
+  border: 1px solid darkgrey;
+  border-radius: 0.5rem;
+  padding: 1rem;
   width: 80%;
-  min-height: 40px;
-  gap: 0.6rem;
-  @media (min-width: 500px) {
-    width: 400px;
-  }
+  min-height: 3rem;
 `;
 
-const StyledDate = styled.h2`
-  color: teal;
-  font-size: 1rem;
-  margin: 0;
+const StyledDate = styled.p`
+  color: var(--darkTeal);
+  align-self: flex-start;
+  margin-left: 1rem;
+  font-weight: bold;
 `;
 
 const StyledForm = styled.form`
-  margin: 0.2rem 0.6rem;
-  display: grid;
-  grid-template-columns: 5fr 4fr 1fr;
-  gap: 10px;
+  width: 100%;
+  margin-top: 0.8rem;
+  display: flex;
+  justify-content: space-between;
 `;
 
 const StyledLabel = styled.label`
@@ -255,55 +186,6 @@ const StyledLabel = styled.label`
 `;
 
 const StyledInput = styled.input`
-  border-radius: 2rem;
-  padding: 0.3rem 0.6rem;
-  color: rgba(0, 0, 0, 0.5);
-  width: 6rem;
-  border: none;
-  &:hover {
-    border: 1px solid rgba(0, 0, 0, 0.4);
-    border-radius: 0.2rem;
-  }
-  &:focus {
-    border: 1px solid rgba(0, 0, 0, 0.3);
-    border-radius: 0.2rem;
-    outline: none;
-  }
-`;
-
-const StyledButton = styled.button`
-  background-color: transparent;
-  border: none;
-  font-size: 1.4rem;
-  font-weight: bold;
-  color: teal;
-  justify-self: end;
-  &:hover {
-    cursor: pointer;
-    transform: scale(1.2);
-  }
-`;
-
-const StyledFooter = styled.div`
-  position: fixed;
-  bottom: 0;
-  z-index: 1;
-  background-color: white;
-  height: 5rem;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  @media (min-width: 500px) {
-    width: 500px;
-  }
-`;
-
-const StyledLink = styled(Link)`
-  border-radius: 2rem;
-  color: white;
-  text-decoration: none;
-  background-color: darkblue;
-  padding: 0.4rem 1rem;
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+  width: 7rem;
+  color: darkgrey;
 `;

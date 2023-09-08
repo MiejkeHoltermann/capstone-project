@@ -1,40 +1,22 @@
 import styled from "styled-components";
 import Image from "next/image";
-import Link from "next/link";
+import DefaultLink from "@/components/DefaultLink";
 import { format } from "date-fns";
-import DefaultLinkButton from "@/components/DefaultLinkButton";
 
 export default function Header({ name, image, startDate, endDate }) {
   return (
     <StyledHeader>
-      <StyledImageWrapper>
-        <StyledImage
-          src={image}
-          height={450}
-          width={600}
-          layout="responsive"
-          alt={name}
-        />
-        <StyledLogo>Travel</StyledLogo>
-        <DefaultLinkButton url="/travellog" icon="book" />
-        <StyledTravelLogLinkBorder>
-          <StyledTravelLogLink href="/travellog">
-            <StyledTravelLogLinkImage
-              src="/book.svg"
-              height={40}
-              width={40}
-              alt="travel log"
-            />
-          </StyledTravelLogLink>
-        </StyledTravelLogLinkBorder>
-        {name && <StyledName>{name}</StyledName>}
-        {startDate && (
-          <StyledDate>
-            {format(new Date(startDate), "dd/MM/yy")} -{" "}
-            {format(new Date(endDate), "dd/MM/yy")}
-          </StyledDate>
-        )}
-      </StyledImageWrapper>
+      <StyledImage src={image} fill alt="header image" />
+      <StyledOverlay />
+      <StyledLogo src="/logo.svg" width={100} height={90} alt="logo" />
+      <DefaultLink url="/travellog" icon="book" $style="round" />
+      {name && <StyledText>{name}</StyledText>}
+      {startDate && (
+        <StyledText className="dates">
+          {format(new Date(startDate), "dd/MM/yy")} -{" "}
+          {format(new Date(endDate), "dd/MM/yy")}
+        </StyledText>
+      )}
     </StyledHeader>
   );
 }
@@ -42,95 +24,49 @@ export default function Header({ name, image, startDate, endDate }) {
 const StyledHeader = styled.header`
   position: fixed;
   top: 0;
-  left: 0;
-  height: 12rem;
   width: 100%;
+  height: 14rem;
+  z-index: 1;
   @media (min-width: 500px) {
     width: 500px;
+    left: 50%;
+    transform: translate(-50%);
   }
-`;
-
-const StyledImageWrapper = styled.div`
-  height: 100%;
-  width: 100%;
-  overflow: clip;
 `;
 
 const StyledImage = styled(Image)`
+  width: 100%;
+  height: 14rem;
   object-fit: cover;
-  object-position: center -80px;
+  object-position: center center;
 `;
 
-const StyledLogo = styled.p`
+const StyledOverlay = styled.div`
+  background: linear-gradient(transparent 50%, rgba(0, 0, 0, 0.4) 100%);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 14rem;
+`;
+
+const StyledLogo = styled(Image)`
   position: fixed;
   top: 0;
   left: 1rem;
-  color: white;
-  font-size: 24px;
+  filter: drop-shadow(1px 1px 4px rgba(0, 0, 0, 0.6));
 `;
 
-const StyledTravelLogLinkBorder = styled.div`
-  width: 3.6rem;
-  height: 3.6rem;
-  position: fixed;
-  top: 1rem;
-  right: 2rem;
-  border-radius: 50%;
-  background: linear-gradient(180deg, #ef8344 60%, #ffaf3b 100%);
-  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.4);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  @media (min-width: 500px) {
-    left: 26.7rem;
-  }
-`;
-
-const StyledTravelLogLink = styled(Link)`
-  background-color: yellow;
-  position: fixed;
-  top: 1.3rem;
-  right: 2.3rem;
-  background: linear-gradient(180deg, #ffaf3b 0%, #ef8344 60%);
-  width: 3rem;
-  height: 3rem;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  @media (min-width: 500px) {
-    left: 27rem;
-  }
-`;
-
-const StyledTravelLogLinkImage = styled(Image)`
-  width: 1.6rem;
-  height: 1.6rem;
-`;
-
-const StyledName = styled.p`
+const StyledText = styled.p`
   color: white;
   font-size: 1.6rem;
   width: 100%;
   text-align: center;
   position: fixed;
-  top: 2.8rem;
+  top: 8.2rem;
   text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
-  @media (min-width: 500px) {
-    width: 500px;
-  }
-`;
-
-const StyledDate = styled.p`
-  color: white;
-  font-size: 1.2rem;
-  width: 100%;
-  text-align: center;
-  position: fixed;
-  top: 5.4rem;
-  left: 0;
-  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
-  @media (min-width: 500px) {
-    width: 500px;
+  &.dates {
+    font-size: 1.2rem;
+    top: 10.8rem;
   }
 `;

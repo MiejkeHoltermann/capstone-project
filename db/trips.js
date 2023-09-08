@@ -6,7 +6,7 @@ const trips = [
     name: "Jordan",
     startDate: "2025-08-29",
     endDate: "2025-09-07",
-    image: "/destinations/jordan.jpg",
+    image: "https://source.unsplash.com/llTLNIFEgZ8/640x426",
     geocode: [31.312, 35.939],
     id: uid(),
     expenses: [

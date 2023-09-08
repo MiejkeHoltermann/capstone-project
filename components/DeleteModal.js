@@ -3,20 +3,12 @@ import styled from "styled-components";
 export default function AddModal({ id, toggleDeleteModal, handleDeleteItem }) {
   return (
     <Modal>
-      <StyledText>Are you sure you want to delete this item?</StyledText>
+      <p>Are you sure you want to delete this item?</p>
       <div>
-        <StyledButton
-          type="button"
-          className="red"
-          onClick={() => toggleDeleteModal()}
-        >
+        <StyledButton $red type="button" onClick={() => toggleDeleteModal()}>
           Cancel
         </StyledButton>
-        <StyledButton
-          type="button"
-          className="green"
-          onClick={() => handleDeleteItem(id)}
-        >
+        <StyledButton type="button" onClick={() => handleDeleteItem(id)}>
           Yes
         </StyledButton>
       </div>
@@ -25,28 +17,22 @@ export default function AddModal({ id, toggleDeleteModal, handleDeleteItem }) {
 }
 
 const Modal = styled.div`
-  border: 1px solid rgba(0, 0, 0, 0.2);
+  border: 1px solid darkgrey;
   box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.3);
-  border-radius: 0.6rem;
-  padding: 10px;
+  border-radius: 0.5rem;
+  padding: 1rem;
   grid-area: 2/1/3/4;
-`;
-
-const StyledText = styled.p`
-  margin: 0;
+  width: 100%;
+  justify-self: center;
 `;
 
 const StyledButton = styled.button`
-  width: 4rem;
-  height: 1.4rem;
+  font-size: 1rem;
+  width: 4.8rem;
+  height: 1.6rem;
   color: white;
   border: none;
-  margin: 0.6rem 0.6rem 0 0;
+  margin: 0.8rem 0.8rem 0 0;
   border-radius: 0.3rem;
-  &.red {
-    background-color: #934d29;
-  }
-  &.green {
-    background-color: teal;
-  }
+  background-color: ${({ $red }) => ($red ? "var(--red)" : "var(--darkTeal)")};
 `;

@@ -16,7 +16,7 @@ export default function App({ Component, pageProps }) {
       if (sight.id === id) {
         return {
           ...sight,
-          inItinerary: true,
+          inItinerary: !sight.inItinerary,
           hidden: true,
         };
       } else {

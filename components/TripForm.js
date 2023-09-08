@@ -11,9 +11,17 @@ export default function TripForm({
 }) {
   return (
     <StyledForm onSubmit={handleAddTrip}>
-      <StyledLabel htmlFor="destination">Destination: </StyledLabel>
-      <StyledSelect name="destination" id="destination">
-        <StyledOption selected disabled>
+      <label htmlFor="destination" className="invisibleLabel">
+        Destination:
+      </label>
+      <StyledSelect
+        name="destination"
+        id="destination"
+        required
+        className="defaultInput"
+        defaultValue="default"
+      >
+        <StyledOption disabled value="default">
           Choose a destination
         </StyledOption>
         {destinations.map((destination) => (
@@ -32,11 +40,10 @@ export default function TripForm({
           dateFormat="dd/MM/yy"
           onChange={handleChange}
           required
+          className="defaultInput"
         />
       </StyledDatePickerWrapper>
-      <StyledButtonBorder>
-        <StyledButton type="submit">Save</StyledButton>
-      </StyledButtonBorder>
+      <StyledButton type="submit">Save</StyledButton>
     </StyledForm>
   );
 }
@@ -45,23 +52,13 @@ const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.6rem;
+  gap: 1rem;
   width: 100%;
-  @media (min-width: 500) {
-    width: 500px;
-  }
-`;
-
-const StyledLabel = styled.label`
-  font-size: 0;
 `;
 
 const StyledSelect = styled.select`
   width: 60%;
-  border-radius: 2rem;
-  padding: 0.4rem 1rem;
-  color: darkgrey;
-  background-color: white;
+  appearance: none;
 `;
 
 const StyledOption = styled.option`
@@ -80,32 +77,40 @@ const StyledDatePickerWrapper = styled.div`
 
 const StyledDatePicker = styled(DatePicker)`
   width: 100%;
-  padding: 0.4rem 1rem;
-  border-radius: 2rem;
-  color: darkgrey;
-`;
-
-const StyledButtonBorder = styled.div`
-  width: 8rem;
-  height: 3rem;
-  border-radius: 5rem;
-  background: linear-gradient(180deg, #0a3d62 0%, #105688 100%);
-  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.4);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  &::placeholder {
+    opacity: 1;
+  }
 `;
 
 const StyledButton = styled.button`
-  font-size: 1rem;
-  width: 7.5rem;
-  height: 2.5rem;
-  border-radius: 5rem;
+margin-top: 0.6rem;
   color: white;
-  text-decoration: none;
-  display: flex;
+  font-size: 1rem;
   border: none;
-  justify-content: center;
-  align-items: center;
-  background: linear-gradient(180deg, #105688 0%, #0a3d62 100%);
+  border-radius: 5rem;
+  background: linear-gradient(
+    180deg,
+    var(--lightBlue) 0%,
+    var(--darkBlue) 100%
+  );
+  height: 2.2rem;
+  width: 7rem;
+  position: relative;
+  &::before {
+    content: "";
+    background-image: linear-gradient(
+      180deg,
+      var(--darkBlue) 0%,
+      var(--lightBlue) 100%
+    );
+    border-radius: 5rem;
+    height: 2.8rem;
+    width: 7.6rem;
+    left: -0.3rem;
+    top: -0.3rem;
+    position: absolute;
+    z-index: -1;
+    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.4);
+    }
+  }
 `;

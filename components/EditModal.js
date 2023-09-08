@@ -9,122 +9,88 @@ export default function EditModal({
   toggleEditModal,
 }) {
   return (
-    <StyledForm onSubmit={(event) => handleUpdateItem(event, id)}>
-      <StyledInputName
-        type="text"
-        name="editedItem"
-        defaultValue={name}
-        required
-      />
-      {amount ? (
-        <StyledInputAmount
-          type="number"
-          min="-10000"
-          max="10000"
-          step="0.01"
-          name="editedAmount"
-          defaultValue={amount}
-        />
-      ) : (
-        <StyledInputTime
-          type="time"
-          name="editedTime"
-          defaultValue={plannedTime}
-        />
-      )}
-      <StyledButtonContainer>
-        <StyledButtonRed
-          type="button"
-          className="cancel"
-          onClick={() => toggleEditModal(id)}
-        >
+    <Modal>
+      <StyledForm onSubmit={(event) => handleUpdateItem(event, id)}>
+        <InputContainer>
+          <StyledInputName
+            type="text"
+            name="editedItem"
+            defaultValue={name}
+            maxLength="100"
+            pattern=".*\S+.*"
+            required
+            className="lowkeyInput"
+          />
+          {amount ? (
+            <StyledInputAmount
+              type="number"
+              min="-10000"
+              max="10000"
+              step="0.01"
+              name="editedAmount"
+              defaultValue={amount}
+              className="lowkeyInput"
+            />
+          ) : (
+            <StyledInputTime
+              type="time"
+              name="editedTime"
+              pattern=""
+              defaultValue={plannedTime}
+              className="lowkeyInput"
+            />
+          )}
+        </InputContainer>
+        <StyledButton $red type="button" onClick={() => toggleEditModal(id)}>
           Cancel
-        </StyledButtonRed>
-        <StyledButtonGreen type="submit" className="yes">
-          Save
-        </StyledButtonGreen>
-      </StyledButtonContainer>
-    </StyledForm>
+        </StyledButton>
+        <StyledButton type="submit">Save</StyledButton>
+      </StyledForm>
+    </Modal>
   );
 }
 
-const StyledForm = styled.form`
-  margin: 0.2rem 0.6rem;
-  display: grid;
-  grid-template-columns: 5fr 4fr 1fr;
-  gap: 10px;
-  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
-  border-radius: 0.6rem;
+const Modal = styled.div`
   padding: 1rem;
+  border: 1px solid darkgrey;
+  box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.3);
+  border-radius: 0.6rem;
+  width: 90%;
+  justify-self: center;
+`;
+
+const StyledForm = styled.form`
+  grid-area: 2/1/3/4;
+  width: 100%;
+`;
+
+const InputContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
 `;
 
 const StyledInputName = styled.input`
-  width: 100px;
-  color: #ef8344;
-  border: none;
-  &:hover {
-    border: 1px solid rgba(0, 0, 0, 0.4);
-    border-radius: 0.2rem;
-  }
-  &:focus {
-    border: 1px solid rgba(0, 0, 0, 0.3);
-    border-radius: 0.2rem;
-    outline: none;
-  }
+  width: 9rem;
+  color: var(--darkOrange);
 `;
 
 const StyledInputTime = styled.input`
-  justify-self: end;
-  width: 80px;
-  border: none;
-  color: #ef8344;
-  &:hover {
-    border: 1px solid rgba(0, 0, 0, 0.4);
-    border-radius: 0.2rem;
-  }
-  &:focus {
-    border: 1px solid rgba(0, 0, 0, 0.3);
-    border-radius: 0.2rem;
-    outline: none;
-  }
+  width: 7rem;
+  color: var(--darkOrange);
 `;
 
 const StyledInputAmount = styled.input`
-  justify-self: end;
-  width: 80px;
-  border: none;
-  color: #ef8344;
-  &:hover {
-    border: 1px solid rgba(0, 0, 0, 0.4);
-    border-radius: 0.2rem;
-  }
-  &:focus {
-    border: 1px solid rgba(0, 0, 0, 0.3);
-    border-radius: 0.2rem;
-    outline: none;
-  }
+  width: 7rem;
+  color: var(--darkOrange);
 `;
 
-const StyledButtonContainer = styled.div`
-  grid-area: 2/1/2/2;
-  display: flex;
-  gap: 5px;
-`;
-
-const StyledButtonRed = styled.button`
-  width: 4rem;
-  height: 1.4rem;
+const StyledButton = styled.button`
+  font-size: 1rem;
+  width: 4.8rem;
+  height: 1.6rem;
   color: white;
   border: none;
+  margin: 0.8rem 0.8rem 0 0;
   border-radius: 0.3rem;
-  background-color: #934d29;
-`;
-
-const StyledButtonGreen = styled.button`
-  width: 4rem;
-  height: 1.4rem;
-  color: white;
-  border: none;
-  border-radius: 0.3rem;
-  background-color: teal;
+  background-color: ${({ $red }) => ($red ? "var(--red)" : "var(--darkTeal)")};
 `;
