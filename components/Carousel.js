@@ -36,7 +36,7 @@ export default function Carousel() {
                 <StyledImage
                   src={randomDestination.image}
                   width={800}
-                  height={800}
+                  height={500}
                   alt={randomDestination.name}
                   id={randomDestination.name}
                 />
