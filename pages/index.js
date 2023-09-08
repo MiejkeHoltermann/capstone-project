@@ -59,6 +59,7 @@ export default function Homepage({ trips, setTrips }) {
       <Header image="/homepage.jpg" />
       <StyledMain>
         <StyledSubtitle>Create a new Trip</StyledSubtitle>
+        <DynamicCarousel />
         <TripForm
           handleAddTrip={handleAddTrip}
           startDate={startDate}
@@ -109,7 +110,6 @@ export default function Homepage({ trips, setTrips }) {
             </StyledArticle>
           ))
         )}
-        <DynamicCarousel />
       </StyledMain>
     </>
   );
