@@ -11,14 +11,11 @@ export default function TripForm({
 }) {
   return (
     <StyledForm onSubmit={handleAddTrip}>
-      <label htmlFor="destination" className="invisibleLabel">
-        Destination:
-      </label>
+      <StyledLabel htmlFor="destination">Destination:</StyledLabel>
       <StyledSelect
         name="destination"
         id="destination"
         required
-        className="defaultInput"
         defaultValue="default"
       >
         <StyledOption disabled value="default">
@@ -40,7 +37,6 @@ export default function TripForm({
           dateFormat="dd/MM/yy"
           onChange={handleChange}
           required
-          className="defaultInput"
         />
       </StyledDatePickerWrapper>
       <StyledButton type="submit">Save</StyledButton>
@@ -56,9 +52,18 @@ const StyledForm = styled.form`
   width: 100%;
 `;
 
+const StyledLabel = styled.label`
+  font-size: 0;
+`;
+
 const StyledSelect = styled.select`
   width: 60%;
   appearance: none;
+  color: darkgrey;
+  font-size: 1rem;
+  border-radius: 2rem;
+  padding: 0.4rem 1rem;
+  background-color: white;
 `;
 
 const StyledOption = styled.option`
@@ -77,13 +82,18 @@ const StyledDatePickerWrapper = styled.div`
 
 const StyledDatePicker = styled(DatePicker)`
   width: 100%;
+  color: darkgrey;
+  font-size: 1rem;
+  border-radius: 2rem;
+  padding: 0.4rem 1rem;
+  background-color: white;
   &::placeholder {
     opacity: 1;
   }
 `;
 
 const StyledButton = styled.button`
-margin-top: 0.6rem;
+  margin-top: 0.6rem;
   color: white;
   font-size: 1rem;
   border: none;
@@ -111,6 +121,5 @@ margin-top: 0.6rem;
     position: absolute;
     z-index: -1;
     box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.4);
-    }
   }
 `;

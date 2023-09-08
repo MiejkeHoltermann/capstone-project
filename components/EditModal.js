@@ -19,25 +19,22 @@ export default function EditModal({
             maxLength="100"
             pattern=".*\S+.*"
             required
-            className="lowkeyInput"
           />
           {amount ? (
-            <StyledInputAmount
+            <StyledInput
               type="number"
               min="-10000"
               max="10000"
               step="0.01"
               name="editedAmount"
               defaultValue={amount}
-              className="lowkeyInput"
             />
           ) : (
-            <StyledInputTime
+            <StyledInput
               type="time"
               name="editedTime"
               pattern=""
               defaultValue={plannedTime}
-              className="lowkeyInput"
             />
           )}
         </InputContainer>
@@ -72,16 +69,35 @@ const InputContainer = styled.div`
 const StyledInputName = styled.input`
   width: 9rem;
   color: var(--darkOrange);
+  padding: 0.3rem 0.6rem;
+  border: none;
+  font-size: 1rem;
+  &:hover {
+    border: 1px solid darkgrey;
+    border-radius: 0.3rem;
+  }
+  &:focus {
+    border: 1px solid darkgrey;
+    border-radius: 0.3rem;
+    outline: none;
+  }
 `;
 
-const StyledInputTime = styled.input`
+const StyledInput = styled.input`
   width: 7rem;
   color: var(--darkOrange);
-`;
-
-const StyledInputAmount = styled.input`
-  width: 7rem;
-  color: var(--darkOrange);
+  padding: 0.3rem 0.6rem;
+  border: none;
+  font-size: 1rem;
+  &:hover {
+    border: 1px solid darkgrey;
+    border-radius: 0.3rem;
+  }
+  &:focus {
+    border: 1px solid darkgrey;
+    border-radius: 0.3rem;
+    outline: none;
+  }
 `;
 
 const StyledButton = styled.button`

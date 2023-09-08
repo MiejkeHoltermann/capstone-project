@@ -14,14 +14,7 @@ export default function Itinerary({ trips, sights, setSights }) {
   const router = useRouter();
   const currentTrip = trips.find((trip) => trip.slug === router.query.slug);
   if (!currentTrip) {
-    return (
-      <Lottie
-        loop
-        animationData={lottieJson}
-        play
-        className="loadingAnimation"
-      />
-    );
+    return <StyledLottie loop animationData={lottieJson} play />;
   }
 
   function handleAddItem(event, date) {
@@ -80,8 +73,8 @@ export default function Itinerary({ trips, sights, setSights }) {
         startDate={currentTrip.startDate}
         endDate={currentTrip.endDate}
       />
-      <h1 className="title">Itinerary</h1>
-      <StyledMain className="mainContent">
+      <StyledTitle>Itinerary</StyledTitle>
+      <StyledMain>
         <StyledItinerary>
           {datesArray.map((date) => (
             <StyledDay key={uid()}>
@@ -105,7 +98,7 @@ export default function Itinerary({ trips, sights, setSights }) {
                   handleAddItem(event, format(date, "yyyy-MM-dd"))
                 }
               >
-                <StyledLabel htmlFor="itemInput" className="invisibleLabel">
+                <StyledLabel htmlFor="itemInput">
                   Add Item:
                   <StyledInput
                     type="text"
@@ -115,17 +108,11 @@ export default function Itinerary({ trips, sights, setSights }) {
                     maxlength="100"
                     required
                     pattern=".*\S+.*"
-                    className="lowkeyInput"
                   ></StyledInput>
                 </StyledLabel>
                 <StyledLabel htmlFor="time" className="timeInput">
                   Set time:
-                  <StyledInput
-                    type="time"
-                    id="time"
-                    name="time"
-                    className="lowkeyInput"
-                  ></StyledInput>
+                  <StyledInput type="time" id="time" name="time"></StyledInput>
                 </StyledLabel>
                 <AddButton />
               </StyledForm>
@@ -138,8 +125,40 @@ export default function Itinerary({ trips, sights, setSights }) {
   );
 }
 
+const StyledLottie = styled(Lottie)`
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 50vw;
+  height: 50vw;
+`;
+
 const StyledMain = styled.main`
   margin: 19rem 0 7rem 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  @media (min-width: 500px) {
+    width: 500px;
+  }
+`;
+
+const StyledTitle = styled.h1`
+  margin: 0;
+  position: fixed;
+  text-align: center;
+  top: 14rem;
+  font-size: 1.6rem;
+  width: 100%;
+  padding: 1rem 0;
+  background-color: white;
+  z-index: 1;
+  @media (min-width: 500px) {
+    width: 500px;
+  }
 `;
 
 const StyledItinerary = styled.ul`
@@ -188,4 +207,16 @@ const StyledLabel = styled.label`
 const StyledInput = styled.input`
   width: 7rem;
   color: darkgrey;
+  padding: 0.3rem 0.6rem;
+  border: none;
+  font-size: 1rem;
+  &:hover {
+    border: 1px solid darkgrey;
+    border-radius: 0.3rem;
+  }
+  &:focus {
+    border: 1px solid darkgrey;
+    border-radius: 0.3rem;
+    outline: none;
+  }
 `;

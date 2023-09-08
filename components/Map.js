@@ -1,5 +1,5 @@
-import "leaflet/dist/leaflet.css";
 import styled from "styled-components";
+import "leaflet/dist/leaflet.css";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
@@ -9,7 +9,6 @@ export default function Map({ sights, trip }) {
     iconUrl: "/map-marker.svg",
     iconSize: [50, 50],
   });
-
   return (
     <StyledMapContainer center={trip.geocode} zoom={6}>
       <TileLayer

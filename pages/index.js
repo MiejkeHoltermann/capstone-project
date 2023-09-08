@@ -57,17 +57,17 @@ export default function Homepage({ trips, setTrips }) {
   return (
     <>
       <Header image="/homepage.jpg" />
-      <StyledMain className="mainContent">
-        <h2 className="subtitle">Create a new Trip</h2>
+      <StyledMain>
+        <StyledSubtitle>Create a new Trip</StyledSubtitle>
         <TripForm
           handleAddTrip={handleAddTrip}
           startDate={startDate}
           endDate={endDate}
           handleChange={handleChange}
         />
-        {successMessage && <h2 className="subtitle">{successMessage}</h2>}
+        {successMessage && <StyledSubtitle>{successMessage}</StyledSubtitle>}
 
-        <h2 className="subtitle">Upcoming Trips</h2>
+        <StyledSubtitle>Upcoming Trips</StyledSubtitle>
         {upcomingTrips.length === 0 ? (
           <p>There are no upcoming trips yet.</p>
         ) : (
@@ -82,14 +82,14 @@ export default function Homepage({ trips, setTrips }) {
                     alt={trip.name}
                   />
                 </StyledImageWrapper>
-                <p className="label">
+                <StyledTag>
                   {trip.name} - {countdown(trip.startDate)}
-                </p>
+                </StyledTag>
               </StyledLink>
             </StyledArticle>
           ))
         )}
-        <h2 className="subtitle">Current Trips</h2>
+        <StyledSubtitle>Current Trips</StyledSubtitle>
         {currentTrips.length === 0 ? (
           <p>There are no current trips yet.</p>
         ) : (
@@ -104,7 +104,7 @@ export default function Homepage({ trips, setTrips }) {
                     alt={trip.name}
                   />
                 </StyledImageWrapper>
-                <p className="label">{trip.name}</p>
+                <StyledTag>{trip.name}</StyledTag>
               </StyledLink>
             </StyledArticle>
           ))
@@ -117,6 +117,22 @@ export default function Homepage({ trips, setTrips }) {
 
 const StyledMain = styled.main`
   margin-top: 15rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  @media (min-width: 500px) {
+    width: 500px;
+  }
+`;
+
+const StyledSubtitle = styled.h2`
+  color: teal;
+  width: 90%;
+  text-align: center;
+  font-size: 1.4em;
+  margin: 2rem 0 0.6rem 0;
 `;
 
 const StyledArticle = styled.article`
@@ -146,4 +162,11 @@ const StyledImage = styled(Image)`
   object-fit: cover;
   width: 100%;
   height: 100%;
+`;
+
+const StyledTag = styled.p`
+  font-size: 1rem;
+  font-weight: bold;
+  margin: 0;
+  text-align: center;
 `;

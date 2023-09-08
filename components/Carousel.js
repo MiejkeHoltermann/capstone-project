@@ -16,7 +16,7 @@ export default function Carousel() {
 
   return (
     <>
-      <h2 className="subtitle">Random Destinations</h2>
+      <StyledSubtitle>Random Destinations</StyledSubtitle>
       <StyledCarousel
         naturalSlideWidth={500}
         naturalSlideHeight={180}
@@ -40,7 +40,7 @@ export default function Carousel() {
                   id={randomDestination.name}
                 />
               </StyledImageWrapper>
-              <p className="label">{randomDestination.name} </p>
+              <StyledTag>{randomDestination.name} </StyledTag>
             </StyledSlide>
           ))}
         </StyledSlider>
@@ -51,6 +51,14 @@ export default function Carousel() {
     </>
   );
 }
+
+const StyledSubtitle = styled.h2`
+  color: teal;
+  width: 90%;
+  text-align: center;
+  font-size: 1.4em;
+  margin: 2rem 0 0.6rem 0;
+`;
 
 const StyledCarousel = styled(CarouselProvider)`
   width: 100%;
@@ -76,6 +84,13 @@ const StyledImageWrapper = styled.div`
   width: 100%;
   margin: 0.8rem 0;
   position: relative;
+`;
+
+const StyledTag = styled.p`
+  font-size: 1rem;
+  font-weight: bold;
+  margin: 0;
+  text-align: center;
 `;
 
 const StyledImage = styled(Image)`

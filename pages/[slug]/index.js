@@ -10,14 +10,7 @@ export default function Overview({ trips }) {
   const router = useRouter();
   const currentTrip = trips.find((trip) => trip.slug === router.query.slug);
   if (!currentTrip) {
-    return (
-      <Lottie
-        loop
-        animationData={lottieJson}
-        play
-        className="loadingAnimation"
-      />
-    );
+    return <StyledLottie loop animationData={lottieJson} play />;
   }
   return (
     <>
@@ -27,7 +20,7 @@ export default function Overview({ trips }) {
         startDate={currentTrip.startDate}
         endDate={currentTrip.endDate}
       />
-      <StyledMain className="mainContent">
+      <StyledMain>
         <DefaultLink url={`/${currentTrip.slug}/explore`} $style="orange">
           Go Explore
         </DefaultLink>
@@ -49,8 +42,25 @@ export default function Overview({ trips }) {
   );
 }
 
+const StyledLottie = styled(Lottie)`
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 50vw;
+  height: 50vw;
+`;
+
 const StyledMain = styled.main`
   margin: 19rem 0 7rem 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  @media (min-width: 500px) {
+    width: 500px;
+  }
 `;
 
 const StyledButtonContainer = styled.div`

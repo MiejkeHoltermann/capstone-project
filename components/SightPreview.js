@@ -34,9 +34,7 @@ export default function SightPreview({ sight, addSightsToItinerary }) {
             onClick={() => toggleDetailsModal()}
           />
         </StyledImageWrapper>
-        <p className="label" onClick={() => toggleDetailsModal()}>
-          {sight.name}
-        </p>
+        <StyledTag onClick={() => toggleDetailsModal()}>{sight.name}</StyledTag>
         {detailsModalOpen && (
           <Modal>
             <p onClick={() => toggleDetailsModal()}>{sight.details}</p>
@@ -99,4 +97,11 @@ const StyledStarButton = styled.button`
   right: -1rem;
   background-color: white;
   border-radius: 50%;
+`;
+
+const StyledTag = styled.p`
+  font-size: 1rem;
+  font-weight: bold;
+  margin: 0;
+  text-align: center;
 `;

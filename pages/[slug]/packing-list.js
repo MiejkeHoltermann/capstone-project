@@ -11,14 +11,7 @@ export default function PackingList({ trips, setTrips }) {
   const router = useRouter();
   const currentTrip = trips.find((trip) => trip.slug === router.query.slug);
   if (!currentTrip) {
-    return (
-      <Lottie
-        loop
-        animationData={lottieJson}
-        play
-        className="loadingAnimation"
-      />
-    );
+    return <StyledLottie loop animationData={lottieJson} play />;
   }
 
   function handleAddItem(event, category) {
@@ -70,6 +63,7 @@ export default function PackingList({ trips, setTrips }) {
     { name: "Clothes", id: uid() },
     { name: "Accessories", id: uid() },
     { name: "Cosmetics", id: uid() },
+    { name: "Technology", id: uid() },
   ];
   return (
     <>
@@ -79,8 +73,8 @@ export default function PackingList({ trips, setTrips }) {
         startDate={currentTrip.startDate}
         endDate={currentTrip.endDate}
       />
-      <h1 className="title">My Packing List</h1>
-      <StyledMain className="mainContent">
+      <StyledTitle>My Packing List</StyledTitle>
+      <StyledMain>
         <StyledPackingList>
           {packingCategories.map((category) => (
             <StyledCategory key={category.id}>
@@ -109,7 +103,6 @@ export default function PackingList({ trips, setTrips }) {
                           id="number"
                           placeholder="amount"
                           defaultValue={item.number}
-                          className="lowkeyInput"
                           onBlur={(event) =>
                             handleCheckboxChange(
                               event,
@@ -128,7 +121,7 @@ export default function PackingList({ trips, setTrips }) {
               >
                 <StyledLabel htmlFor="itemInput">
                   Add Item:
-                  <StyledItemInput
+                  <StyledInput
                     type="text"
                     id="itemInput"
                     name="itemInput"
@@ -136,20 +129,18 @@ export default function PackingList({ trips, setTrips }) {
                     maxLength="100"
                     required
                     pattern=".*\S+.*"
-                    className="lowkeyInput"
-                  ></StyledItemInput>
+                  ></StyledInput>
                 </StyledLabel>
                 <StyledLabel htmlFor="numberInput" className="numberInput">
                   Amount:
-                  <StyledNumberInput
+                  <StyledInput
                     type="number"
                     min="0"
                     max="100"
                     placeholder="amount"
                     id="numberInput"
                     name="numberInput"
-                    className="lowkeyInput"
-                  ></StyledNumberInput>
+                  ></StyledInput>
                 </StyledLabel>
                 <AddButton />
               </StyledForm>
@@ -162,8 +153,40 @@ export default function PackingList({ trips, setTrips }) {
   );
 }
 
+const StyledLottie = styled(Lottie)`
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 50vw;
+  height: 50vw;
+`;
+
 const StyledMain = styled.main`
   margin: 19rem 0 7rem 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  @media (min-width: 500px) {
+    width: 500px;
+  }
+`;
+
+const StyledTitle = styled.h1`
+  margin: 0;
+  position: fixed;
+  text-align: center;
+  top: 14rem;
+  font-size: 1.6rem;
+  width: 100%;
+  padding: 1rem 0;
+  background-color: white;
+  z-index: 1;
+  @media (min-width: 500px) {
+    width: 500px;
+  }
 `;
 
 const StyledPackingList = styled.ul`
@@ -201,8 +224,17 @@ const StyledNumber = styled.input`
   margin-left: 4rem;
   color: var(--darkOrange);
   width: 7rem;
-  &::placeholder {
-    opacity: 1;
+  padding: 0.3rem 0.6rem;
+  border: none;
+  font-size: 1rem;
+  &:hover {
+    border: 1px solid darkgrey;
+    border-radius: 0.3rem;
+  }
+  &:focus {
+    border: 1px solid darkgrey;
+    border-radius: 0.3rem;
+    outline: none;
   }
 `;
 
@@ -233,12 +265,19 @@ const StyledLabel = styled.label`
   }
 `;
 
-const StyledItemInput = styled.input`
-  width: 8rem;
-  color: darkgrey;
-`;
-
-const StyledNumberInput = styled.input`
+const StyledInput = styled.input`
   width: 7rem;
   color: darkgrey;
+  padding: 0.3rem 0.6rem;
+  border: none;
+  font-size: 1rem;
+  &:hover {
+    border: 1px solid darkgrey;
+    border-radius: 0.3rem;
+  }
+  &:focus {
+    border: 1px solid darkgrey;
+    border-radius: 0.3rem;
+    outline: none;
+  }
 `;
