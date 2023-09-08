@@ -213,6 +213,7 @@ const StyledName = styled.p`
   align-self: flex-start;
   margin-left: 1rem;
   font-weight: bold;
+  font-size: 1.2rem;
 `;
 
 const StyledItem = styled.div`
@@ -249,7 +250,8 @@ const StyledForm = styled.form`
   width: 100%;
   margin-top: 0.8rem;
   display: flex;
-  justify-content: space-between;
+  margin-left: 1rem;
+  gap: 1rem;
 `;
 
 const StyledCheckboxLabel = styled.label`
@@ -266,7 +268,7 @@ const StyledLabel = styled.label`
 `;
 
 const StyledInput = styled.input`
-  width: 7rem;
+  width: 8rem;
   color: darkgrey;
   padding: 0.3rem 0.6rem;
   border: none;
