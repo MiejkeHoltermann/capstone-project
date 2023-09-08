@@ -35,7 +35,8 @@ export default function Carousel() {
               <StyledImageWrapper>
                 <StyledImage
                   src={randomDestination.image}
-                  fill
+                  width={800}
+                  height={800}
                   alt={randomDestination.name}
                   id={randomDestination.name}
                 />
