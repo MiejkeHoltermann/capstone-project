@@ -1,8 +1,9 @@
 import styled from "styled-components";
-import { FormatTime } from "@/components/utils";
+import { useState } from "react";
+import Image from "next/image";
 import EditModal from "@/components/EditModal";
 import DeleteModal from "@/components/DeleteModal";
-import { useState } from "react";
+import { FormatTime } from "@/components/utils";
 
 export default function ItineraryItem({
   id,
@@ -29,20 +30,25 @@ export default function ItineraryItem({
     <>
       {!editModalOpen ? (
         <StyledItineraryItem>
-          <StyledItineraryName onClick={() => toggleEditModal()}>
+          <StyledText className="name" onClick={() => toggleEditModal()}>
             {name}
-          </StyledItineraryName>
+          </StyledText>
           {amount ? (
-            <StyledAmount onClick={() => toggleEditModal()}>
+            <StyledText onClick={() => toggleEditModal()}>
               {amount} €
-            </StyledAmount>
+            </StyledText>
           ) : (
-            <StyledItineraryTime onClick={() => toggleEditModal()}>
+            <StyledText onClick={() => toggleEditModal()}>
               {plannedTime ? FormatTime(plannedTime) : null}
-            </StyledItineraryTime>
+            </StyledText>
           )}
           <StyledDeleteButton onClick={() => toggleDeleteModal()}>
-            X
+            <Image
+              src="/cross.svg"
+              width={18}
+              height={18}
+              alt="delete button"
+            />
           </StyledDeleteButton>
           {deleteModalOpen && (
             <DeleteModal
@@ -67,48 +73,37 @@ export default function ItineraryItem({
 }
 
 const StyledItineraryItem = styled.div`
-  margin: 0.2rem 0.6rem;
+  margin: 0 0.6rem;
   display: grid;
+  width: 90%;
   grid-template-columns: 5fr 4fr 1fr;
   gap: 10px;
 `;
 
-const StyledItineraryName = styled.p`
-  margin: 0;
+const StyledText = styled.p`
   overflow: hidden;
   text-overflow: ellipsis;
-  &:hover {
-    cursor: pointer;
-    color: #934d29;
-  }
-`;
-
-const StyledItineraryTime = styled.p`
-  margin: 0;
   justify-self: end;
-  &:hover {
-    cursor: pointer;
-    color: #934d29;
+  &.name {
+    width: 100%;
   }
-`;
-
-const StyledAmount = styled.p`
-  margin: 0;
-  justify-self: end;
   &:hover {
     cursor: pointer;
-    color: #934d29;
+    color: var(--red);
   }
 `;
 
 const StyledDeleteButton = styled.button`
   justify-self: end;
   color: white;
-  background-color: #934d29;
+  background-color: var(--red);
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border: none;
-  border-radius: 0.3rem;
-  width: 20px;
-  height: 20px;
+  border-radius: 0.2rem;
+  width: 1.4rem;
+  height: 1.4rem;
   &:hover {
     cursor: pointer;
     transform: scale(1.1);

@@ -54,18 +54,11 @@ export function fillCarousel(destinations) {
 
 export function sortTrips(trips) {
   const today = format(new Date(), "yyyy-MM-dd");
-  const currentTrips = [];
-  const upcomingTrips = [];
-  const passedTrips = [];
-  trips.forEach((trip) => {
-    if (trip.startDate <= today && trip.endDate >= today) {
-      currentTrips.push(trip);
-    } else if (trip.startDate > today) {
-      upcomingTrips.push(trip);
-    } else if (trip.endDate < today) {
-      passedTrips.push(trip);
-    }
-  });
+  const currentTrips = trips.filter(
+    (trip) => trip.startDate <= today && trip.endDate >= today
+  );
+  const upcomingTrips = trips.filter((trip) => trip.startDate > today);
+  const passedTrips = trips.filter((trip) => trip.endDate < today);
   return {
     currentTrips: currentTrips,
     upcomingTrips: upcomingTrips,
@@ -84,5 +77,5 @@ export function countdown(startDate) {
       return `1 day left`;
     }
   }
-  return `0 day left`;
+  return `0 days left`;
 }

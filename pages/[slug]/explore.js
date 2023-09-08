@@ -1,11 +1,10 @@
 import styled from "styled-components";
+import { useRouter } from "next/router";
 import Header from "@/components/Header";
-import Link from "next/link";
 import Footer from "@/components/Footer";
+import SightPreview from "@/components/SightPreview";
 import Lottie from "react-lottie-player";
 import lottieJson from "../../public/loadingAnimation.json";
-import SightPreview from "@/components/SightPreview";
-import { useRouter } from "next/router";
 
 export default function Explore({
   sights,
@@ -30,26 +29,25 @@ export default function Explore({
         endDate={currentTrip.endDate}
       />
       <StyledTitle>Explore</StyledTitle>
-      <Scrollbox>
+      <StyledMain>
         {filteredSights.length === 0 ? (
           <p>There are no sights for this destination yet.</p>
         ) : (
-          filteredSights
-            .filter(
-              (sight) => sight.inItinerary !== true && sight.plannedDate === ""
-            )
-            .map((sight) => (
-              <SightPreview
-                key={sight.id}
-                sights={sights}
-                setSights={setSights}
-                sight={sight}
-                addSightsToItinerary={addSightsToItinerary}
-              />
-            ))
+          filteredSights.map(
+            (sight) =>
+              sight.image && (
+                <SightPreview
+                  key={sight.id}
+                  sights={sights}
+                  setSights={setSights}
+                  sight={sight}
+                  addSightsToItinerary={addSightsToItinerary}
+                />
+              )
+          )
         )}
-      </Scrollbox>
-      <Footer url={`/${currentTrip.slug}/itinerary`} linkText="Itinerary" />
+      </StyledMain>
+      <Footer url={`/${currentTrip.slug}`} linkText="Overview" />
     </>
   );
 }
@@ -63,52 +61,29 @@ const StyledLottie = styled(Lottie)`
   height: 50vw;
 `;
 
+const StyledMain = styled.main`
+  margin: 19rem 0 7rem 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  @media (min-width: 500px) {
+    width: 500px;
+  }
+`;
+
 const StyledTitle = styled.h1`
   margin: 0;
   position: fixed;
   text-align: center;
-  top: 13rem;
+  top: 14rem;
   font-size: 1.6rem;
   width: 100%;
   padding: 1rem 0;
   background-color: white;
-  @media (min-width: 500px) {
-    width: 500px;
-  }
-`;
-
-const Scrollbox = styled.div`
-  width: 100%;
-  margin-top: 16rem;
-  margin-bottom: 6rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  @media (min-width: 500px) {
-    width: 500px;
-  }
-`;
-
-const StyledFooter = styled.div`
-  position: fixed;
-  bottom: 0;
   z-index: 1;
-  background-color: white;
-  height: 5rem;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   @media (min-width: 500px) {
     width: 500px;
   }
-`;
-
-const StyledLink = styled(Link)`
-  border-radius: 2rem;
-  color: white;
-  text-decoration: none;
-  background-color: darkblue;
-  padding: 0.4rem 1rem;
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
 `;

@@ -1,14 +1,15 @@
 import styled from "styled-components";
-import { uid } from "uid";
 import Link from "next/link";
 import Image from "next/image";
-import TripForm from "@/components/TripForm";
-import dynamic from "next/dynamic";
-import { sortTrips, countdown } from "@/components/utils";
-import destinations from "@/db/destinations";
 import { useState } from "react";
+import dynamic from "next/dynamic";
+import { uid } from "uid";
 import { format } from "date-fns";
 import Header from "@/components/Header";
+import TripForm from "@/components/TripForm";
+import { sortTrips, countdown } from "@/components/utils";
+import destinations from "@/db/destinations";
+import packingList from "@/db/packingList";
 
 const DynamicCarousel = dynamic(() => import("../components/Carousel"), {
   ssr: false,
@@ -23,7 +24,6 @@ export default function Homepage({ trips, setTrips }) {
     setStartDate(start);
     setEndDate(end);
   }
-  const { currentTrips, upcomingTrips } = sortTrips(trips);
 
   function handleAddTrip(event) {
     event.preventDefault();
@@ -40,6 +40,7 @@ export default function Homepage({ trips, setTrips }) {
         image: currentDestination.image,
         geocode: currentDestination.geocode,
         expenses: [],
+        packingList: packingList,
         id: uid(),
       },
       ...trips,
@@ -50,22 +51,23 @@ export default function Homepage({ trips, setTrips }) {
     setEndDate();
     setSuccessMessage("You successfully created a new trip.");
   }
+
+  const { currentTrips, upcomingTrips } = sortTrips(trips);
+
   return (
     <>
       <Header image="/homepage.jpg" />
-      <Scrollbox>
-        <StyledSubheading>Create a new Trip</StyledSubheading>
+      <StyledMain>
+        <StyledSubtitle>Create a new Trip</StyledSubtitle>
         <TripForm
           handleAddTrip={handleAddTrip}
           startDate={startDate}
           endDate={endDate}
           handleChange={handleChange}
         />
-        {successMessage && (
-          <StyledSubheading>{successMessage}</StyledSubheading>
-        )}
+        {successMessage && <StyledSubtitle>{successMessage}</StyledSubtitle>}
 
-        <StyledSubheading>Upcoming Trips</StyledSubheading>
+        <StyledSubtitle>Upcoming Trips</StyledSubtitle>
         {upcomingTrips.length === 0 ? (
           <p>There are no upcoming trips yet.</p>
         ) : (
@@ -80,14 +82,14 @@ export default function Homepage({ trips, setTrips }) {
                     alt={trip.name}
                   />
                 </StyledImageWrapper>
-                <StyledName>
+                <StyledTag>
                   {trip.name} - {countdown(trip.startDate)}
-                </StyledName>
+                </StyledTag>
               </StyledLink>
             </StyledArticle>
           ))
         )}
-        <StyledSubheading>Current Trips</StyledSubheading>
+        <StyledSubtitle>Current Trips</StyledSubtitle>
         {currentTrips.length === 0 ? (
           <p>There are no current trips yet.</p>
         ) : (
@@ -102,66 +104,69 @@ export default function Homepage({ trips, setTrips }) {
                     alt={trip.name}
                   />
                 </StyledImageWrapper>
-                <StyledName>{trip.name}</StyledName>
+                <StyledTag>{trip.name}</StyledTag>
               </StyledLink>
             </StyledArticle>
           ))
         )}
         <DynamicCarousel />
-      </Scrollbox>
+      </StyledMain>
     </>
   );
 }
 
-const Scrollbox = styled.div`
+const StyledMain = styled.main`
+  margin-top: 15rem;
   width: 100%;
-  margin-top: 12rem;
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 1rem;
   @media (min-width: 500px) {
     width: 500px;
   }
 `;
 
-const StyledSubheading = styled.h2`
+const StyledSubtitle = styled.h2`
   color: teal;
-  width: 60%;
+  width: 90%;
   text-align: center;
-  font-size: 1.2em;
-  margin: 3rem 0 1rem 0;
+  font-size: 1.4em;
+  margin: 2rem 0 0.6rem 0;
 `;
 
 const StyledArticle = styled.article`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
+  width: 60%;
   &:hover {
     transform: scale(1.05);
   }
 `;
 
+const StyledLink = styled(Link)`
+  width: 100%;
+  color: black;
+  text-decoration: none;
+`;
+
 const StyledImageWrapper = styled.div`
-  height: 120px;
-  width: 260px;
+  height: 9rem;
+  width: 100%;
   margin: 1rem 0 0.6rem 0;
 `;
 
 const StyledImage = styled(Image)`
-  border-radius: 0.6rem;
+  border-radius: 0.5rem;
   object-fit: cover;
   width: 100%;
   height: 100%;
 `;
 
-const StyledName = styled.h3`
+const StyledTag = styled.p`
   font-size: 1rem;
+  font-weight: bold;
   margin: 0;
   text-align: center;
-`;
-
-const StyledLink = styled(Link)`
-  color: black;
-  text-decoration: none;
 `;

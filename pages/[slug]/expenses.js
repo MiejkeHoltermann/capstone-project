@@ -1,13 +1,14 @@
 import styled from "styled-components";
+import { useRouter } from "next/router";
 import { uid } from "uid";
 import { format } from "date-fns";
-import Header from "@/components/Header";
 import { CreateItinerary, SortSights } from "@/components/utils";
-import { useRouter } from "next/router";
+import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import ItineraryItem from "@/components/ItineraryItem";
+import AddButton from "@/components/AddButton";
 import Lottie from "react-lottie-player";
 import lottieJson from "../../public/loadingAnimation.json";
-import ItineraryItem from "@/components/ItineraryItem";
 
 export default function Expenses({ trips, setTrips }) {
   const router = useRouter();
@@ -78,7 +79,7 @@ export default function Expenses({ trips, setTrips }) {
         endDate={currentTrip.endDate}
       />
       <StyledTitle>My Expenses</StyledTitle>
-      <Scrollbox>
+      <StyledMain>
         <StyledExpenses>
           {datesArray.map((date) => (
             <StyledDay key={uid()}>
@@ -108,8 +109,9 @@ export default function Expenses({ trips, setTrips }) {
                     id="expenseInput"
                     name="expenseItem"
                     placeholder="Add Item"
+                    maxLength="100"
                     required
-                    pattern="\S+"
+                    pattern=".*\S+.*"
                   ></StyledInput>
                 </StyledLabel>
                 <StyledLabel htmlFor="amount" className="amountInput">
@@ -119,16 +121,17 @@ export default function Expenses({ trips, setTrips }) {
                     min="-10000"
                     max="10000"
                     step="0.01"
+                    required
                     id="amount"
                     name="amount"
                   ></StyledInput>
                 </StyledLabel>
-                <StyledButton type="submit">+</StyledButton>
+                <AddButton />
               </StyledForm>
             </StyledDay>
           ))}
         </StyledExpenses>
-      </Scrollbox>
+      </StyledMain>
       <Footer url={`/${currentTrip.slug}`} linkText="Overview" />
     </>
   );
@@ -143,27 +146,28 @@ const StyledLottie = styled(Lottie)`
   height: 50vw;
 `;
 
-const StyledTitle = styled.h1`
-  margin: 0;
-  position: fixed;
-  text-align: center;
-  top: 10rem;
-  font-size: 1.6rem;
+const StyledMain = styled.main`
+  margin: 19rem 0 7rem 0;
   width: 100%;
-  padding: 1rem 0;
-  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
   @media (min-width: 500px) {
     width: 500px;
   }
 `;
 
-const Scrollbox = styled.div`
+const StyledTitle = styled.h1`
+  margin: 0;
+  position: fixed;
+  text-align: center;
+  top: 14rem;
+  font-size: 1.6rem;
   width: 100%;
-  margin-top: 15rem;
-  margin-bottom: 6rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  padding: 1rem 0;
+  background-color: white;
+  z-index: 1;
   @media (min-width: 500px) {
     width: 500px;
   }
@@ -176,33 +180,33 @@ const StyledExpenses = styled.ul`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.6rem;
+  gap: 1.2rem;
 `;
 
 const StyledDay = styled.li`
   display: flex;
   flex-direction: column;
-  border-radius: 0.4rem;
-  padding: 0.4rem;
+  align-items: center;
+  gap: 0.8rem;
+  border-radius: 0.5rem;
   width: 80%;
-  min-height: 40px;
-  gap: 0.6rem;
-  @media (min-width: 500px) {
-    width: 400px;
-  }
+  min-height: 3rem;
 `;
 
-const StyledDate = styled.h2`
-  color: teal;
-  font-size: 1rem;
-  margin: 0;
+const StyledDate = styled.p`
+  color: var(--darkTeal);
+  align-self: flex-start;
+  margin-left: 1rem;
+  font-weight: bold;
+  font-size: 1.2rem;
 `;
 
 const StyledForm = styled.form`
-  margin: 0.2rem 0.6rem;
-  display: grid;
-  grid-template-columns: 5fr 4fr 1fr;
-  gap: 10px;
+  width: 100%;
+  margin-top: 0.8rem;
+  display: flex;
+  margin-left: 1rem;
+  gap: 1rem;
 `;
 
 const StyledLabel = styled.label`
@@ -213,31 +217,18 @@ const StyledLabel = styled.label`
 `;
 
 const StyledInput = styled.input`
-  border-radius: 2rem;
+  width: 8rem;
+  color: darkgrey;
   padding: 0.3rem 0.6rem;
-  color: rgba(0, 0, 0, 0.5);
-  width: 6rem;
   border: none;
+  font-size: 1rem;
   &:hover {
-    border: 1px solid rgba(0, 0, 0, 0.4);
-    border-radius: 0.2rem;
+    border: 1px solid darkgrey;
+    border-radius: 0.3rem;
   }
   &:focus {
-    border: 1px solid rgba(0, 0, 0, 0.3);
-    border-radius: 0.2rem;
+    border: 1px solid darkgrey;
+    border-radius: 0.3rem;
     outline: none;
-  }
-`;
-
-const StyledButton = styled.button`
-  background-color: transparent;
-  border: none;
-  font-size: 1.4rem;
-  font-weight: bold;
-  color: teal;
-  justify-self: end;
-  &:hover {
-    cursor: pointer;
-    transform: scale(1.2);
   }
 `;

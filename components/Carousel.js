@@ -1,6 +1,6 @@
+import styled from "styled-components";
 import Image from "next/image";
 import destinations from "@/db/destinations";
-import styled from "styled-components";
 import { fillCarousel } from "@/components/utils";
 import {
   CarouselProvider,
@@ -16,7 +16,7 @@ export default function Carousel() {
 
   return (
     <>
-      <StyledSubheading>Random Destinations</StyledSubheading>
+      <StyledSubtitle>Random Destinations</StyledSubtitle>
       <StyledCarousel
         naturalSlideWidth={500}
         naturalSlideHeight={180}
@@ -24,7 +24,7 @@ export default function Carousel() {
         visibleSlides={1}
       >
         <StyledButtonBack>
-          <Image src="/arrowBack.svg" height={30} width={30} alt="last slide" />
+          <Image src="/arrowLeft.svg" fill alt="back to previous slide" />
         </StyledButtonBack>
         <StyledSlider>
           {randomDestinations.map((randomDestination) => (
@@ -35,83 +35,89 @@ export default function Carousel() {
               <StyledImageWrapper>
                 <StyledImage
                   src={randomDestination.image}
+                  width={800}
                   height={500}
-                  width={500}
                   alt={randomDestination.name}
                   id={randomDestination.name}
                 />
               </StyledImageWrapper>
-              <StyledName>{randomDestination.name} </StyledName>
+              <StyledTag>{randomDestination.name} </StyledTag>
             </StyledSlide>
           ))}
         </StyledSlider>
         <StyledButtonNext>
-          <Image src="/arrowNext.svg" height={30} width={30} alt="next slide" />
+          <Image src="/arrowRight.svg" fill alt="go to next slide" />
         </StyledButtonNext>
       </StyledCarousel>
     </>
   );
 }
 
+const StyledSubtitle = styled.h2`
+  color: teal;
+  width: 90%;
+  text-align: center;
+  font-size: 1.4em;
+  margin: 2rem 0 0.6rem 0;
+`;
+
 const StyledCarousel = styled(CarouselProvider)`
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 3rem;
+  margin-bottom: 3.2rem;
+  position: relative;
 `;
 
 const StyledSlider = styled(Slider)`
-  width: 260px;
+  width: 100%;
 `;
 
 const StyledSlide = styled(Slide)`
-  height: 220px;
-  width: 260px;
-  margin: 1rem 0 0.6rem 0;
+  height: 20rem;
+  width: 100%;
+  position: relative;
 `;
 
 const StyledImageWrapper = styled.div`
-  height: 180px;
-  width: 260px;
-  margin: 1rem 0 0.6rem 0;
+  height: 16rem;
+  width: 100%;
+  margin: 0.8rem 0;
+  position: relative;
+`;
+
+const StyledTag = styled.p`
+  font-size: 1rem;
+  font-weight: bold;
+  margin: 0;
+  text-align: center;
 `;
 
 const StyledImage = styled(Image)`
-  border-radius: 0.6rem;
   object-fit: cover;
   width: 100%;
   height: 100%;
 `;
 
-const StyledSubheading = styled.h2`
-  color: teal;
-  font-size: 1.2em;
-  margin: 3rem 0 1rem 0;
-`;
-
-const StyledName = styled.h4`
-  font-size: 1rem;
-  margin: 0;
-  text-align: center;
+const buttonStyle = `width: 2rem;
+height: 2rem;
+position: absolute;
+top: calc(50% - 1.5rem);
+z-index: 1;
+border: none;
+background-color: transparent;
+display: flex;
+justify-content: flex-end;
+align-items: center;
+filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.6));
 `;
 
 const StyledButtonBack = styled(ButtonBack)`
-  width: 30px;
-  height: 30px;
-  border: none;
-  background-color: transparent;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
+  ${buttonStyle}
+  left: 0.8rem;
 `;
-
 const StyledButtonNext = styled(ButtonNext)`
-  width: 30px;
-  height: 30px;
-  border: none;
-  background-color: transparent;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
+  ${buttonStyle}
+  right: 0.8rem;
 `;

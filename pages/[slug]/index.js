@@ -1,10 +1,10 @@
-import Header from "@/components/Header";
 import styled from "styled-components";
 import { useRouter } from "next/router";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import DefaultLink from "@/components/DefaultLink";
 import Lottie from "react-lottie-player";
 import lottieJson from "../../public/loadingAnimation.json";
-import Footer from "@/components/Footer";
-import DefaultLinkButton from "@/components/DefaultLinkButton";
 
 export default function Overview({ trips }) {
   const router = useRouter();
@@ -20,22 +20,23 @@ export default function Overview({ trips }) {
         startDate={currentTrip.startDate}
         endDate={currentTrip.endDate}
       />
-      <Scrollbox>
-        <DefaultLinkButton url={`/${currentTrip.slug}/explore`} $orange>
+      <StyledMain>
+        <DefaultLink url={`/${currentTrip.slug}/explore`} $style="orange">
           Go Explore
-        </DefaultLinkButton>
+        </DefaultLink>
         <StyledButtonContainer>
-          <DefaultLinkButton
+          <DefaultLink
             url={`/${currentTrip.slug}/itinerary`}
-            icon="list"
+            icon="itinerary"
           />
-          <DefaultLinkButton url={`/${currentTrip.slug}/map`} icon="map" />
-          <DefaultLinkButton
-            url={`/${currentTrip.slug}/expenses`}
-            icon="euro"
+          <DefaultLink url={`/${currentTrip.slug}/map`} icon="map" />
+          <DefaultLink url={`/${currentTrip.slug}/expenses`} icon="expenses" />
+          <DefaultLink
+            url={`/${currentTrip.slug}/packing-list`}
+            icon="packingList"
           />
         </StyledButtonContainer>
-      </Scrollbox>
+      </StyledMain>
       <Footer url="/" linkText="Home" />
     </>
   );
@@ -50,24 +51,23 @@ const StyledLottie = styled(Lottie)`
   height: 50vw;
 `;
 
-const Scrollbox = styled.div`
+const StyledMain = styled.main`
+  margin: 19rem 0 7rem 0;
   width: 100%;
-  margin-top: 18rem;
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 1rem;
   @media (min-width: 500px) {
     width: 500px;
   }
 `;
 
 const StyledButtonContainer = styled.div`
-  margin: 4rem 0;
-  width: 90vw;
+  padding: 2rem;
+  width: 100%;
   display: grid;
-  grid: repeat(2, 1fr) / repeat(3, 1fr);
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
   justify-items: center;
-  @media (min-width: 500px) {
-    width: 450px;
-  }
 `;
