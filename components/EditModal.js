@@ -29,14 +29,14 @@ export default function EditModal({
               name="editedAmount"
               defaultValue={amount}
             />
-          ) : (
+          ) : plannedTime ? (
             <StyledInput
               type="time"
               name="editedTime"
               pattern=""
               defaultValue={plannedTime}
             />
-          )}
+          ) : null}
         </InputContainer>
         <StyledButton $red type="button" onClick={() => toggleEditModal(id)}>
           Cancel

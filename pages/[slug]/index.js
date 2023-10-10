@@ -66,8 +66,8 @@ const StyledMain = styled.main`
 const StyledButtonContainer = styled.div`
   padding: 2rem;
   width: 100%;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-wrap: wrap;
   gap: 1rem;
-  justify-items: center;
+  justify-content: center;
 `;

@@ -48,7 +48,6 @@ export default function Expenses({ trips, setTrips }) {
             ...expense,
             name: updatedName,
             amount: updatedAmount,
-            editModal: !expense.editModal,
           }
         : expense
     );

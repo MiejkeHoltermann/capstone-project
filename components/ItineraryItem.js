@@ -37,10 +37,12 @@ export default function ItineraryItem({
             <StyledText onClick={() => toggleEditModal()}>
               {amount} €
             </StyledText>
-          ) : (
+          ) : plannedTime ? (
             <StyledText onClick={() => toggleEditModal()}>
               {plannedTime ? FormatTime(plannedTime) : null}
             </StyledText>
+          ) : (
+            <p />
           )}
           <StyledDeleteButton onClick={() => toggleDeleteModal()}>
             <Image
