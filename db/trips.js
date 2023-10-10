@@ -16,8 +16,8 @@ const trips = [
       { name: "Falafel", amount: "20.00", date: "2025-08-30", id: uid() },
       { name: "Entry Fee", amount: "12.20", date: "2025-08-30", id: uid() },
       { name: "Massage", amount: "28.50", date: "2025-08-31", id: uid() },
-      { name: "Bus Ticket", amount: "04.99", date: "2025-08-31", id: uid() },
-      { name: "Bus Ticket", amount: "07.80", date: "2025-09-01", id: uid() },
+      { name: "Bus Ticket", amount: "4.99", date: "2025-08-31", id: uid() },
+      { name: "Bus Ticket", amount: "7.80", date: "2025-09-01", id: uid() },
       {
         name: "Petra at Night",
         amount: "38.00",
@@ -257,6 +257,11 @@ const trips = [
         checked: true,
         id: uid(),
       },
+    ],
+    documents: [
+      { name: "Passport copy", id: uid() },
+      { name: "Boarding pass", id: uid() },
+      { name: "Travel insurance", id: uid() },
     ],
   },
 ];

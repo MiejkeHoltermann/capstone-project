@@ -46,7 +46,6 @@ export default function Itinerary({ trips, sights, setSights }) {
             ...sight,
             name: updatedName,
             plannedTime: time,
-            editModal: !sight.editModal,
           }
         : { ...sight }
     );
