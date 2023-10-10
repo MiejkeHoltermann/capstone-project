@@ -45,7 +45,7 @@ const trips = [
       },
       {
         name: "Bus to Dead Sea",
-        amount: "5,80",
+        amount: "5.80",
         date: "2025-08-30",
         id: uid(),
       },
